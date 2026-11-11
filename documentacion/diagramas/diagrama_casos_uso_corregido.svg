@@ -1,0 +1,185 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1520" height="1270" viewBox="0 0 1520 1270" font-family="Arial, Helvetica, sans-serif" xmlns:c2pa="http://c2pa.org/manifest">
+<defs><marker id="op" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,1 L9,5 L0,9" fill="none" stroke="#374151" stroke-width="1.4"/></marker></defs>
+<rect width="1520" height="1270" fill="#fff"/>
+<rect x="210" y="135" width="1090" height="1110" rx="24" fill="#F5F9FF" stroke="#1E3A8A" stroke-width="2.5"/>
+<text x="234" y="169" font-size="22" font-weight="bold" fill="#1E3A8A">OdontoAgenda CRM</text>
+<text x="234" y="191" font-size="13" fill="#4B5563">Sistema de Gestión de Clínica Odontológica</text>
+<line x1="124.0" y1="537.0" x2="356.4" y2="281.0" stroke="#9333EA" stroke-width="1.4" opacity=".85"/>
+<line x1="124.0" y1="537.0" x2="347.4" y2="365.1" stroke="#9333EA" stroke-width="1.4" opacity=".85"/>
+<line x1="124.0" y1="537.0" x2="293.0" y2="529.1" stroke="#9333EA" stroke-width="1.4" opacity=".85"/>
+<line x1="124.0" y1="537.0" x2="347.6" y2="709.9" stroke="#9333EA" stroke-width="1.4" opacity=".85"/>
+<line x1="124.0" y1="537.0" x2="325.0" y2="613.9" stroke="#9333EA" stroke-width="1.4" opacity=".85"/>
+<line x1="124.0" y1="537.0" x2="329.5" y2="447.1" stroke="#9333EA" stroke-width="1.4" opacity=".85"/>
+<line x1="124.0" y1="537.0" x2="358.3" y2="818.8" stroke="#9333EA" stroke-width="1.4" opacity=".85"/>
+<line x1="1376.0" y1="722.0" x2="1166.0" y2="800.2" stroke="#2563EB" stroke-width="1.4" opacity=".85"/>
+<line x1="1376.0" y1="722.0" x2="1190.1" y2="696.1" stroke="#2563EB" stroke-width="1.4" opacity=".85"/>
+<line x1="1376.0" y1="722.0" x2="1164.0" y2="638.3" stroke="#2563EB" stroke-width="1.4" opacity=".85"/>
+<line x1="1376.0" y1="722.0" x2="1192.3" y2="743.4" stroke="#2563EB" stroke-width="1.4" opacity=".85"/>
+<line x1="1376.0" y1="722.0" x2="1144.1" y2="552.9" stroke="#2563EB" stroke-width="1.4" opacity=".85"/>
+<line x1="1376.0" y1="382.0" x2="1152.7" y2="258.6" stroke="#059669" stroke-width="1.4" opacity=".85"/>
+<line x1="1376.0" y1="382.0" x2="1173.2" y2="321.8" stroke="#059669" stroke-width="1.4" opacity=".85"/>
+<line x1="1376.0" y1="382.0" x2="1197.2" y2="374.6" stroke="#059669" stroke-width="1.4" opacity=".85"/>
+<line x1="1376.0" y1="382.0" x2="1182.1" y2="423.5" stroke="#059669" stroke-width="1.4" opacity=".85"/>
+<line x1="1376.0" y1="382.0" x2="1152.9" y2="504.4" stroke="#059669" stroke-width="1.4" opacity=".85"/>
+<line x1="1376.0" y1="1052.0" x2="1155.0" y2="938.2" stroke="#B45309" stroke-width="1.4" opacity=".85"/>
+<line x1="1376.0" y1="1052.0" x2="1177.2" y2="1000.4" stroke="#B45309" stroke-width="1.4" opacity=".85"/>
+<line x1="1376.0" y1="1052.0" x2="1198.0" y2="1051.3" stroke="#B45309" stroke-width="1.4" opacity=".85"/>
+<line x1="1376.0" y1="1052.0" x2="1178.0" y2="1101.9" stroke="#B45309" stroke-width="1.4" opacity=".85"/>
+<line x1="1376.0" y1="1052.0" x2="1155.5" y2="1163.9" stroke="#B45309" stroke-width="1.4" opacity=".85"/>
+<line x1="930.0" y1="92.0" x2="726.5" y2="289.3" stroke="#DB2777" stroke-width="1.4" opacity=".85"/>
+<line x1="438.6" y1="504.9" x2="641.4" y2="435.1" stroke="#374151" stroke-width="1.3" stroke-dasharray="6 4" marker-end="url(#op)"/>
+<line x1="451.7" y1="540.7" x2="628.3" y2="579.3" stroke="#374151" stroke-width="1.3" stroke-dasharray="6 4" marker-end="url(#op)"/>
+<line x1="466.2" y1="519.6" x2="613.8" y2="510.4" stroke="#374151" stroke-width="1.3" stroke-dasharray="6 4" marker-end="url(#op)"/>
+<line x1="417.3" y1="500.5" x2="662.7" y2="339.5" stroke="#374151" stroke-width="1.3" stroke-dasharray="6 4" marker-end="url(#op)"/>
+<line x1="461.5" y1="624.8" x2="618.5" y2="605.2" stroke="#374151" stroke-width="1.3" stroke-dasharray="6 4" marker-end="url(#op)"/>
+<line x1="448.2" y1="652.1" x2="631.8" y2="697.9" stroke="#374151" stroke-width="1.3" stroke-dasharray="6 4" marker-end="url(#op)"/>
+<line x1="466.2" y1="729.6" x2="613.8" y2="720.4" stroke="#374151" stroke-width="1.3" stroke-dasharray="6 4" marker-end="url(#op)"/>
+<line x1="412.2" y1="819.9" x2="667.8" y2="620.1" stroke="#374151" stroke-width="1.3" stroke-dasharray="6 4" marker-end="url(#op)"/>
+<line x1="1038.4" y1="669.3" x2="771.6" y2="610.7" stroke="#374151" stroke-width="1.3" stroke-dasharray="6 4" marker-end="url(#op)"/>
+<line x1="1059.6" y1="662.9" x2="750.4" y2="527.1" stroke="#374151" stroke-width="1.3" stroke-dasharray="6 4" marker-end="url(#op)"/>
+<line x1="1076.2" y1="592.1" x2="733.8" y2="339.9" stroke="#374151" stroke-width="1.3" stroke-dasharray="6 4" marker-end="url(#op)"/>
+<line x1="1065.2" y1="504.8" x2="744.8" y2="338.2" stroke="#374151" stroke-width="1.3" stroke-dasharray="6 4" marker-end="url(#op)"/>
+<line x1="1053.3" y1="350.4" x2="971.7" y2="320.6" stroke="#374151" stroke-width="1.3" stroke-dasharray="6 4" marker-end="url(#op)"/>
+<line x1="1025.8" y1="745.2" x2="784.2" y2="722.8" stroke="#374151" stroke-width="1.3" stroke-dasharray="6 4" marker-end="url(#op)"/>
+<line x1="603.9" y1="240.6" x2="466.1" y2="249.4" stroke="#374151" stroke-width="1.3" stroke-dasharray="6 4" marker-end="url(#op)"/>
+<ellipse cx="380" cy="255" rx="88" ry="27" fill="#F3E8FF" stroke="#9333EA" stroke-width="1.6"/>
+<text x="380" y="246" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#9333EA">CU-01</text>
+<text x="380" y="259" text-anchor="middle" font-size="9.5" fill="#1F2937">Registrarse /</text>
+<text x="380" y="271" text-anchor="middle" font-size="9.5" fill="#1F2937">iniciar sesión</text>
+<ellipse cx="380" cy="340" rx="88" ry="27" fill="#F3E8FF" stroke="#9333EA" stroke-width="1.6"/>
+<text x="380" y="331" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#9333EA">CU-02</text>
+<text x="380" y="344" text-anchor="middle" font-size="9.5" fill="#1F2937">Consultar catálogo</text>
+<text x="380" y="356" text-anchor="middle" font-size="9.5" fill="#1F2937">de servicios</text>
+<ellipse cx="380" cy="425" rx="88" ry="27" fill="#F3E8FF" stroke="#9333EA" stroke-width="1.6"/>
+<text x="380" y="416" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#9333EA">CU-06</text>
+<text x="380" y="429" text-anchor="middle" font-size="9.5" fill="#1F2937">Consultar citas</text>
+<text x="380" y="441" text-anchor="middle" font-size="9.5" fill="#1F2937">e historial</text>
+<ellipse cx="380" cy="525" rx="88" ry="27" fill="#F3E8FF" stroke="#9333EA" stroke-width="1.6"/>
+<text x="380" y="521" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#9333EA">CU-03</text>
+<text x="380" y="535" text-anchor="middle" font-size="9.5" fill="#1F2937">Agendar cita</text>
+<ellipse cx="380" cy="635" rx="88" ry="27" fill="#F3E8FF" stroke="#9333EA" stroke-width="1.6"/>
+<text x="380" y="631" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#9333EA">CU-05</text>
+<text x="380" y="645" text-anchor="middle" font-size="9.5" fill="#1F2937">Reagendar cita</text>
+<ellipse cx="380" cy="735" rx="88" ry="27" fill="#F3E8FF" stroke="#9333EA" stroke-width="1.6"/>
+<text x="380" y="731" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#9333EA">CU-04</text>
+<text x="380" y="745" text-anchor="middle" font-size="9.5" fill="#1F2937">Cancelar cita</text>
+<ellipse cx="380" cy="845" rx="88" ry="27" fill="#F3E8FF" stroke="#9333EA" stroke-width="3"/>
+<text x="380" y="836" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#9333EA">CU-25</text>
+<text x="380" y="849" text-anchor="middle" font-size="9.5" fill="#1F2937">Reprogramar cita</text>
+<text x="380" y="861" text-anchor="middle" font-size="9.5" fill="#1F2937">tras inasistencia</text>
+<ellipse cx="690" cy="235" rx="88" ry="27" fill="#F3E8FF" stroke="#9333EA" stroke-width="3"/>
+<text x="690" y="226" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#9333EA">CU-26</text>
+<text x="690" y="239" text-anchor="middle" font-size="9.5" fill="#1F2937">Recuperar</text>
+<text x="690" y="251" text-anchor="middle" font-size="9.5" fill="#1F2937">contraseña</text>
+<ellipse cx="700" cy="315" rx="88" ry="27" fill="#FCE7F3" stroke="#DB2777" stroke-width="1.6"/>
+<text x="700" y="306" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#DB2777">CU-19</text>
+<text x="700" y="319" text-anchor="middle" font-size="9.5" fill="#1F2937">Enviar notificaciones</text>
+<text x="700" y="331" text-anchor="middle" font-size="9.5" fill="#1F2937">por correo</text>
+<ellipse cx="700" cy="415" rx="88" ry="27" fill="#E0F2FE" stroke="#0284C7" stroke-width="3"/>
+<text x="700" y="406" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#0284C7">CU-27</text>
+<text x="700" y="419" text-anchor="middle" font-size="9.5" fill="#1F2937">Validar restricción</text>
+<text x="700" y="431" text-anchor="middle" font-size="9.5" fill="#1F2937">por inasistencias</text>
+<ellipse cx="700" cy="505" rx="88" ry="27" fill="#E0F2FE" stroke="#0284C7" stroke-width="3"/>
+<text x="700" y="496" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#0284C7">CU-21</text>
+<text x="700" y="509" text-anchor="middle" font-size="9.5" fill="#1F2937">Calcular duración</text>
+<text x="700" y="521" text-anchor="middle" font-size="9.5" fill="#1F2937">total</text>
+<ellipse cx="700" cy="595" rx="88" ry="27" fill="#E0F2FE" stroke="#0284C7" stroke-width="3"/>
+<text x="700" y="586" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#0284C7">CU-20</text>
+<text x="700" y="599" text-anchor="middle" font-size="9.5" fill="#1F2937">Verificar</text>
+<text x="700" y="611" text-anchor="middle" font-size="9.5" fill="#1F2937">disponibilidad</text>
+<ellipse cx="700" cy="715" rx="88" ry="27" fill="#E0F2FE" stroke="#0284C7" stroke-width="3"/>
+<text x="700" y="706" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#0284C7">CU-22</text>
+<text x="700" y="719" text-anchor="middle" font-size="9.5" fill="#1F2937">Aplicar política de</text>
+<text x="700" y="731" text-anchor="middle" font-size="9.5" fill="#1F2937">cancelación (≥ 2 h)</text>
+<ellipse cx="915" cy="300" rx="88" ry="27" fill="#E0F2FE" stroke="#0284C7" stroke-width="3"/>
+<text x="915" y="291" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#0284C7">CU-23</text>
+<text x="915" y="304" text-anchor="middle" font-size="9.5" fill="#1F2937">Actualizar historial y</text>
+<text x="915" y="316" text-anchor="middle" font-size="9.5" fill="#1F2937">descontar insumos</text>
+<ellipse cx="1110" cy="235" rx="88" ry="27" fill="#D1FAE5" stroke="#059669" stroke-width="1.6"/>
+<text x="1110" y="226" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#059669">CU-07</text>
+<text x="1110" y="239" text-anchor="middle" font-size="9.5" fill="#1F2937">Consultar agenda</text>
+<text x="1110" y="251" text-anchor="middle" font-size="9.5" fill="#1F2937">diaria</text>
+<ellipse cx="1110" cy="303" rx="88" ry="27" fill="#D1FAE5" stroke="#059669" stroke-width="1.6"/>
+<text x="1110" y="294" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#059669">CU-08</text>
+<text x="1110" y="307" text-anchor="middle" font-size="9.5" fill="#1F2937">Iniciar atención</text>
+<text x="1110" y="319" text-anchor="middle" font-size="9.5" fill="#1F2937">(En Proceso)</text>
+<ellipse cx="1110" cy="371" rx="88" ry="27" fill="#D1FAE5" stroke="#059669" stroke-width="1.6"/>
+<text x="1110" y="362" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#059669">CU-09</text>
+<text x="1110" y="375" text-anchor="middle" font-size="9.5" fill="#1F2937">Finalizar y registrar</text>
+<text x="1110" y="387" text-anchor="middle" font-size="9.5" fill="#1F2937">observaciones (Atendido)</text>
+<ellipse cx="1110" cy="439" rx="88" ry="27" fill="#D1FAE5" stroke="#059669" stroke-width="3"/>
+<text x="1110" y="430" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#059669">CU-28</text>
+<text x="1110" y="443" text-anchor="middle" font-size="9.5" fill="#1F2937">Consultar historial</text>
+<text x="1110" y="455" text-anchor="middle" font-size="9.5" fill="#1F2937">clínico del paciente</text>
+<ellipse cx="1110" cy="528" rx="88" ry="27" fill="#CFFAFE" stroke="#0E7490" stroke-width="3"/>
+<text x="1110" y="519" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#0E7490">CU-24</text>
+<text x="1110" y="532" text-anchor="middle" font-size="9.5" fill="#1F2937">Marcar No Asistió</text>
+<text x="1110" y="544" text-anchor="middle" font-size="9.5" fill="#1F2937">(tras 15 min)</text>
+<ellipse cx="1110" cy="821" rx="88" ry="27" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.6"/>
+<text x="1110" y="817" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#2563EB">CU-10</text>
+<text x="1110" y="831" text-anchor="middle" font-size="9.5" fill="#1F2937">Registrar paciente</text>
+<ellipse cx="1110" cy="685" rx="88" ry="27" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.6"/>
+<text x="1110" y="676" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#2563EB">CU-11</text>
+<text x="1110" y="689" text-anchor="middle" font-size="9.5" fill="#1F2937">Agendar cita para</text>
+<text x="1110" y="701" text-anchor="middle" font-size="9.5" fill="#1F2937">un paciente</text>
+<ellipse cx="1110" cy="617" rx="88" ry="27" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.6"/>
+<text x="1110" y="608" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#2563EB">CU-12</text>
+<text x="1110" y="621" text-anchor="middle" font-size="9.5" fill="#1F2937">Asignar odontólogo</text>
+<text x="1110" y="633" text-anchor="middle" font-size="9.5" fill="#1F2937">y confirmar cita</text>
+<ellipse cx="1110" cy="753" rx="88" ry="27" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.6"/>
+<text x="1110" y="744" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#2563EB">CU-13</text>
+<text x="1110" y="757" text-anchor="middle" font-size="9.5" fill="#1F2937">Cancelar o</text>
+<text x="1110" y="769" text-anchor="middle" font-size="9.5" fill="#1F2937">reagendar cita</text>
+<ellipse cx="1110" cy="915" rx="88" ry="27" fill="#FEF3C7" stroke="#B45309" stroke-width="1.6"/>
+<text x="1110" y="906" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#B45309">CU-14</text>
+<text x="1110" y="919" text-anchor="middle" font-size="9.5" fill="#1F2937">Gestionar servicios</text>
+<text x="1110" y="931" text-anchor="middle" font-size="9.5" fill="#1F2937">y precios</text>
+<ellipse cx="1110" cy="983" rx="88" ry="27" fill="#FEF3C7" stroke="#B45309" stroke-width="1.6"/>
+<text x="1110" y="974" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#B45309">CU-15</text>
+<text x="1110" y="987" text-anchor="middle" font-size="9.5" fill="#1F2937">Gestionar odontólogos</text>
+<text x="1110" y="999" text-anchor="middle" font-size="9.5" fill="#1F2937">y horarios</text>
+<ellipse cx="1110" cy="1051" rx="88" ry="27" fill="#FEF3C7" stroke="#B45309" stroke-width="1.6"/>
+<text x="1110" y="1042" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#B45309">CU-16</text>
+<text x="1110" y="1055" text-anchor="middle" font-size="9.5" fill="#1F2937">Gestionar usuarios</text>
+<text x="1110" y="1067" text-anchor="middle" font-size="9.5" fill="#1F2937">y roles</text>
+<ellipse cx="1110" cy="1119" rx="88" ry="27" fill="#FEF3C7" stroke="#B45309" stroke-width="1.6"/>
+<text x="1110" y="1110" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#B45309">CU-17</text>
+<text x="1110" y="1123" text-anchor="middle" font-size="9.5" fill="#1F2937">Gestionar inventario</text>
+<text x="1110" y="1135" text-anchor="middle" font-size="9.5" fill="#1F2937">de insumos</text>
+<ellipse cx="1110" cy="1187" rx="88" ry="27" fill="#FEF3C7" stroke="#B45309" stroke-width="1.6"/>
+<text x="1110" y="1178" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#B45309">CU-18</text>
+<text x="1110" y="1191" text-anchor="middle" font-size="9.5" fill="#1F2937">Consultar reportes</text>
+<text x="1110" y="1203" text-anchor="middle" font-size="9.5" fill="#1F2937">(incl. % inasistencia)</text>
+<text x="540.0" y="467.0" text-anchor="middle" font-size="8.5" font-style="italic" fill="#374151" stroke="#F5F9FF" stroke-width="3" paint-order="stroke">«include»</text>
+<text x="540.0" y="557.0" text-anchor="middle" font-size="8.5" font-style="italic" fill="#374151" stroke="#F5F9FF" stroke-width="3" paint-order="stroke">«include»</text>
+<text x="540.0" y="512.0" text-anchor="middle" font-size="8.5" font-style="italic" fill="#374151" stroke="#F5F9FF" stroke-width="3" paint-order="stroke">«include»</text>
+<text x="540.0" y="417.0" text-anchor="middle" font-size="8.5" font-style="italic" fill="#374151" stroke="#F5F9FF" stroke-width="3" paint-order="stroke">«include»</text>
+<text x="540.0" y="612.0" text-anchor="middle" font-size="8.5" font-style="italic" fill="#374151" stroke="#F5F9FF" stroke-width="3" paint-order="stroke">«include»</text>
+<text x="518.0" y="666.5" text-anchor="middle" font-size="8.5" font-style="italic" fill="#374151" stroke="#F5F9FF" stroke-width="3" paint-order="stroke">«include»</text>
+<text x="557.7" y="720.9" text-anchor="middle" font-size="8.5" font-style="italic" fill="#374151" stroke="#F5F9FF" stroke-width="3" paint-order="stroke">«include»</text>
+<text x="488.9" y="756.9" text-anchor="middle" font-size="8.5" font-style="italic" fill="#374151" stroke="#F5F9FF" stroke-width="3" paint-order="stroke">«include»</text>
+<text x="905.0" y="637.0" text-anchor="middle" font-size="8.5" font-style="italic" fill="#374151" stroke="#F5F9FF" stroke-width="3" paint-order="stroke">«include»</text>
+<text x="905.0" y="592.0" text-anchor="middle" font-size="8.5" font-style="italic" fill="#374151" stroke="#F5F9FF" stroke-width="3" paint-order="stroke">«include»</text>
+<text x="905.0" y="463.0" text-anchor="middle" font-size="8.5" font-style="italic" fill="#374151" stroke="#F5F9FF" stroke-width="3" paint-order="stroke">«include»</text>
+<text x="905.0" y="418.5" text-anchor="middle" font-size="8.5" font-style="italic" fill="#374151" stroke="#F5F9FF" stroke-width="3" paint-order="stroke">«include»</text>
+<text x="1012.5" y="332.5" text-anchor="middle" font-size="8.5" font-style="italic" fill="#374151" stroke="#F5F9FF" stroke-width="3" paint-order="stroke">«include»</text>
+<text x="905.0" y="731.0" text-anchor="middle" font-size="8.5" font-style="italic" fill="#374151" stroke="#F5F9FF" stroke-width="3" paint-order="stroke">«include»</text>
+<text x="535.0" y="242.0" text-anchor="middle" font-size="8.5" font-style="italic" fill="#374151" stroke="#F5F9FF" stroke-width="3" paint-order="stroke">«extend»</text>
+<g stroke="#9333EA" stroke-width="2" fill="#fff"><circle cx="100" cy="515" r="11"/><line x1="100" y1="526" x2="100" y2="557"/><line x1="80" y1="537" x2="120" y2="537"/><line x1="100" y1="557" x2="86" y2="583"/><line x1="100" y1="557" x2="114" y2="583"/></g>
+<text x="100" y="601" text-anchor="middle" font-size="12" font-weight="bold" fill="#111827">Paciente</text>
+<g stroke="#059669" stroke-width="2" fill="#fff"><circle cx="1400" cy="360" r="11"/><line x1="1400" y1="371" x2="1400" y2="402"/><line x1="1380" y1="382" x2="1420" y2="382"/><line x1="1400" y1="402" x2="1386" y2="428"/><line x1="1400" y1="402" x2="1414" y2="428"/></g>
+<text x="1400" y="446" text-anchor="middle" font-size="12" font-weight="bold" fill="#111827">Odontólogo</text>
+<g stroke="#2563EB" stroke-width="2" fill="#fff"><circle cx="1400" cy="700" r="11"/><line x1="1400" y1="711" x2="1400" y2="742"/><line x1="1380" y1="722" x2="1420" y2="722"/><line x1="1400" y1="742" x2="1386" y2="768"/><line x1="1400" y1="742" x2="1414" y2="768"/></g>
+<text x="1400" y="786" text-anchor="middle" font-size="12" font-weight="bold" fill="#111827">Recepcionista</text>
+<g stroke="#B45309" stroke-width="2" fill="#fff"><circle cx="1400" cy="1030" r="11"/><line x1="1400" y1="1041" x2="1400" y2="1072"/><line x1="1380" y1="1052" x2="1420" y2="1052"/><line x1="1400" y1="1072" x2="1386" y2="1098"/><line x1="1400" y1="1072" x2="1414" y2="1098"/></g>
+<text x="1400" y="1116" text-anchor="middle" font-size="12" font-weight="bold" fill="#111827">Administrador</text>
+<g stroke="#DB2777" stroke-width="2" fill="#fff"><circle cx="930" cy="32" r="11"/><line x1="930" y1="43" x2="930" y2="74"/><line x1="910" y1="54" x2="950" y2="54"/><line x1="930" y1="74" x2="916" y2="100"/><line x1="930" y1="74" x2="944" y2="100"/></g>
+<text x="930" y="118" text-anchor="middle" font-size="12" font-weight="bold" fill="#111827">Sistema de notificaciones</text>
+<rect x="230" y="1010" width="400" height="150" rx="8" fill="#fff" stroke="#CBD5E1"/>
+<text x="244" y="1032" font-size="12" font-weight="bold" fill="#111827">Relaciones entre casos de uso</text>
+<line x1="244" y1="1052" x2="300" y2="1052" stroke="#374151" stroke-width="1.3" stroke-dasharray="6 4" marker-end="url(#op)"/><text x="310" y="1056" font-size="10.5" fill="#374151"><tspan font-weight="bold">«include»</tspan>  funcionalidad obligatoria</text>
+<line x1="244" y1="1074" x2="300" y2="1074" stroke="#374151" stroke-width="1.3" stroke-dasharray="6 4" marker-end="url(#op)"/><text x="310" y="1078" font-size="10.5" fill="#374151"><tspan font-weight="bold">«extend»</tspan>  comportamiento opcional</text>
+<line x1="244" y1="1096" x2="300" y2="1096" stroke="#374151" stroke-width="1.4"/><text x="310" y="1100" font-size="10.5" fill="#374151">Asociación entre actor y caso de uso</text>
+<ellipse cx="272" cy="1120" rx="26" ry="11" fill="#E0F2FE" stroke="#0284C7" stroke-width="3"/><text x="310" y="1124" font-size="10.5" fill="#374151">Borde grueso: caso de uso agregado (CU-20 a CU-28)</text>
+<text x="244" y="1148" font-size="9.5" fill="#6B7280">Los óvalos celestes son funciones internas reutilizadas por «include».</text>
+<metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTo3YmFkYjE0Yi0wZmQwLTQ3NmYtODBkMy1hZmZiNGNhZmZhNWUAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaHuntQabyonnio4Y10bTIbIAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDoxNzJiMWUzNC1lMmNhLTQxM2MtYmI0My1lYWQ0MzIwMWQwNTZscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoOydwuLc0lakKcgVygVCzRwAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggwG7xtycg6saAPnx6VNko3VpwtwxdCmrQKK9JLRhqFH+kZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaOyHsqx+dlwsK+yMOQpzui8AAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYIGTPh0TaxHBzHziN3x94FDYKbTttyvBm7w6RQa3ENhklZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GVSfZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjdiYWRiMTRiLTBmZDAtNDc2Zi04MGQzLWFmZmI0Y2FmZmE1ZS9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjc0ODlkMmFiLTM1YzgtNGUxZC1hZmZmLTljZmZhZWJlYWNlYXJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCDAbvG3JyDqxoA+fHpU2SjdWnC3DF0KatAor0ktGGoUf6JjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggz2VrWAKivjGZe3HsF/2AF1Jp+m6RVinaC9wa6rL/yO+iY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggn7zBJPba9LD9TjfbZwq+hZkWDNpAuA6WjdKl6hZFh7R0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQIMfQqcKi2po7O0rj+lHlOhTfP8XvHnBAhw5ru0Gs2DrFdrLyCnp4RCL/8niTejd99VWQgl2FQKmxACuX+e1La4=</c2pa:manifest></metadata></svg>

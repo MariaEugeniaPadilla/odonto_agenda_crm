@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>OdontoAgenda CRM - Prototipo navegable</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F3F8F7;--sf:#fff;--ink:#12263A;--mu:#587080;--ln:#D6E3E1;--pri:#0E7C7B;--pk:#fff;--ps:#DAF0ED;
+--s1b:#E2ECFF;--s1:#1E4FA8;--s2b:#D9F1EE;--s2:#0B6663;--s3b:#EBE3FF;--s3:#5B3FB0;--s4b:#DCF3DF;--s4:#1F6B35;--s5b:#FFE1E0;--s5:#A6302B;--s6b:#FFEBC9;--s6:#8A5200;
+color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0D1A22;--sf:#14252F;--ink:#E7F0F2;--mu:#9DB2BD;--ln:#26404D;--pri:#3CC3BE;--pk:#062321;--ps:#123A3A;
+--s1b:#1B2E52;--s1:#9DBDFF;--s2b:#124240;--s2:#7FE0D9;--s3b:#2E2554;--s3:#C2B0FF;--s4b:#1A3C25;--s4:#8FDDA0;--s5b:#4A1E1D;--s5:#FFA9A4;--s6b:#4A3511;--s6:#FFCB78;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0D1A22;--sf:#14252F;--ink:#E7F0F2;--mu:#9DB2BD;--ln:#26404D;--pri:#3CC3BE;--pk:#062321;--ps:#123A3A;
+--s1b:#1B2E52;--s1:#9DBDFF;--s2b:#124240;--s2:#7FE0D9;--s3b:#2E2554;--s3:#C2B0FF;--s4b:#1A3C25;--s4:#8FDDA0;--s5b:#4A1E1D;--s5:#FFA9A4;--s6b:#4A3511;--s6:#FFCB78;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.5 Figtree,system-ui,-apple-system,"Segoe UI",sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--sf);backdrop-filter:blur(8px)}
+h1,h2,h3{font-family:"Bricolage Grotesque",Figtree,system-ui,sans-serif;margin:0 0 .4em;line-height:1.1}
+h1{font-size:clamp(30px,5vw,48px)}h2{font-size:26px}h3{font-size:17px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:11;background:var(--sf);border-bottom:1px solid var(--ln);display:flex;align-items:center;gap:6px;padding:10px 20px;flex-wrap:wrap}
+.brand{font:700 19px "Bricolage Grotesque",sans-serif;margin-right:14px;color:var(--pri);cursor:pointer}
+.top nav{display:flex;gap:2px;flex-wrap:wrap;flex:1}
+.nl{background:none;border:0;color:var(--mu);font:500 14px Figtree,system-ui,sans-serif;padding:7px 11px;border-radius:8px;cursor:pointer}
+.nl:hover{background:var(--ps)}.nl.on{background:var(--ps);color:var(--pri);font-weight:600}
+.who{font-size:13px;color:var(--mu)}
+main{max-width:1040px;margin:0 auto;padding:26px 20px 60px}
+.c{background:var(--sf);border:1px solid var(--ln);border-radius:14px;padding:18px}
+.g{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.b,.b2,.bd{font:600 14px Figtree,sans-serif;padding:10px 18px;border-radius:10px;border:1.5px solid var(--pri);cursor:pointer}
+.b{background:var(--pri);color:var(--pk)}.b2{background:none;color:var(--pri)}.bd{background:none;color:var(--s5);border-color:var(--s5)}
+.b:disabled{opacity:.4;cursor:not-allowed}
+.b:focus-visible,.b2:focus-visible,.bd:focus-visible,.nl:focus-visible,.slot:focus-visible,.opt:focus-visible{outline:3px solid var(--pri);outline-offset:2px}
+.ch{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:99px;white-space:nowrap}
+.s1{background:var(--s1b);color:var(--s1)}.s2{background:var(--s2b);color:var(--s2)}.s3{background:var(--s3b);color:var(--s3)}.s4{background:var(--s4b);color:var(--s4)}.s5{background:var(--s5b);color:var(--s5)}.s6{background:var(--s6b);color:var(--s6)}
+.hero{display:grid;gap:30px;grid-template-columns:1.3fr 1fr;align-items:center;padding:30px 0}
+.lead{font-size:18px;color:var(--mu);max-width:46ch;margin:0 0 22px}
+.slot{display:flex;flex-direction:column;align-items:flex-start;width:100%;text-align:left;background:var(--ps);border:1px solid var(--ln);border-radius:10px;padding:10px 14px;margin-top:10px;cursor:pointer;color:var(--ink);font:inherit}
+.slot span{font-size:13px;color:var(--mu)}
+.slot.on{background:var(--pri);color:var(--pk);border-color:var(--pri)}.slot.on span{color:var(--pk)}
+.slot:disabled{opacity:.35;text-decoration:line-through;cursor:not-allowed}
+.hs{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px}.hs .slot{margin:0;align-items:center;text-align:center;padding:8px}
+.opt{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:var(--sf);border:1.5px solid var(--ln);border-radius:12px;padding:13px 15px;margin-bottom:10px;cursor:pointer;color:var(--ink);font:inherit}
+.opt.on{border-color:var(--pri);background:var(--ps)}.opt small{display:block;color:var(--mu)}.opt .r{margin-left:auto;font-weight:600}
+.steps{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.st{flex:1;min-width:120px;padding:9px 12px;border-radius:10px;background:var(--sf);border:1px solid var(--ln);font-size:13px;color:var(--mu)}
+.st.on{border-color:var(--pri);color:var(--pri);font-weight:600}.st.ok{background:var(--ps);color:var(--pri)}
+table{width:100%;border-collapse:collapse;background:var(--sf);border:1px solid var(--ln);border-radius:12px;overflow:hidden}
+th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--ln);font-size:14px}th{color:var(--mu);font-weight:600;background:var(--bg)}
+.sc{overflow-x:auto}
+.li{display:flex;gap:14px;align-items:center;padding:14px 16px;background:var(--sf);border:1px solid var(--ln);border-radius:12px;margin-bottom:10px;cursor:pointer;width:100%;text-align:left;color:var(--ink);font:inherit}
+.li:hover{border-color:var(--pri)}.li .t{font:700 17px "Bricolage Grotesque",sans-serif;min-width:62px}.li .m{flex:1}.li small{color:var(--mu);display:block}
+.kv{display:grid;grid-template-columns:140px 1fr;gap:6px 14px;margin:14px 0}.kv dt{color:var(--mu)}.kv dd{margin:0}
+input,select,textarea{font:inherit;padding:10px 12px;border:1.5px solid var(--ln);border-radius:10px;background:var(--sf);color:var(--ink);width:100%}
+label{display:block;font-weight:600;margin:12px 0 5px;font-size:14px}
+.note{background:var(--s6b);color:var(--s6);padding:12px 14px;border-radius:10px;margin:14px 0}.note.ok{background:var(--s4b);color:var(--s4)}.note.in{background:var(--s1b);color:var(--s1)}
+.bar{height:12px;border-radius:6px;background:var(--pri);margin-top:6px}
+.k{font:700 32px "Bricolage Grotesque",sans-serif}.mu{color:var(--mu)}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:12px;opacity:0;transition:.25s;z-index:20;max-width:92vw;pointer-events:none}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+.foot{text-align:center;color:var(--mu);font-size:12px;padding:10px}
+@media(max-width:720px){.hero{grid-template-columns:1fr}.kv{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){#toast{transition:none}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="toast" role="status"></div>
+<script>
+const $=s=>document.querySelector(s),money=n=>'$'+n.toLocaleString('es-CO');
+const SV=[{n:'Limpieza dental',m:30,p:80000},{n:'Resina (calza)',m:45,p:150000},{n:'Endodoncia',m:90,p:450000},{n:'Blanqueamiento',m:60,p:300000}];
+const OD=[{n:'Dra. Laura Pérez',e:'Ortodoncia',h:'Lun a vie, 8:00-17:00'},{n:'Dr. Andrés Gómez',e:'Endodoncia',h:'Lun a sáb, 9:00-15:00'},{n:'Dra. Camila Ruiz',e:'Odontología general',h:'Mar a sáb, 8:00-16:00'}];
+let C=[
+{id:1,p:'Carlos Mejía',o:0,s:'Limpieza dental',f:'Hoy',h:'08:30',e:'Asignado',hr:1},
+{id:2,p:'Carlos Mejía',o:1,s:'Endodoncia',f:'Vie 13 nov',h:'09:00',e:'Asignado',hr:46},
+{id:3,p:'Carlos Mejía',o:2,s:'Resina (calza)',f:'Lun 2 nov',h:'10:00',e:'Atendido',n:'Resina en molar 36. Sin complicaciones.'},
+{id:4,p:'Carlos Mejía',o:1,s:'Blanqueamiento',f:'Mié 21 oct',h:'16:00',e:'No Asistió',n:'Inasistencia registrada tras 15 min de tolerancia.'},
+{id:5,p:'Carlos Mejía',o:0,s:'Limpieza dental',f:'Jue 3 sep',h:'11:00',e:'Cancelado',n:'Cancelada por el paciente con 24 h de anticipación.'},
+{id:6,p:'Ana Torres',o:0,s:'Limpieza dental',f:'Hoy',h:'09:30',e:'Asignado',hr:2},
+{id:7,p:'Luis Rojas',o:0,s:'Resina (calza)',f:'Hoy',h:'10:30',e:'Asignado',hr:3},
+{id:8,p:'Ana Torres',o:0,s:'Limpieza dental',f:'Mar 27 oct',h:'09:00',e:'Atendido',n:'Control semestral. Sensibilidad leve en zona inferior.'},
+{id:9,p:'Luis Rojas',o:0,s:'Resina (calza)',f:'Lun 12 oct',h:'15:00',e:'No Asistió',n:'Inasistencia sin aviso.'},
+{id:10,p:'Marta Díaz',o:2,s:'Blanqueamiento',f:'Sáb 14 nov',h:'11:00',e:'Solicitado',hr:70}];
+let INV=[{n:'Guantes (pares)',q:800},{n:'Resina compuesta (jeringa)',q:42},{n:'Anestesia (carpules)',q:120},{n:'Gel blanqueador (unidad)',q:15}];
+let PA=['Carlos Mejía','Ana Torres','Luis Rojas','Marta Díaz'];
+const ME='Carlos Mejía',cl={Solicitado:'s1',Asignado:'s2','En Proceso':'s3',Atendido:'s4',Cancelado:'s5','No Asistió':'s6'};
+const chip=e=>`<span class="ch ${cl[e]}">${e}</span>`;
+const NAV={pub:[['inicio','Inicio'],['servicios','Servicios'],['odontologos','Odontólogos'],['login','Iniciar sesión']],
+pac:[['pac','Panel'],['agendar','Agendar cita'],['mis','Mis citas'],['hist','Mi historial'],['perfil','Mi perfil']],
+odo:[['agenda','Agenda del día']],
+rec:[['dash','Dashboard'],['ageneral','Agenda general'],['pacientes','Pacientes']],
+adm:[['dash','Dashboard'],['ageneral','Agenda general'],['pacientes','Pacientes'],['aserv','Servicios y tarifas'],['aodo','Odontólogos y horarios'],['ainv','Inventario'],['ausu','Usuarios y roles'],['arep','Reportes']]};
+const RN={pac:'Paciente',odo:'Odontólogo (Dra. Laura Pérez)',rec:'Recepción',adm:'Administrador'};
+const W0=()=>({step:1,sv:[],od:null,fecha:'2026-11-16',hora:null,re:null});
+let S={role:null,view:'inicio',arg:null,pend:null,restr:false,w:W0()};
+const find=id=>C.find(c=>c.id===id);
+function go(v,a=null){S.view=v;S.arg=a;S.pend=null;render();scrollTo(0,0)}
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(window._t);window._t=setTimeout(()=>t.classList.remove('on'),3400)}
+function login(r){S.restr=r==='pr';S.role=r==='pr'?'pac':r;S.w=W0();go({pac:'pac',pr:'pac',odo:'agenda',rec:'dash',adm:'dash'}[r])}
+function logout(){S.role=null;go('inicio')}
+function render(){
+ const nav=NAV[S.role||'pub'];
+ $('#app').innerHTML=`<header class="top"><span class="brand" onclick="${S.role?"go('"+nav[0][0]+"')":"go('inicio')"}">OdontoAgenda</span><nav>${nav.map(n=>`<button class="nl ${S.view===n[0]?'on':''}" onclick="go('${n[0]}')">${n[1]}</button>`).join('')}</nav>${S.role?`<span class="who">${RN[S.role]}</span><button class="b2" onclick="logout()">Cerrar sesión</button>`:''}</header><main>${V[S.view]()}</main><div class="foot">Prototipo navegable con datos de ejemplo</div>`}
+const V={
+inicio:()=>`<section class="hero"><div><h1>Tu cita odontológica, sin llamadas</h1><p class="lead">Elige servicio, odontólogo y horario en línea. Te enviamos la confirmación y un recordatorio 24 horas antes.</p><div class="row"><button class="b" onclick="go('login')">Agendar cita</button><button class="b2" onclick="go('servicios')">Ver servicios</button></div></div><div class="c"><h3>Próximas franjas libres</h3>${[['Dra. Laura Pérez','Hoy 15:30'],['Dr. Andrés Gómez','Mañana 09:00'],['Dra. Camila Ruiz','Vie 11:30']].map(x=>`<button class="slot" onclick="go('login')"><b>${x[1]}</b><span>${x[0]}</span></button>`).join('')}</div></section>`,
+servicios:()=>`<h2>Servicios odontológicos</h2><p class="mu">Duración estimada y precio referencial.</p><div class="g">${SV.map(s=>`<div class="c"><h3>${s.n}</h3><p class="mu">${s.m} minutos</p><div class="k">${money(s.p)}</div></div>`).join('')}</div><p><button class="b" onclick="go('login')">Iniciar sesión para agendar</button></p>`,
+odontologos:()=>`<h2>Nuestros odontólogos</h2><div class="g">${OD.map(o=>`<div class="c"><h3>${o.n}</h3><p>${o.e}</p><p class="mu">${o.h}</p></div>`).join('')}</div><p><button class="b" onclick="go('login')">Iniciar sesión para agendar</button></p>`,
+login:()=>`<div class="hero"><div class="c"><h2>Iniciar sesión</h2><label>Correo</label><input value="carlos@correo.com"><label>Contraseña</label><input type="password" value="clave1234"><div class="row" style="margin-top:16px"><button class="b" onclick="login('pac')">Iniciar sesión</button><button class="b2" onclick="toast('Te enviamos un enlace para restablecer tu contraseña al correo.')">Recuperar contraseña</button></div><p class="mu">¿Eres nuevo? <a href="#" onclick="toast('Registro enviado. Revisa tu correo para activar la cuenta.');return false" style="color:var(--pri)">Crear cuenta</a></p></div>
+<div class="c"><h3>Entrar como (demo)</h3><p class="mu">El sistema valida tus credenciales y rol, y te lleva a tu portal.</p><div class="row" style="flex-direction:column;align-items:stretch">${[['pac','Paciente'],['pr','Paciente con 2 inasistencias'],['odo','Odontólogo'],['rec','Recepción'],['adm','Administrador']].map(r=>`<button class="b2" onclick="login('${r[0]}')">${r[1]}</button>`).join('')}</div></div></div>`,
+pac:()=>{const n=C.find(c=>c.p===ME&&c.e==='Asignado');return `<h2>Hola, Carlos</h2>${n?`<div class="c" style="margin-bottom:16px"><p class="mu" style="margin:0">Tu próxima cita</p><h3>${n.s} con ${OD[n.o].n}</h3><p>${n.f}, ${n.h} ${chip(n.e)}</p><button class="b2" onclick="go('detalle',${n.id})">Ver detalle</button></div>`:''}<div class="g">${[['agendar','Agendar cita','Servicio, odontólogo y horario'],['mis','Mis citas','Detalle, cancelar o reagendar'],['hist','Mi historial','Atendidas, canceladas e inasistencias'],['perfil','Mi perfil','Tus datos de contacto']].map(x=>`<button class="li" style="display:block;margin:0" onclick="go('${x[0]}')"><h3>${x[1]}</h3><span class="mu">${x[2]}</span></button>`).join('')}</div>`},
+agendar:()=>{const w=S.w;if(S.restr)return `<h2>Agendar cita</h2><div class="note"><b>Agendamiento web restringido.</b> Tienes 2 inasistencias consecutivas sin justificar. Confirma tu cita por teléfono o de forma presencial con recepción.</div>`;
+ const dur=w.sv.reduce((a,i)=>a+SV[i].m,0),tot=w.sv.reduce((a,i)=>a+SV[i].p,0);
+ const hs=[];for(let i=0;i<18;i++){const m=480+i*30;hs.push(String(m/60|0).padStart(2,'0')+':'+(m%60?'30':'00'))}
+ const busy=h=>(parseInt(h)+(w.od||0)+w.fecha.length)%4===0;
+ const body={1:()=>`<h3>Elige uno o varios servicios</h3>${SV.map((s,i)=>`<button class="opt ${w.sv.includes(i)?'on':''}" onclick="tg(${i})"><span><b>${s.n}</b><small>${s.m} min</small></span><span class="r">${money(s.p)}</span></button>`).join('')}<p class="mu">Duración total: <b>${dur} min</b></p><button class="b" ${dur?'':'disabled'} onclick="sp(2)">Continuar</button>`,
+ 2:()=>`<h3>Elige tu odontólogo</h3>${OD.map((o,i)=>`<button class="opt ${w.od===i?'on':''}" onclick="po(${i})"><span><b>${o.n}</b><small>${o.e} - ${o.h}</small></span></button>`).join('')}<div class="row"><button class="b2" onclick="sp(1)">Atrás</button><button class="b" ${w.od===null?'disabled':''} onclick="sp(3)">Continuar</button></div>`,
+ 3:()=>`<h3>Elige fecha y hora</h3><label>Fecha</label><input type="date" value="${w.fecha}" min="2026-11-12" onchange="S.w.fecha=this.value;S.w.hora=null;render()" style="max-width:220px"><p class="mu">Franjas de ${OD[w.od??0].n}. Reservas ${dur||30} min en total.</p><div class="hs">${hs.map(h=>`<button class="slot ${w.hora===h?'on':''}" ${busy(h)?'disabled':''} onclick="S.w.hora='${h}';render()">${h}</button>`).join('')}</div><div class="row" style="margin-top:16px"><button class="b2" onclick="sp(2)">Atrás</button><button class="b" ${w.hora?'':'disabled'} onclick="sp(4)">Continuar</button></div>`,
+ 4:()=>`<h3>Confirma tu cita</h3><dl class="kv"><dt>Servicios</dt><dd>${w.sv.map(i=>SV[i].n).join(', ')}</dd><dt>Odontólogo</dt><dd>${OD[w.od].n}</dd><dt>Fecha y hora</dt><dd>${fl(w.fecha)}, ${w.hora}</dd><dt>Duración</dt><dd>${dur} min</dd><dt>Precio referencial</dt><dd>${money(tot)}</dd></dl><div class="note in">Recibirás la confirmación por correo y un recordatorio 24 horas antes.</div><div class="row"><button class="b2" onclick="sp(3)">Atrás</button><button class="b" onclick="conf()">Confirmar cita</button></div>`}[w.step]();
+ return `<h2>${w.re?(w.re.t==='re'?'Reagendar cita':'Reprogramar cita'):'Agendar cita'}</h2><div class="steps">${['Servicios','Odontólogo','Fecha y hora','Confirmación'].map((s,i)=>`<div class="st ${w.step===i+1?'on':w.step>i+1?'ok':''}">${i+1}. ${s}</div>`).join('')}</div><div class="c">${body}</div>`},
+mis:()=>{const l=C.filter(c=>c.p===ME&&['Solicitado','Asignado','En Proceso','No Asistió'].includes(c.e));return `<h2>Mis citas</h2>${l.map(c=>`<button class="li" onclick="go('detalle',${c.id})"><span class="t">${c.h}</span><span class="m"><b>${c.s}</b><small>${OD[c.o].n} - ${c.f}</small></span>${chip(c.e)}</button>`).join('')||'<p class="mu">Aún no tienes citas. Agenda la primera.</p>'}`},
+detalle:()=>{const c=find(S.arg),act=['Solicitado','Asignado'].includes(c.e);
+ return `<p><button class="b2" onclick="go('mis')">Volver a mis citas</button></p><div class="c"><h2>${c.s} ${chip(c.e)}</h2><dl class="kv"><dt>Odontólogo</dt><dd>${OD[c.o].n}</dd><dt>Fecha y hora</dt><dd>${c.f}, ${c.h}</dd></dl>
+ ${act?`<div class="row"><button class="b2" onclick="re(${c.id},'re')">Reagendar cita</button><button class="bd" onclick="S.pend='x';render()">Cancelar cita</button></div><p class="mu">Cancelar o reagendar exige al menos 2 horas de anticipación.</p>`:''}
+ ${c.e==='No Asistió'?`<div class="note">Esta cita quedó como No Asistió. Puedes reprogramarla.</div><button class="b" onclick="re(${c.id},'rp')">Reprogramar cita</button>`:''}
+ ${S.pend==='x'?(c.hr<2?`<div class="note"><b>No se puede cancelar.</b> Faltan menos de 2 horas. Si no llegas dentro de 15 minutos, la cita se marcará como No Asistió.</div>`:`<div class="note"><b>¿Cancelar esta cita?</b> Se liberará el cupo.<div class="row" style="margin-top:10px"><button class="bd" onclick="can(${c.id})">Sí, cancelar cita</button><button class="b2" onclick="S.pend=null;render()">Mantener cita</button></div></div>`):''}</div>`},
+hist:()=>{const l=C.filter(c=>c.p===ME&&['Atendido','Cancelado','No Asistió'].includes(c.e));return `<h2>Mi historial</h2>${tabla(l)}`},
+perfil:()=>`<h2>Mi perfil</h2><div class="c" style="max-width:480px"><label>Nombre</label><input value="Carlos Mejía"><label>Correo</label><input value="carlos@correo.com"><label>Teléfono</label><input value="300 123 4567"><p><button class="b" style="margin-top:14px" onclick="toast('Perfil actualizado.')">Guardar cambios</button></p></div>`,
+agenda:()=>{const l=C.filter(c=>c.o===0&&c.f==='Hoy');return `<h2>Agenda del día</h2><p class="mu">Hoy, mié 11 de noviembre</p>${l.map(c=>`<button class="li" onclick="go('cita',${c.id})"><span class="t">${c.h}</span><span class="m"><b>${c.p}</b><small>${c.s}</small></span>${chip(c.e)}</button>`).join('')}`},
+cita:()=>{const c=find(S.arg);
+ return `<p><button class="b2" onclick="go('agenda')">Volver a la agenda</button></p><div class="c"><h2>${c.p} ${chip(c.e)}</h2><dl class="kv"><dt>Servicio</dt><dd>${c.s}</dd><dt>Hora</dt><dd>${c.f}, ${c.h}</dd></dl>
+ <div class="row"><button class="b2" onclick="go('histp',${c.id})">Ver historial del paciente</button>${c.e==='Asignado'?`<button class="b" onclick="ini(${c.id})">Iniciar atención</button><button class="bd" onclick="S.pend='n';render()">Marcar No Asistió</button>`:''}</div>
+ ${c.e==='En Proceso'?`<label>Observaciones de la atención</label><textarea id="obs" rows="3" placeholder="Procedimiento realizado, hallazgos, indicaciones"></textarea><p><button class="b" onclick="fin(${c.id})">Finalizar y registrar notas</button></p>`:''}
+ ${S.pend==='n'?`<div class="note"><b>¿Pasaron 15 minutos de tolerancia sin que el paciente llegara?</b><div class="row" style="margin-top:10px"><button class="bd" onclick="nas(${c.id})">Sí, marcar No Asistió</button><button class="b2" onclick="S.pend=null;render()">Volver</button></div></div>`:''}
+ ${c.n&&c.e==='Atendido'?`<div class="note ok">${c.n}</div>`:''}</div>`},
+histp:()=>{const c=find(S.arg);return `<p><button class="b2" onclick="go('cita',${c.id})">Volver a la cita</button></p><h2>Historial de ${c.p} <span class="ch s1">Solo lectura</span></h2>${tabla(C.filter(x=>x.p===c.p&&x.id!==c.id&&['Atendido','Cancelado','No Asistió'].includes(x.e)))}`},
+dash:()=>{const a=C.filter(c=>c.e==='Atendido').length,n=C.filter(c=>c.e==='No Asistió').length,pc=C.filter(c=>c.e==='Solicitado');
+ return `<h2>Dashboard gerencial</h2><div class="g" style="margin-bottom:20px"><div class="c"><div class="k">${C.filter(c=>c.f==='Hoy').length}</div><span class="mu">Citas de hoy</span></div><div class="c"><div class="k">${a}</div><span class="mu">Citas atendidas</span></div><div class="c"><div class="k">${pc.length}</div><span class="mu">Por confirmar</span></div><div class="c"><div class="k">${Math.round(n/(a+n||1)*100)}%</div><span class="mu">Tasa de inasistencia</span></div></div>
+ <h3>Solicitudes por confirmar</h3>${pc.map(c=>`<div class="li" style="cursor:default"><span class="m"><b>${c.p}</b><small>${c.s} - ${c.f}, ${c.h}</small></span><button class="b" onclick="asi(${c.id})">Confirmar y asignar a ${OD[c.o].n}</button><button class="bd" onclick="rej(${c.id})">Rechazar</button></div>`).join('')||'<p class="mu">No hay solicitudes pendientes.</p>'}`},
+ageneral:()=>`<h2>Agenda general</h2><div class="sc"><table><tr><th>Fecha</th><th>Paciente</th><th>Odontólogo</th><th>Servicio</th><th>Estado</th></tr>${C.map(c=>`<tr><td>${c.f}, ${c.h}</td><td>${c.p}</td><td>${OD[c.o].n}</td><td>${c.s}</td><td><select aria-label="Cambiar estado" onchange="setE(${c.id},this.value)">${Object.keys(cl).map(e=>`<option ${e===c.e?'selected':''}>${e}</option>`).join('')}</select></td></tr>`).join('')}</table></div>`,
+pacientes:()=>`<h2>Pacientes</h2><div class="row" style="margin-bottom:14px"><input id="np" placeholder="Nombre del nuevo paciente" style="max-width:300px"><button class="b" onclick="addP()">Registrar paciente</button></div><div class="sc"><table><tr><th>Paciente</th><th>Citas</th><th>Inasistencias</th></tr>${PA.map(p=>`<tr><td>${p}</td><td>${C.filter(c=>c.p===p).length}</td><td>${C.filter(c=>c.p===p&&c.e==='No Asistió').length}</td></tr>`).join('')}</table></div>`,
+aserv:()=>`<h2>Servicios y tarifas</h2><div class="sc"><table><tr><th>Servicio</th><th>Duración</th><th>Precio</th></tr>${SV.map(s=>`<tr><td>${s.n}</td><td>${s.m} min</td><td>${money(s.p)}</td></tr>`).join('')}</table></div>`,
+aodo:()=>`<h2>Odontólogos y horarios</h2><div class="sc"><table><tr><th>Odontólogo</th><th>Especialidad</th><th>Horario</th></tr>${OD.map(o=>`<tr><td>${o.n}</td><td>${o.e}</td><td>${o.h}</td></tr>`).join('')}</table></div>`,
+ainv:()=>`<h2>Inventario de insumos</h2><p class="mu">El stock solo se descuenta cuando una cita queda en estado Atendido.</p><div class="sc"><table><tr><th>Insumo</th><th>Existencias</th></tr>${INV.map(i=>`<tr><td>${i.n}</td><td>${i.q}</td></tr>`).join('')}</table></div>`,
+ausu:()=>`<h2>Usuarios y roles</h2><div class="sc"><table><tr><th>Usuario</th><th>Rol</th></tr>${[['Carlos Mejía','Paciente'],['Dra. Laura Pérez','Odontólogo'],['Sofía Vargas','Recepción'],['Admin general','Administrador']].map(u=>`<tr><td>${u[0]}</td><td>${u[1]}</td></tr>`).join('')}</table></div>`,
+arep:()=>{const a=C.filter(c=>c.e==='Atendido').length,n=C.filter(c=>c.e==='No Asistió').length;return `<h2>Reportes</h2><div class="c" style="margin-bottom:16px"><div class="k">${Math.round(n/(a+n||1)*100)}%</div><span class="mu">Tasa de inasistencia (No Asistió sobre atendidas y no asistidas)</span></div><div class="c"><h3>Citas por estado</h3>${Object.keys(cl).map(e=>{const k=C.filter(c=>c.e===e).length;return `<p style="margin:12px 0 0">${chip(e)} ${k}<div class="bar" style="width:${k/C.length*100}%"></div></p>`}).join('')}</div>`}
+};
+function tabla(l){return l.length?`<div class="sc"><table><tr><th>Fecha</th><th>Servicio</th><th>Odontólogo</th><th>Estado</th><th>Notas</th></tr>${l.map(c=>`<tr><td>${c.f}</td><td>${c.s}</td><td>${OD[c.o].n}</td><td>${chip(c.e)}</td><td>${c.n||''}</td></tr>`).join('')}</table></div>`:'<p class="mu">Todavía no hay registros en el historial.</p>'}
+function fl(f){return new Date(f+'T12:00').toLocaleDateString('es-CO',{weekday:'short',day:'numeric',month:'short'})}
+function tg(i){const s=S.w.sv,k=s.indexOf(i);k<0?s.push(i):s.splice(k,1);render()}
+function po(i){S.w.od=i;render()}function sp(n){S.w.step=n;render()}
+function re(id,t){const c=find(id);S.w={step:3,sv:[SV.findIndex(s=>c.s===s.n)].filter(i=>i>=0),od:c.o,fecha:'2026-11-16',hora:null,re:{id,t}};go('agendar')}
+function conf(){const w=S.w;C.push({id:Math.max(...C.map(c=>c.id))+1,p:ME,o:w.od,s:w.sv.map(i=>SV[i].n).join(' + '),f:fl(w.fecha),h:w.hora,e:'Solicitado',hr:48});
+ if(w.re&&w.re.t==='re')find(w.re.id).e='Cancelado';S.w=W0();toast('Cita solicitada. Te enviamos la confirmación al correo.');go('mis')}
+function can(id){find(id).e='Cancelado';toast('Cita cancelada. El cupo quedó libre.');go('mis')}
+function ini(id){find(id).e='En Proceso';toast('Atención iniciada. La cita pasó a En Proceso.');render()}
+function fin(id){const c=find(id);c.e='Atendido';c.n=($('#obs').value||'Atención finalizada sin observaciones.');INV[0].q-=2;INV[1].q-=1;toast('Atención registrada. Historial actualizado e insumos descontados.');render()}
+function nas(id){find(id).e='No Asistió';toast('Marcada como No Asistió. Cupo liberado y correo enviado al paciente.');go('agenda')}
+function asi(id){const c=find(id);c.e='Asignado';toast('Cita confirmada con '+OD[c.o].n+'. Correo enviado al paciente.');render()}
+function rej(id){const c=find(id);c.e='Cancelado';c.n='Rechazada por la clínica. Motivo enviado por correo.';toast('Solicitud rechazada. El paciente recibe un correo con el motivo.');render()}
+function setE(id,e){find(id).e=e;toast('Estado actualizado a '+e+'. Se notifica al paciente por correo.');render()}
+function addP(){const v=$('#np').value.trim();if(!v){toast('Escribe el nombre del paciente.');return}PA.push(v);toast('Paciente registrado.');render()}
+render();
+</script>
+</body>
+</html>

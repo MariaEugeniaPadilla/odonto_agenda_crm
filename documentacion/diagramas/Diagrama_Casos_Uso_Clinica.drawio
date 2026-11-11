@@ -1,0 +1,199 @@
+<mxfile host="app.diagrams.net" agent="ChatGPT">
+  <diagram id="odontagenda-uml-matching-image" name="OdontoAgenda CRM">
+    <mxGraphModel dx="1900" dy="724" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1050" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="boundary" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF4FF;fillOpacity=75;strokeColor=#1455A0;strokeWidth=2.5;verticalAlign=top;spacingTop=10;fontSize=25;fontColor=#12356A;" value="&lt;b&gt;OdontoAgenda CRM&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:16px&#39;&gt;Sistema de Gestión de Clínica Odontológica&lt;/font&gt;" vertex="1">
+          <mxGeometry height="865" width="1005" x="265" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_paciente" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=15;fontStyle=1;strokeWidth=2;fillColor=#E9D5FF;strokeColor=#7E3FA1;fontColor=#111827;" value="Paciente" vertex="1">
+          <mxGeometry height="115" width="85" x="50" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_recepcion" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=15;fontStyle=1;strokeWidth=2;fillColor=#DBEAFE;strokeColor=#2563EB;fontColor=#111827;" value="Recepcionista" vertex="1">
+          <mxGeometry height="115" width="120" x="30" y="565" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_odontologo" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=15;fontStyle=1;strokeWidth=2;fillColor=#D1FAE5;strokeColor=#16804A;fontColor=#111827;" value="Odontólogo" vertex="1">
+          <mxGeometry height="110" width="90" x="1395" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_admin" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=15;fontStyle=1;strokeWidth=2;fillColor=#FEF3C7;strokeColor=#A16207;fontColor=#111827;" value="Administrador" vertex="1">
+          <mxGeometry height="115" width="125" x="1375" y="555" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_notif" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=15;fontStyle=1;strokeWidth=2;fillColor=#FCE7F3;strokeColor=#BE185D;fontColor=#111827;" value="Sistema de&lt;br&gt;notificaciones" vertex="1">
+          <mxGeometry height="115" width="125" x="1375" y="770" as="geometry" />
+        </mxCell>
+        <mxCell id="cu01" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#F3E8FF;strokeColor=#7E3FA1;fontSize=12;fontColor=#172033;strokeWidth=1.4;" value="CU-01&lt;br&gt;Registrarse / iniciar&lt;br&gt;sesión" vertex="1">
+          <mxGeometry height="62" width="180" x="300" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="cu02" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#F3E8FF;strokeColor=#7E3FA1;fontSize=12;fontColor=#172033;strokeWidth=1.4;" value="CU-02&lt;br&gt;Consultar catálogo&lt;br&gt;de servicios" vertex="1">
+          <mxGeometry height="62" width="180" x="300" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="cu03" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#F3E8FF;strokeColor=#7E3FA1;fontSize=12;fontColor=#172033;strokeWidth=1.4;" value="CU-03&lt;br&gt;Agendar cita" vertex="1">
+          <mxGeometry height="62" width="165" x="485" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="cu04" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#F3E8FF;strokeColor=#7E3FA1;fontSize=12;fontColor=#172033;strokeWidth=1.4;" value="CU-04&lt;br&gt;Cancelar cita" vertex="1">
+          <mxGeometry height="58" width="155" x="305" y="265" as="geometry" />
+        </mxCell>
+        <mxCell id="cu05" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#F3E8FF;strokeColor=#7E3FA1;fontSize=12;fontColor=#172033;strokeWidth=1.4;" value="CU-05&lt;br&gt;Reagendar cita" vertex="1">
+          <mxGeometry height="58" width="155" x="305" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="cu06" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#F3E8FF;strokeColor=#7E3FA1;fontSize=12;fontColor=#172033;strokeWidth=1.4;" value="CU-06&lt;br&gt;Consultar citas&lt;br&gt;e historial" vertex="1">
+          <mxGeometry height="62" width="180" x="295" y="405" as="geometry" />
+        </mxCell>
+        <mxCell id="avail1" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0284C7;fontSize=11;fontColor=#172033;strokeWidth=1.3;" value="Verificar&lt;br&gt;disponibilidad" vertex="1">
+          <mxGeometry height="52" width="155" x="755" y="138" as="geometry" />
+        </mxCell>
+        <mxCell id="duration" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0284C7;fontSize=11;fontColor=#172033;strokeWidth=1.3;" value="Calcular duración&lt;br&gt;total" vertex="1">
+          <mxGeometry height="52" width="155" x="755" y="205" as="geometry" />
+        </mxCell>
+        <mxCell id="policy" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0284C7;fontSize=11;fontColor=#172033;strokeWidth=1.3;" value="Aplicar política&lt;br&gt;de cancelación" vertex="1">
+          <mxGeometry height="52" width="155" x="510" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="avail2" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0284C7;fontSize=11;fontColor=#172033;strokeWidth=1.3;" value="Verificar&lt;br&gt;disponibilidad" vertex="1">
+          <mxGeometry height="52" width="155" x="525" y="365" as="geometry" />
+        </mxCell>
+        <mxCell id="notify_in" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FCE7F3;strokeColor=#BE185D;fontSize=12;fontColor=#172033;strokeWidth=1.4;" value="CU-19&lt;br&gt;Enviar notificación" vertex="1">
+          <mxGeometry height="58" width="170" x="755" y="284" as="geometry" />
+        </mxCell>
+        <mxCell id="cu10" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=12;fontColor=#172033;strokeWidth=1.4;" value="CU-10&lt;br&gt;Registrar paciente" vertex="1">
+          <mxGeometry height="62" width="195" x="310" y="495" as="geometry" />
+        </mxCell>
+        <mxCell id="cu11" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=12;fontColor=#172033;strokeWidth=1.4;" value="CU-11&lt;br&gt;Agendar cita para&lt;br&gt;un paciente" vertex="1">
+          <mxGeometry height="62" width="195" x="310" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="cu12" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=12;fontColor=#172033;strokeWidth=1.4;" value="CU-12&lt;br&gt;Asignar odontólogo&lt;br&gt;y confirmar cita" vertex="1">
+          <mxGeometry height="62" width="205" x="305" y="645" as="geometry" />
+        </mxCell>
+        <mxCell id="cu13" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=12;fontColor=#172033;strokeWidth=1.4;" value="CU-13&lt;br&gt;Cancelar o reagendar cita" vertex="1">
+          <mxGeometry height="62" width="220" x="295" y="720" as="geometry" />
+        </mxCell>
+        <mxCell id="cu07" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16804A;fontSize=12;fontColor=#172033;strokeWidth=1.4;" value="CU-07&lt;br&gt;Consultar agenda&lt;br&gt;diaria" vertex="1">
+          <mxGeometry height="58" width="175" x="1000" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="cu08" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16804A;fontSize=12;fontColor=#172033;strokeWidth=1.4;" value="CU-08&lt;br&gt;Iniciar atención&lt;br&gt;(En Proceso)" vertex="1">
+          <mxGeometry height="58" width="175" x="1000" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="cu09" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16804A;fontSize=12;fontColor=#172033;strokeWidth=1.4;" value="CU-09&lt;br&gt;Finalizar atención y&lt;br&gt;registrar observaciones&lt;br&gt;(Atendido)" vertex="1">
+          <mxGeometry height="72" width="195" x="990" y="265" as="geometry" />
+        </mxCell>
+        <mxCell id="history" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0284C7;fontSize=11;fontColor=#172033;strokeWidth=1.3;" value="Actualizar historial&lt;br&gt;y descontar insumos" vertex="1">
+          <mxGeometry height="55" width="190" x="992.5" y="405" as="geometry" />
+        </mxCell>
+        <mxCell id="cu14" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#A16207;fontSize=12;fontColor=#172033;strokeWidth=1.4;" value="CU-14&lt;br&gt;Gestionar servicios&lt;br&gt;y precios" vertex="1">
+          <mxGeometry height="60" width="185" x="925" y="465" as="geometry" />
+        </mxCell>
+        <mxCell id="cu15" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#A16207;fontSize=12;fontColor=#172033;strokeWidth=1.4;" value="CU-15&lt;br&gt;Gestionar odontólogos&lt;br&gt;y horarios" vertex="1">
+          <mxGeometry height="60" width="205" x="910" y="545" as="geometry" />
+        </mxCell>
+        <mxCell id="cu16" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#A16207;fontSize=12;fontColor=#172033;strokeWidth=1.4;" value="CU-16&lt;br&gt;Gestionar usuarios&lt;br&gt;y roles" vertex="1">
+          <mxGeometry height="60" width="205" x="900" y="625" as="geometry" />
+        </mxCell>
+        <mxCell id="cu17" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#A16207;fontSize=12;fontColor=#172033;strokeWidth=1.4;" value="CU-17&lt;br&gt;Gestionar inventario&lt;br&gt;de insumos" vertex="1">
+          <mxGeometry height="60" width="205" x="900" y="705" as="geometry" />
+        </mxCell>
+        <mxCell id="cu18" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#A16207;fontSize=12;fontColor=#172033;strokeWidth=1.4;" value="CU-18&lt;br&gt;Consultar reportes" vertex="1">
+          <mxGeometry height="55" width="205" x="900" y="785" as="geometry" />
+        </mxCell>
+        <mxCell id="cu19" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FCE7F3;strokeColor=#BE185D;fontSize=12;fontColor=#172033;strokeWidth=1.4;" value="CU-19&lt;br&gt;Enviar confirmación,&lt;br&gt;recordatorio y cambio&lt;br&gt;de estado" vertex="1">
+          <mxGeometry height="68" width="230" x="590" y="810" as="geometry" />
+        </mxCell>
+        <mxCell id="patient_0" edge="1" parent="1" source="actor_paciente" style="edgeStyle=none;html=1;rounded=0;strokeColor=#1E293B;strokeWidth=1.2;endArrow=none;" target="cu01" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="patient_1" edge="1" parent="1" source="actor_paciente" style="edgeStyle=none;html=1;rounded=0;strokeColor=#1E293B;strokeWidth=1.2;endArrow=none;" target="cu02" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="patient_2" edge="1" parent="1" source="actor_paciente" style="edgeStyle=none;html=1;rounded=0;strokeColor=#1E293B;strokeWidth=1.2;endArrow=none;" target="cu03" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="patient_3" edge="1" parent="1" source="actor_paciente" style="edgeStyle=none;html=1;rounded=0;strokeColor=#1E293B;strokeWidth=1.2;endArrow=none;" target="cu04" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="patient_4" edge="1" parent="1" source="actor_paciente" style="edgeStyle=none;html=1;rounded=0;strokeColor=#1E293B;strokeWidth=1.2;endArrow=none;" target="cu05" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="patient_5" edge="1" parent="1" source="actor_paciente" style="edgeStyle=none;html=1;rounded=0;strokeColor=#1E293B;strokeWidth=1.2;endArrow=none;" target="cu06" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="reception_0" edge="1" parent="1" source="actor_recepcion" style="edgeStyle=none;html=1;rounded=0;strokeColor=#1E293B;strokeWidth=1.2;endArrow=none;" target="cu10" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="reception_1" edge="1" parent="1" source="actor_recepcion" style="edgeStyle=none;html=1;rounded=0;strokeColor=#1E293B;strokeWidth=1.2;endArrow=none;" target="cu11" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="reception_2" edge="1" parent="1" source="actor_recepcion" style="edgeStyle=none;html=1;rounded=0;strokeColor=#1E293B;strokeWidth=1.2;endArrow=none;" target="cu12" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="reception_3" edge="1" parent="1" source="actor_recepcion" style="edgeStyle=none;html=1;rounded=0;strokeColor=#1E293B;strokeWidth=1.2;endArrow=none;" target="cu13" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dentist_0" edge="1" parent="1" source="actor_odontologo" style="edgeStyle=none;html=1;rounded=0;strokeColor=#1E293B;strokeWidth=1.2;endArrow=none;" target="cu07" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dentist_1" edge="1" parent="1" source="actor_odontologo" style="edgeStyle=none;html=1;rounded=0;strokeColor=#1E293B;strokeWidth=1.2;endArrow=none;" target="cu08" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dentist_2" edge="1" parent="1" source="actor_odontologo" style="edgeStyle=none;html=1;rounded=0;strokeColor=#1E293B;strokeWidth=1.2;endArrow=none;" target="cu09" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="admin_0" edge="1" parent="1" source="actor_admin" style="edgeStyle=none;html=1;rounded=0;strokeColor=#1E293B;strokeWidth=1.2;endArrow=none;" target="cu14" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="admin_1" edge="1" parent="1" source="actor_admin" style="edgeStyle=none;html=1;rounded=0;strokeColor=#1E293B;strokeWidth=1.2;endArrow=none;" target="cu15" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="admin_2" edge="1" parent="1" source="actor_admin" style="edgeStyle=none;html=1;rounded=0;strokeColor=#1E293B;strokeWidth=1.2;endArrow=none;" target="cu16" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="admin_3" edge="1" parent="1" source="actor_admin" style="edgeStyle=none;html=1;rounded=0;strokeColor=#1E293B;strokeWidth=1.2;endArrow=none;" target="cu17" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="admin_4" edge="1" parent="1" source="actor_admin" style="edgeStyle=none;html=1;rounded=0;strokeColor=#1E293B;strokeWidth=1.2;endArrow=none;" target="cu18" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="notif_assoc" edge="1" parent="1" style="edgeStyle=none;html=1;rounded=0;strokeColor=#1E293B;strokeWidth=1.2;endArrow=none;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1370" y="850.29" as="sourcePoint" />
+            <mxPoint x="819.9969976442699" y="850.2931803793601" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="include_availability" edge="1" parent="1" source="cu03" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=6 4;strokeColor=#334155;strokeWidth=1.4;endArrow=open;endFill=0;fontSize=11;fontStyle=2;labelBackgroundColor=#EAF4FF;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="avail1" value="«include»">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="include_duration" edge="1" parent="1" source="cu03" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=6 4;strokeColor=#334155;strokeWidth=1.4;endArrow=open;endFill=0;fontSize=11;fontStyle=2;labelBackgroundColor=#EAF4FF;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="duration" value="«include»">
+          <mxGeometry relative="1" x="-0.2821" y="-9" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="650" y="230" />
+              <mxPoint x="675" y="230" />
+              <mxPoint x="675" y="231" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="include_notification" edge="1" parent="1" source="cu03" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=6 4;strokeColor=#334155;strokeWidth=1.4;endArrow=open;endFill=0;fontSize=11;fontStyle=2;labelBackgroundColor=#EAF4FF;exitX=1;exitY=1;exitDx=0;exitDy=0;" target="notify_in" value="«include»">
+          <mxGeometry relative="1" x="-0.0744" as="geometry">
+            <Array as="points">
+              <mxPoint x="680" y="263" />
+              <mxPoint x="680" y="313" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="extend_cancel" edge="1" parent="1" source="cu04" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=6 4;strokeColor=#9A3412;strokeWidth=1.4;endArrow=open;endFill=0;fontSize=11;fontStyle=2;labelBackgroundColor=#EAF4FF;" target="policy" value="«extend»">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="include_reschedule" edge="1" parent="1" source="cu05" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=6 4;strokeColor=#334155;strokeWidth=1.4;endArrow=open;endFill=0;fontSize=11;fontStyle=2;labelBackgroundColor=#EAF4FF;" target="avail2" value="«include»">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="include_history" edge="1" parent="1" source="cu09" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=6 4;strokeColor=#334155;strokeWidth=1.4;endArrow=open;endFill=0;fontSize=11;fontStyle=2;labelBackgroundColor=#EAF4FF;" target="history" value="«include»">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#94A3B8;strokeWidth=1.2;fontSize=12;fontColor=#172033;align=left;spacing=10;" value="&lt;b&gt;Relaciones entre casos de uso&lt;/b&gt;&lt;br&gt;&lt;br&gt;╌╌╌➜　&lt;b&gt;«include»&lt;/b&gt;　 Incluye funcionalidad obligatoria&lt;br&gt;&lt;br&gt;╌╌╌➜　&lt;b&gt;«extend»&lt;/b&gt;　 Extiende comportamiento (opcional)" vertex="1">
+          <mxGeometry height="110" width="510" x="25" y="920" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_note" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#CBD5E1;fontSize=12;fontColor=#334155;align=center;" value="Las líneas continuas representan asociaciones entre actores y casos de uso.&lt;br&gt;Los óvalos están organizados por actor y módulo funcional." vertex="1">
+          <mxGeometry height="65" width="700" x="590" y="930" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

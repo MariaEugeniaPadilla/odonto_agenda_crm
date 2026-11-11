@@ -1,0 +1,85 @@
+/* =====================================================================
+   DENTAL CARE • Clínica Odontológica (Cali, Colombia)
+   Sistema de Agendamiento en línea "Odonto Agenda"
+   Estilos base y tipografía institucional
+   ===================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap');
+
+:root {
+    --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    font-family: var(--font-sans);
+    color: #1e293b;
+    background-color: #f8fafc;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, .font-heading {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+}
+
+/* Scrollbar refinado y minimalista */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Gradientes institucionales DENTAL CARE */
+.gradient-dental-primary {
+    background: linear-gradient(135deg, #14b8a6 0%, #0d9488 50%, #1a3a5c 100%);
+}
+
+.gradient-dental-soft {
+    background: linear-gradient(135deg, #effaf8 0%, #f0f5fa 50%, #ffffff 100%);
+}
+
+.gradient-dental-card {
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+/* Cabecera translúcida con desenfoque suave */
+.glass-nav {
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+/* Efectos de tarjeta con sombra suave institucional */
+.dental-card {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 1rem;
+    box-shadow: 0 4px 14px -3px rgba(15, 76, 110, 0.05), 0 2px 6px -2px rgba(15, 76, 110, 0.03);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dental-card:hover {
+    border-color: #b0e8de;
+    box-shadow: 0 10px 25px -4px rgba(15, 76, 110, 0.08), 0 4px 10px -2px rgba(15, 76, 110, 0.04);
+}
+
+/* Contenedor Toast siempre en capa superior z-[99999] */
+#toast-container {
+    z-index: 99999 !important;
+}
+
+#toast-container > div {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}

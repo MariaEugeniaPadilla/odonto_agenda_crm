@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1550" height="775" viewBox="0 0 1550 775" font-family="Arial, Helvetica, sans-serif" xmlns:c2pa="http://c2pa.org/manifest">
+<defs><marker id="m2563EB" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 z" fill="#2563EB"/></marker><marker id="m374151" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 z" fill="#374151"/></marker><marker id="m6B7280" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 z" fill="#6B7280"/></marker><marker id="mEF4444" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 z" fill="#EF4444"/></marker></defs>
+<rect width="1550" height="775" fill="#fff"/><rect x="10" y="8" width="1530" height="38" rx="8" fill="#111827"/>
+<text x="775" y="33" text-anchor="middle" font-size="17" font-weight="bold" fill="#fff">MAPA DE NAVEGABILIDAD - ODONTOAGENDA CRM</text>
+<rect x="20" y="85" width="230" height="615" rx="10" fill="#F0F6FF" stroke="#3B82F6" stroke-width="1.5"/>
+<text x="135.0" y="106" text-anchor="middle" font-size="12" font-weight="bold" fill="#1D4ED8">1. ZONA PÚBLICA (Acceso abierto)</text>
+<rect x="310" y="85" width="560" height="615" rx="10" fill="#F0FDF8" stroke="#10B981" stroke-width="1.5"/>
+<text x="590.0" y="106" text-anchor="middle" font-size="12" font-weight="bold" fill="#047857">2. PORTAL DEL PACIENTE</text>
+<rect x="930" y="85" width="240" height="615" rx="10" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.5"/>
+<text x="1050.0" y="106" text-anchor="middle" font-size="12" font-weight="bold" fill="#B45309">3. PORTAL DEL ODONTÓLOGO</text>
+<rect x="1230" y="85" width="300" height="615" rx="10" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.5"/>
+<text x="1380.0" y="106" text-anchor="middle" font-size="12" font-weight="bold" fill="#7E22CE">4. PANEL ADMINISTRATIVO (Recepción / Admin)</text>
+<polyline points="135,171 135,205" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<polyline points="135,245 135,275" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<polyline points="135,315 135,345" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<polyline points="135,385 135,420" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<polyline points="135,520 135,560" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#m6B7280)"/>
+<polyline points="45,578 32,578 32,365 45,365" fill="none" stroke="#6B7280" stroke-width="1.5" marker-end="url(#m6B7280)"/>
+<polyline points="230,470 280,470 280,153 490,153" fill="none" stroke="#2563EB" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#m2563EB)"/>
+<polyline points="230,470 280,470 280,70 900,70 900,153 960,153" fill="none" stroke="#2563EB" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#m2563EB)"/>
+<polyline points="230,470 280,470 280,70 1200,70 1200,153 1280,153" fill="none" stroke="#2563EB" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#m2563EB)"/>
+<polyline points="590,171 590,193 395,193 395,215" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<polyline points="590,171 590,193 560,193 560,215" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<polyline points="590,171 590,193 690,193 690,215" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<polyline points="590,171 590,193 805,193 805,215" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<polyline points="395,249 395,275" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<polyline points="395,309 395,325" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<polyline points="395,359 395,375" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<polyline points="395,409 395,425" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<polyline points="560,249 560,275" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<polyline points="507,309 507,347 520,347" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<polyline points="507,309 507,392 520,392" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<polyline points="507,309 507,437 520,437" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<polyline points="465,232 478,232 478,480" fill="none" stroke="#EF4444" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#mEF4444)"/>
+<polyline points="1050,171 1050,215" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<polyline points="1050,255 1050,285" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<polyline points="1050,325 1050,355" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<polyline points="960,235 945,235 945,445 960,445" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<polyline points="960,235 945,235 945,515 960,515" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<polyline points="1295,171 1295,190 1255,190 1255,235 1275,235" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<polyline points="1295,171 1295,190 1255,190 1255,350 1275,350" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<polyline points="1295,171 1295,190 1255,190 1255,405 1275,405" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<polyline points="1295,171 1295,190 1255,190 1255,460 1275,460" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<polyline points="1295,171 1295,190 1255,190 1255,515 1275,515" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<polyline points="1295,171 1295,190 1255,190 1255,570 1275,570" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<polyline points="1295,171 1295,190 1255,190 1255,625 1275,625" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<polyline points="1380,255 1380,275" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#m374151)"/>
+<rect x="45" y="135" width="180" height="36" rx="7" fill="#3B82F6" stroke="#3B82F6" stroke-width="1.5"/>
+<text x="135.0" y="157.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#fff">Inicio (Landing page)</text>
+<rect x="45" y="205" width="180" height="40" rx="7" fill="#fff" stroke="#3B82F6" stroke-width="1.5"/>
+<text x="135.0" y="224.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Servicios</text>
+<text x="135.0" y="236.0" text-anchor="middle" font-size="8.5" fill="#6B7280">catálogo público</text>
+<rect x="45" y="275" width="180" height="40" rx="7" fill="#fff" stroke="#3B82F6" stroke-width="1.5"/>
+<text x="135.0" y="294.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Odontólogos</text>
+<text x="135.0" y="306.0" text-anchor="middle" font-size="8.5" fill="#6B7280">equipo odontológico</text>
+<rect x="45" y="345" width="180" height="40" rx="7" fill="#1D4ED8" stroke="#1D4ED8" stroke-width="1.5"/>
+<text x="135.0" y="369.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#fff">Iniciar sesión / Registrarse</text>
+<polygon points="135.0,420 230,470.0 135.0,520 40,470.0" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="1.5"/>
+<text x="135.0" y="468.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Validar credenciales</text><text x="135.0" y="482.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">y rol de usuario</text>
+<rect x="45" y="560" width="180" height="36" rx="7" fill="#fff" stroke="#3B82F6" stroke-width="1.5"/>
+<text x="135.0" y="582.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Recuperar contraseña</text>
+<rect x="490" y="135" width="200" height="36" rx="7" fill="#10B981" stroke="#10B981" stroke-width="1.5"/>
+<text x="590.0" y="157.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#fff">Panel del Paciente</text>
+<rect x="325" y="215" width="140" height="34" rx="7" fill="#D1FAE5" stroke="#10B981" stroke-width="1.5"/>
+<text x="395.0" y="236.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Agendar cita</text>
+<rect x="495" y="215" width="130" height="34" rx="7" fill="#D1FAE5" stroke="#10B981" stroke-width="1.5"/>
+<text x="560.0" y="236.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Mis citas</text>
+<rect x="640" y="215" width="100" height="34" rx="7" fill="#fff" stroke="#10B981" stroke-width="1.5"/>
+<text x="690.0" y="231.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Mi historial</text>
+<text x="690.0" y="243.0" text-anchor="middle" font-size="8.5" fill="#6B7280">atendidas · canceladas</text>
+<rect x="755" y="215" width="100" height="34" rx="7" fill="#fff" stroke="#10B981" stroke-width="1.5"/>
+<text x="805.0" y="236.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Mi perfil</text>
+<rect x="330" y="275" width="130" height="34" rx="7" fill="#fff" stroke="#10B981" stroke-width="1.5"/>
+<text x="395.0" y="291.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Paso 1: Servicios</text>
+<text x="395.0" y="303.0" text-anchor="middle" font-size="8.5" fill="#6B7280">uno o varios</text>
+<rect x="330" y="325" width="130" height="34" rx="7" fill="#fff" stroke="#10B981" stroke-width="1.5"/>
+<text x="395.0" y="341.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Paso 2: Odontólogo</text>
+<text x="395.0" y="353.0" text-anchor="middle" font-size="8.5" fill="#6B7280">horarios disponibles</text>
+<rect x="330" y="375" width="130" height="34" rx="7" fill="#fff" stroke="#10B981" stroke-width="1.5"/>
+<text x="395.0" y="391.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Paso 3: Fecha y hora</text>
+<text x="395.0" y="403.0" text-anchor="middle" font-size="8.5" fill="#6B7280">calendario · duración total</text>
+<rect x="330" y="425" width="130" height="34" rx="7" fill="#fff" stroke="#10B981" stroke-width="1.5"/>
+<text x="395.0" y="441.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Paso 4: Confirmación</text>
+<text x="395.0" y="453.0" text-anchor="middle" font-size="8.5" fill="#6B7280">correo de confirmación</text>
+<rect x="495" y="275" width="130" height="34" rx="7" fill="#fff" stroke="#10B981" stroke-width="1.5"/>
+<text x="560.0" y="296.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Detalle de cita</text>
+<rect x="520" y="330" width="180" height="34" rx="7" fill="#FEF2F2" stroke="#EF4444" stroke-width="1.5"/>
+<text x="610.0" y="346.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Cancelar cita</text>
+<text x="610.0" y="358.0" text-anchor="middle" font-size="8.5" fill="#6B7280">≥ 2 h de anticipación</text>
+<rect x="520" y="375" width="180" height="34" rx="7" fill="#fff" stroke="#10B981" stroke-width="1.5"/>
+<text x="610.0" y="391.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Reagendar cita</text>
+<text x="610.0" y="403.0" text-anchor="middle" font-size="8.5" fill="#6B7280">≥ 2 h de anticipación</text>
+<rect x="520" y="420" width="180" height="34" rx="7" fill="#FFF7ED" stroke="#EA580C" stroke-width="1.5"/>
+<text x="610.0" y="436.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Reprogramar cita</text>
+<text x="610.0" y="448.0" text-anchor="middle" font-size="8.5" fill="#6B7280">si fue marcada No Asistió</text>
+<rect x="330" y="480" width="185" height="56" rx="7" fill="#FEF2F2" stroke="#EF4444" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="422.5" y="498" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#B91C1C">Agendamiento web restringido</text>
+<text x="422.5" y="512" text-anchor="middle" font-size="8.5" fill="#6B7280">2 inasistencias consecutivas:</text><text x="422.5" y="524" text-anchor="middle" font-size="8.5" fill="#6B7280">confirmar por teléfono o presencial</text>
+<rect x="960" y="135" width="180" height="36" rx="7" fill="#F59E0B" stroke="#F59E0B" stroke-width="1.5"/>
+<text x="1050.0" y="157.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#fff">Agenda del día</text>
+<rect x="960" y="215" width="180" height="40" rx="7" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.5"/>
+<text x="1050.0" y="234.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Detalle de la cita</text>
+<text x="1050.0" y="246.0" text-anchor="middle" font-size="8.5" fill="#6B7280">estado y datos del paciente</text>
+<rect x="960" y="285" width="180" height="40" rx="7" fill="#fff" stroke="#F59E0B" stroke-width="1.5"/>
+<text x="1050.0" y="304.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Iniciar atención</text>
+<text x="1050.0" y="316.0" text-anchor="middle" font-size="8.5" fill="#6B7280">estado → En Proceso</text>
+<rect x="960" y="355" width="180" height="40" rx="7" fill="#fff" stroke="#F59E0B" stroke-width="1.5"/>
+<text x="1050.0" y="374.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Finalizar y registrar notas</text>
+<text x="1050.0" y="386.0" text-anchor="middle" font-size="8.5" fill="#6B7280">Atendido · historial e insumos</text>
+<rect x="960" y="425" width="180" height="40" rx="7" fill="#fff" stroke="#F59E0B" stroke-width="1.5"/>
+<text x="1050.0" y="444.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Historial del paciente</text>
+<text x="1050.0" y="456.0" text-anchor="middle" font-size="8.5" fill="#6B7280">citas, inasistencias y notas</text>
+<rect x="960" y="495" width="180" height="40" rx="7" fill="#FFF7ED" stroke="#EA580C" stroke-width="1.5"/>
+<text x="1050.0" y="514.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Marcar No Asistió</text>
+<text x="1050.0" y="526.0" text-anchor="middle" font-size="8.5" fill="#6B7280">tras 15 min de tolerancia</text>
+<rect x="1280" y="135" width="200" height="36" rx="7" fill="#A855F7" stroke="#A855F7" stroke-width="1.5"/>
+<text x="1380.0" y="152.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#fff">Dashboard gerencial</text>
+<text x="1380.0" y="164.0" text-anchor="middle" font-size="8.5" fill="#F3E8FF">calendario · estados · inasistencias</text>
+<rect x="1275" y="215" width="210" height="40" rx="7" fill="#F3E8FF" stroke="#A855F7" stroke-width="1.5"/>
+<text x="1380.0" y="234.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Agenda general (calendario)</text>
+<text x="1380.0" y="246.0" text-anchor="middle" font-size="8.5" fill="#6B7280">agendar, asignar y confirmar citas</text>
+<rect x="1275" y="330" width="210" height="40" rx="7" fill="#F3E8FF" stroke="#A855F7" stroke-width="1.5"/>
+<text x="1380.0" y="349.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Pacientes</text>
+<text x="1380.0" y="361.0" text-anchor="middle" font-size="8.5" fill="#6B7280">registrar y consultar pacientes</text>
+<rect x="1275" y="385" width="210" height="40" rx="7" fill="#fff" stroke="#7C3AED" stroke-width="1.5"/>
+<text x="1380.0" y="404.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Servicios y tarifas</text>
+<text x="1380.0" y="416.0" text-anchor="middle" font-size="8.5" fill="#6B7280">solo Admin</text>
+<rect x="1275" y="440" width="210" height="40" rx="7" fill="#fff" stroke="#7C3AED" stroke-width="1.5"/>
+<text x="1380.0" y="459.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Odontólogos y horarios</text>
+<text x="1380.0" y="471.0" text-anchor="middle" font-size="8.5" fill="#6B7280">solo Admin</text>
+<rect x="1275" y="495" width="210" height="40" rx="7" fill="#fff" stroke="#7C3AED" stroke-width="1.5"/>
+<text x="1380.0" y="514.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Inventario de insumos</text>
+<text x="1380.0" y="526.0" text-anchor="middle" font-size="8.5" fill="#6B7280">solo Admin</text>
+<rect x="1275" y="550" width="210" height="40" rx="7" fill="#fff" stroke="#7C3AED" stroke-width="1.5"/>
+<text x="1380.0" y="569.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Usuarios y roles</text>
+<text x="1380.0" y="581.0" text-anchor="middle" font-size="8.5" fill="#6B7280">solo Admin</text>
+<rect x="1275" y="605" width="210" height="40" rx="7" fill="#fff" stroke="#7C3AED" stroke-width="1.5"/>
+<text x="1380.0" y="624.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Reportes</text>
+<text x="1380.0" y="636.0" text-anchor="middle" font-size="8.5" fill="#6B7280">estados · % inasistencia · solo Admin</text>
+<rect x="1285" y="275" width="190" height="36" rx="7" fill="#F3E8FF" stroke="#A855F7" stroke-width="1.5"/>
+<text x="1380.0" y="292.0" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#111">Cambiar estado de cita</text>
+<text x="1380.0" y="304.0" text-anchor="middle" font-size="8.5" fill="#6B7280">incluye Marcar No Asistió</text>
+<text x="143" y="545" text-anchor="start" font-size="9" font-weight="normal" fill="#6B7280" stroke="#fff" stroke-width="3" paint-order="stroke">Credenciales inválidas</text>
+<text x="300" y="147" text-anchor="start" font-size="9" font-weight="bold" fill="#2563EB" stroke="#fff" stroke-width="3" paint-order="stroke">Rol Paciente</text>
+<text x="895" y="64" text-anchor="end" font-size="9" font-weight="bold" fill="#2563EB" stroke="#fff" stroke-width="3" paint-order="stroke">Rol Odontólogo</text>
+<text x="1195" y="64" text-anchor="end" font-size="9" font-weight="bold" fill="#2563EB" stroke="#fff" stroke-width="3" paint-order="stroke">Rol Admin / Recepción</text>
+<rect x="10" y="712" width="1530" height="54" rx="6" fill="#F8FAFC" stroke="#CBD5E1"/>
+<line x1="30" y1="728" x2="70" y2="728" stroke="#374151" stroke-width="1.8" marker-end="url(#m374151)"/><text x="78" y="732" font-size="10" fill="#374151">Navegación dentro del portal</text>
+<line x1="300" y1="728" x2="340" y2="728" stroke="#2563EB" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#m2563EB)"/><text x="348" y="732" font-size="10" fill="#374151">Acceso según el rol, tras validar credenciales</text>
+<line x1="660" y1="728" x2="700" y2="728" stroke="#EF4444" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#mEF4444)"/><text x="708" y="732" font-size="10" fill="#374151">Restricción de agendamiento web (RF-15)</text>
+<rect x="1000" y="720" width="24" height="16" rx="3" fill="#F3E8FF" stroke="#A855F7"/><text x="1032" y="732" font-size="10" fill="#374151">Recepción y Admin</text>
+<rect x="1170" y="720" width="24" height="16" rx="3" fill="#fff" stroke="#7C3AED"/><text x="1202" y="732" font-size="10" fill="#374151">Solo Admin</text>
+<text x="30" y="756" font-size="10" fill="#6B7280">Cancelar y reagendar exigen ≥ 2 h de anticipación (RF-07). Una cita No Asistió puede reprogramarse desde Mis citas (HU-04). El historial registra citas atendidas, canceladas e inasistencias (RF-10).</text>
+<metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTpjNTE1NzQwZi01NzFkLTQwM2ItYjMzNy0xZGYzNmFkM2QwYjQAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaIytfvp1Q2DvY6cbfjRqhGAAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDplZjdhYWRlZC0yYTgzLTRhZmQtYWRjMS1kNDNjMDhjZjkxYjBscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNo2arXctFtkCJTcgZWIHCqeQAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggxKnqDKV4L26GWkd0QB+wjJiCp0KAKXlBfmSCstAinYqkZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaJBZrKdjSoXAIGseX3H4VPYAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYILb88/+0j8U0vdnDaaykistB/e2FvBryIoi4XVKJ/yZYZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GUvoZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOmM1MTU3NDBmLTU3MWQtNDAzYi1iMzM3LTFkZjM2YWQzZDBiNC9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjljYTY4ZTAwLTI2M2MtNDQwMS05YzFhLWUzMmUwMWRmY2FhYnJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCDEqeoMpXgvboZaR3RAH7CMmIKnQoApeUF+ZIKy0CKdiqJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggk2DP40LYBXq5O09sUw4mrhyQGbtf6M+xX1ZGVozEULWiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggsYProErj03d6JtBAXCsFohbbi8nuxrtjIfEfdcUI8eJ0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQEIa1wT8HmiYK9XLKwrpwDRitkpggt6fZRMs/HelK/IJGT3CXqUWEOTXi8+rs0vInPOKYw+GkNHVCYTAW7IAMrI=</c2pa:manifest></metadata></svg>

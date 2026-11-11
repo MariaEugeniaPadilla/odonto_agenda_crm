@@ -1,0 +1,183 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="estados" name="Diagrama de estados">
+    <mxGraphModel dx="1294" dy="556" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="745" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="c3" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=20;fontStyle=1;fontColor=#0F2A5C;" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;DIAGRAMA DE ESTADOS DEL SERVICIO - ODONTOAGENDA CRM&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="900" x="280" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="c4" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#6B7280;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;&lt;b&gt;Ciclo de vida de la atención odontológica&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="24" width="345" x="400" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="c5" parent="1" style="ellipse;fillColor=#1F2937;strokeColor=#1F2937;" value="" vertex="1">
+          <mxGeometry height="22" width="22" x="12" y="224" as="geometry" />
+        </mxCell>
+        <mxCell id="c6" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#E8F0FE;strokeColor=#4285F4;strokeWidth=2;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;&lt;font style=&quot;font-size:14px&quot; color=&quot;#1A3F8F&quot;&gt;SOLICITADO&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#374151&quot;&gt;Paciente reserva en línea&lt;br&gt;En espera de confirmación&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="180" x="70" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="c7" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#E6F6FD;strokeColor=#0A9BD6;strokeWidth=2;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;&lt;font style=&quot;font-size:14px&quot; color=&quot;#0B5F85&quot;&gt;ASIGNADO&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#374151&quot;&gt;Cita y horario confirmados&lt;br&gt;(Visible como Confirmada)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="180" x="350" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="c8" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#F1ECFB;strokeColor=#7E57C2;strokeWidth=2;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;&lt;font style=&quot;font-size:14px&quot; color=&quot;#4A2C8A&quot;&gt;EN PROCESO&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#374151&quot;&gt;Paciente en consultorio&lt;br&gt;Odontólogo inicia atención&lt;br&gt;y consulta su historial&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="180" x="630" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="c9" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#E8F8EC;strokeColor=#2EAD4B;strokeWidth=2;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;&lt;font style=&quot;font-size:14px&quot; color=&quot;#14692B&quot;&gt;ATENDIDO&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#374151&quot;&gt;Atención finalizada con éxito&lt;br&gt;Descuenta stock y guarda&lt;br&gt;historial&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="180" x="910" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="c10" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#FDECEC;strokeColor=#E05252;strokeWidth=2;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;&lt;font style=&quot;font-size:14px&quot; color=&quot;#9B1C1C&quot;&gt;CANCELADO&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#374151&quot;&gt;Anulada por paciente (≥ 2 h antes)&lt;br&gt;o rechazada por la clínica.&lt;br&gt;Libera cupo. Puede reagendar&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="220" x="330" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="c11" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fillColor=#FFF1E0;strokeColor=#F0932B;strokeWidth=2;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;&lt;font style=&quot;font-size:14px&quot; color=&quot;#B45309&quot;&gt;NO ASISTIÓ (Inasistencia)&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot; color=&quot;#374151&quot;&gt;Tolerancia de 15 min superada&lt;br&gt;Paciente no se presenta a consulta&lt;br&gt;Libera cupo y NO descuenta stock&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="230" x="650" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="c12" parent="1" style="ellipse;shape=endState;fillColor=#1F2937;strokeColor=#2EAD4B;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="26" width="26" x="987" y="332" as="geometry" />
+        </mxCell>
+        <mxCell id="c13" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontStyle=1;fontColor=#1F2937;" value="Fin (Atención exitosa)" vertex="1">
+          <mxGeometry height="20" width="190" x="1022" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="c14" parent="1" style="ellipse;shape=endState;fillColor=#1F2937;strokeColor=#E05252;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="26" width="26" x="427" y="587" as="geometry" />
+        </mxCell>
+        <mxCell id="c15" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontStyle=1;fontColor=#1F2937;" value="Fin (Cita cancelada)" vertex="1">
+          <mxGeometry height="20" width="190" x="462" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="c16" parent="1" style="ellipse;shape=endState;fillColor=#1F2937;strokeColor=#F0932B;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="26" width="26" x="752" y="587" as="geometry" />
+        </mxCell>
+        <mxCell id="c17" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontStyle=1;fontColor=#1F2937;" value="Fin (Inasistencia registrada)" vertex="1">
+          <mxGeometry height="20" width="190" x="787" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="c18" edge="1" parent="1" source="c5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;exitX=1;exitY=0.5;exitDx=0;exitDy=0;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="46" y="235" as="sourcePoint" />
+            <mxPoint x="70" y="235" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c19" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="250" y="235" as="sourcePoint" />
+            <mxPoint x="350" y="235" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c20" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="530" y="235" as="sourcePoint" />
+            <mxPoint x="630" y="235" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c21" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="810" y="235" as="sourcePoint" />
+            <mxPoint x="910" y="235" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c22" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1000" y="280" as="sourcePoint" />
+            <mxPoint x="1000" y="335" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c23" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#C0392B;dashed=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="100" y="520" />
+            </Array>
+            <mxPoint x="100" y="280" as="sourcePoint" />
+            <mxPoint x="330" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c24" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#C0392B;dashed=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="160" y="480" />
+            </Array>
+            <mxPoint x="160" y="280" as="sourcePoint" />
+            <mxPoint x="330" y="480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c25" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#C0392B;dashed=1;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="280" as="sourcePoint" />
+            <mxPoint x="400" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c26" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#2563EB;dashed=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="350" y="330" />
+              <mxPoint x="220" y="330" />
+            </Array>
+            <mxPoint x="350" y="450" as="sourcePoint" />
+            <mxPoint x="220" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c27" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#D97706;dashed=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="500" y="410" />
+              <mxPoint x="765" y="410" />
+            </Array>
+            <mxPoint x="500" y="280" as="sourcePoint" />
+            <mxPoint x="765" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c28" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="440" y="540" as="sourcePoint" />
+            <mxPoint x="440" y="587" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c29" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4B5563;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="765" y="540" as="sourcePoint" />
+            <mxPoint x="765" y="587" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c30" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#2563EB;dashed=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="965" y="495" />
+              <mxPoint x="965" y="622" />
+              <mxPoint x="30" y="622" />
+              <mxPoint x="30" y="262" />
+            </Array>
+            <mxPoint x="880" y="495" as="sourcePoint" />
+            <mxPoint x="70" y="262" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c31" parent="1" style="text;html=1;align=center;verticalAlign=top;fontSize=11;fontStyle=1;fontColor=#1F2937;spacing=0;" value="Recepción&lt;br&gt;confirma" vertex="1">
+          <mxGeometry height="28" width="68" x="266" y="196" as="geometry" />
+        </mxCell>
+        <mxCell id="c32" parent="1" style="text;html=1;align=center;verticalAlign=top;fontSize=11;fontStyle=1;fontColor=#1F2937;spacing=0;" value="Inicia&lt;br&gt;atención" vertex="1">
+          <mxGeometry height="28" width="62" x="549" y="196" as="geometry" />
+        </mxCell>
+        <mxCell id="c33" parent="1" style="text;html=1;align=center;verticalAlign=top;fontSize=11;fontStyle=1;fontColor=#1F2937;spacing=0;" value="Finaliza&lt;br&gt;tratamiento" vertex="1">
+          <mxGeometry height="28" width="81" x="820" y="196" as="geometry" />
+        </mxCell>
+        <mxCell id="c34" parent="1" style="text;html=1;align=left;verticalAlign=top;fontSize=11;fontStyle=1;fontColor=#C0392B;spacing=0;" value="Paciente anula (≥ 2 h)" vertex="1">
+          <mxGeometry height="14" width="150" x="116" y="499" as="geometry" />
+        </mxCell>
+        <mxCell id="c35" parent="1" style="text;html=1;align=left;verticalAlign=top;fontSize=11;fontStyle=1;fontColor=#C0392B;spacing=0;" value="Recepción rechaza&lt;br&gt;(correo con el motivo)" vertex="1">
+          <mxGeometry height="28" width="150" x="170" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="c36" parent="1" style="text;html=1;align=left;verticalAlign=top;fontSize=11;fontStyle=1;fontColor=#C0392B;spacing=0;" value="Cancelación&lt;br&gt;(≥ 2 h)" vertex="1">
+          <mxGeometry height="28" width="81" x="408" y="338" as="geometry" />
+        </mxCell>
+        <mxCell id="c37" parent="1" style="text;html=1;align=center;verticalAlign=top;fontSize=11;fontStyle=1;fontColor=#2563EB;spacing=0;" value="Reagenda (opcional)" vertex="1">
+          <mxGeometry height="14" width="131" x="219" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="c38" parent="1" style="text;html=1;align=left;verticalAlign=top;fontSize=11;fontStyle=1;fontColor=#2563EB;spacing=0;" value="Reprograma&lt;br&gt;(opcional)" vertex="1">
+          <mxGeometry height="28" width="75" x="973" y="513" as="geometry" />
+        </mxCell>
+        <mxCell id="c39" parent="1" style="text;html=1;align=left;verticalAlign=top;fontSize=11;fontStyle=1;fontColor=#D97706;spacing=0;" value="Tolerancia de 15 min superada sin llegada del paciente" vertex="1">
+          <mxGeometry height="14" width="300" x="510" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="c40" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#F4F6FB;strokeColor=#CBD2E0;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;fontColor=#374151;" value="&lt;b&gt;REGLAS DEL SISTEMA:&lt;/b&gt; &amp;nbsp;[1] Las citas en Atendido ingresan al historial clínico y descuentan inventario. [2] Las citas en Cancelado o No Asistió liberan el cupo y NO descuentan stock.&lt;br&gt;[3] Tras 15 min de demora sin aviso, recepción u odontólogo marcan «No Asistió». [4] Tras la inasistencia, el paciente recibe un correo y puede reprogramar; dos faltas consecutivas inhabilitan la reserva web.&lt;br&gt;[5] Si recepción rechaza una solicitud, se envía un correo con el motivo y la cita queda Cancelada por la clínica. [6] Si el paciente cancela con ≥ 2 h de anticipación puede reagendar, lo que evita la inasistencia.&lt;br&gt;[7] El odontólogo puede consultar el historial clínico del paciente al revisar la cita (Asignado) y durante la atención (En Proceso)." vertex="1">
+          <mxGeometry height="90" width="1120" x="40" y="632" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
