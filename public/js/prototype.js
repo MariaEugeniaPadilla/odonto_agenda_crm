@@ -123,7 +123,52 @@ const AppIcons = {
         </svg>`
 };
 
-// Estado inicial del sistema
+// Cliente API HTTP para comunicar las interfaces directamente con MySQL (odontoagenda_crm)
+async function apiFetch(url, options = {}) {
+    const csrfMeta = document.querySelector('meta[name="csrf-token"]');
+    const csrfToken = csrfMeta ? csrfMeta.getAttribute('content') : '';
+
+    const headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        ...(csrfToken ? { 'X-CSRF-TOKEN': csrfToken } : {}),
+        ...(options.headers || {})
+    };
+
+    try {
+        const response = await fetch(url, {
+            ...options,
+            headers
+        });
+
+        const data = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+            throw new Error(data.message || `Error en la solicitud (${response.status})`);
+        }
+
+        return data;
+    } catch (err) {
+        console.error('API Error:', err);
+        throw err;
+    }
+}
+
+function syncStateFromDb(dbState) {
+    if (!dbState) return;
+    if (dbState.currentUser) OdontoState.currentUser = dbState.currentUser;
+    if (dbState.servicios && dbState.servicios.length) OdontoState.servicios = dbState.servicios;
+    if (dbState.odontologos && dbState.odontologos.length) OdontoState.odontologos = dbState.odontologos;
+    if (dbState.insumos && dbState.insumos.length) OdontoState.insumos = dbState.insumos;
+    if (dbState.citas) OdontoState.citas = dbState.citas;
+    if (dbState.historial) OdontoState.historial = dbState.historial;
+    if (dbState.notificaciones) OdontoState.notificaciones = dbState.notificaciones;
+    if (dbState.usuarios) OdontoState.usuarios = dbState.usuarios;
+
+    updateUserBadge();
+}
+
+// Estado inicial del sistema (hidratado dinámicamente desde MySQL)
 const OdontoState = {
     currentUser: {
         id: 6,
@@ -414,56 +459,80 @@ function navigateToModule(moduleId) {
     if (moduleId === 'mod-admin') renderAdminPortal();
 }
 
-// Switch de roles para demostración
-function switchRoleDemo(roleType) {
+// Switch de roles para demostración conectado a la BD MySQL
+async function switchRoleDemo(roleType) {
+    let targetUserId = 6; // Paciente normal por defecto (Juan Carlos Pérez)
+    let moduleTarget = 'mod-paciente';
+
     if (roleType === 'paciente-normal') {
-        OdontoState.currentUser = {
-            id: 6,
-            nombre: 'Maria Padilla',
-            correo: 'mariaepadilla@gmail.com',
-            telefono: '3157894561',
-            rol: 'paciente',
-            faltas_acumuladas: 0,
-            puedeAgendarWeb: true
-        };
-        showToast('Sesión activa: Maria Padilla (mariaepadilla@gmail.com) · Rol Paciente.', 'success');
-        navigateToModule('mod-paciente');
+        targetUserId = 6;
+        moduleTarget = 'mod-paciente';
     } else if (roleType === 'paciente-bloqueado') {
-        OdontoState.currentUser = {
-            id: 8,
-            nombre: 'Andrés Felipe Murillo',
-            correo: 'andres.murillo@gmail.com',
-            telefono: '3023456789',
-            rol: 'paciente',
-            faltas_acumuladas: 2,
-            puedeAgendarWeb: false
-        };
-        showToast('Sesión de prueba: Paciente con 2 faltas. Demostración de atención y validación en recepción.', 'warning');
-        navigateToModule('mod-paciente');
+        targetUserId = 8; // Andrés Felipe Murillo (2 faltas)
+        moduleTarget = 'mod-paciente';
     } else if (roleType === 'odontologo') {
-        OdontoState.currentUser = {
-            id: 3,
-            nombre: 'Dra. Camila Morales',
-            correo: 'dra.morales@dentalcare.com',
-            telefono: '3209876543',
-            rol: 'odontologo',
-            especialidad: 'Ortodoncia y Ortopedia Maxilar',
-            odontologoId: 1
-        };
-        showToast('Sesión de prueba: Dra. Camila Morales (Odontóloga Especialista).', 'info');
-        navigateToModule('mod-odontologo');
+        targetUserId = 3; // Dra. Camila Morales
+        moduleTarget = 'mod-odontologo';
     } else if (roleType === 'admin') {
-        OdontoState.currentUser = {
-            id: 1,
-            nombre: 'Administración y Recepción',
-            correo: 'contacto@dentalcare.com',
-            telefono: '3104567890',
-            rol: 'admin'
-        };
-        showToast('Sesión de prueba: Panel Administrativo y Recepción DENTAL CARE.', 'info');
-        navigateToModule('mod-admin');
+        targetUserId = 1; // Administradora General
+        moduleTarget = 'mod-admin';
     }
+
+    try {
+        const res = await apiFetch(`/api/switch-user/${targetUserId}`, { method: 'POST' });
+        if (res.success && res.estado) {
+            syncStateFromDb(res.estado);
+            showToast(`Sesión conectada a MySQL: ${res.user.nombre} (${res.user.rol}).`, 'success');
+        }
+    } catch (err) {
+        console.warn('Fallo en switchUser API, usando fallback local:', err);
+    }
+
     updateUserBadge();
+    navigateToModule(moduleTarget);
+}
+
+// Iniciar sesión interactivo validando en MySQL
+async function handleLoginFormSubmit(event) {
+    if (event) event.preventDefault();
+    const emailInput = document.getElementById('login-email-input');
+    const passInput = document.getElementById('login-pass-input');
+
+    const correo = emailInput ? emailInput.value.trim() : '';
+    const contrasena = passInput ? passInput.value : '';
+
+    if (!correo || !contrasena) {
+        showToast('Por favor ingrese su correo y contraseña.', 'warning');
+        return;
+    }
+
+    try {
+        const res = await apiFetch('/api/login', {
+            method: 'POST',
+            body: JSON.stringify({ correo, contrasena })
+        });
+
+        if (!res.success) {
+            showToast(res.message || 'Credenciales inválidas.', 'error');
+            return;
+        }
+
+        if (res.estado) {
+            syncStateFromDb(res.estado);
+        }
+
+        showToast(res.message || '¡Sesión iniciada con éxito en la base de datos!', 'success');
+
+        if (res.user.rol === 'admin' || res.user.rol === 'recepcionista') {
+            navigateToModule('mod-admin');
+        } else if (res.user.rol === 'odontologo') {
+            navigateToModule('mod-odontologo');
+        } else {
+            navigateToModule('mod-paciente');
+        }
+    } catch (err) {
+        showToast(err.message, 'error');
+    }
 }
 
 function updateUserBadge() {
@@ -1051,34 +1120,42 @@ function wizardPrev() {
     }
 }
 
-function submitWizardBooking() {
-    const doctor = OdontoState.odontologos.find(o => o.id === BookingWizard.selectedDoctorId);
-    const servNames = OdontoState.servicios.filter(s => BookingWizard.selectedServices.includes(s.id)).map(s => s.nombre);
-    const horaFin = calculateEndTime(BookingWizard.selectedTime, BookingWizard.calculatedDuration);
+async function submitWizardBooking() {
+    clearWizardStepAlert();
 
-    const nuevaCita = {
-        id: 100 + OdontoState.citas.length + 1,
-        pacienteId: OdontoState.currentUser.id,
-        pacienteNombre: OdontoState.currentUser.nombre,
-        pacienteTel: OdontoState.currentUser.telefono,
-        odontologoId: doctor.id,
-        odontologoNombre: doctor.nombre,
+    const payload = {
+        paciente_id: OdontoState.currentUser.id,
+        odontologo_id: BookingWizard.selectedDoctorId,
+        servicios: BookingWizard.selectedServices,
         fecha: BookingWizard.selectedDate,
-        horaInicio: BookingWizard.selectedTime,
-        horaFin: horaFin,
-        servicios: servNames,
-        duracionMin: BookingWizard.calculatedDuration,
-        costo: BookingWizard.calculatedCost,
-        estado: 'Solicitado',
-        observaciones: BookingWizard.notes || 'Solicitud generada vía portal web del paciente.',
-        motivoInasistencia: null
+        hora_inicio: BookingWizard.selectedTime,
+        observaciones: BookingWizard.notes || 'Solicitud generada vía portal web del paciente.'
     };
 
-    OdontoState.citas.unshift(nuevaCita);
+    try {
+        const res = await apiFetch('/api/citas', {
+            method: 'POST',
+            body: JSON.stringify(payload)
+        });
 
-    closeBookingWizard();
-    showToast(`¡Cita #${nuevaCita.id} solicitada con éxito! Se envió notificación de confirmación al correo ${OdontoState.currentUser.correo}.`, 'success');
-    renderPacientePortal();
+        if (!res.success) {
+            showToast(res.message || 'Error al agendar la cita.', 'error');
+            showWizardStepAlert(res.message || 'Error al agendar la cita.', 'error');
+            return;
+        }
+
+        if (res.estado) {
+            syncStateFromDb(res.estado);
+        }
+
+        closeBookingWizard();
+        showToast(res.message || `¡Cita agendada con éxito en MySQL!`, 'success');
+        renderPacientePortal();
+    } catch (err) {
+        showToast(err.message, 'error');
+        showWizardStepAlert(err.message, 'error');
+    }
+}
 }
 
 function checkDoctorCollision(doctorId, fecha, horaInicioStr, duracionMin) {
@@ -1119,7 +1196,7 @@ function calculateEndTime(startTimeStr, durationMin) {
 // -------------------------------------------------------------
 // REGLAS DE NEGOCIO: CANCELAR Y REPROGRAMAR
 // -------------------------------------------------------------
-function handleCancelarCita(citaId) {
+async function handleCancelarCita(citaId) {
     const cita = OdontoState.citas.find(c => c.id === citaId);
     if (!cita) return;
 
@@ -1133,15 +1210,27 @@ function handleCancelarCita(citaId) {
         const confirmar = confirm(`ALERTA DE POLÍTICA (Regla 3):\nFaltan menos de 2 horas para la cita programada (${diffHours.toFixed(1)} horas restantes).\n\nCancelar con menos de 2 horas genera un perjuicio operativo para la clínica.\n¿Desea solicitar la cancelación de emergencia de todas formas?`);
         if (!confirmar) return;
     } else {
-        const confirmar = confirm(`¿Está seguro de cancelar la cita #${cita.id} con ${cita.odontologoNombre}?\nLa franja horaria será liberada inmediatamente.`);
+        const confirmar = confirm(`¿Está seguro de cancelar la cita #${cita.id} con ${cita.odontologoNombre}?\nLa franja horaria será liberada inmediatamente en la base de datos.`);
         if (!confirmar) return;
     }
 
-    cita.estado = 'Cancelado';
-    cita.observaciones = (cita.observaciones ? cita.observaciones + ' | ' : '') + 'Cancelada voluntariamente por el paciente.';
+    try {
+        const res = await apiFetch(`/api/citas/${citaId}/cancelar`, { method: 'POST' });
+        if (!res.success) {
+            showToast(res.message || 'Error al cancelar la cita.', 'error');
+            return;
+        }
 
-    showToast(`Cita #${cita.id} cancelada. Notificación de cancelación enviada a ${OdontoState.currentUser.correo}.`, 'info');
-    renderPacientePortal();
+        if (res.estado) {
+            syncStateFromDb(res.estado);
+        }
+
+        showToast(res.message || `Cita #${cita.id} cancelada exitosamente en la base de datos.`, 'info');
+        renderPacientePortal();
+        renderAdminPortal();
+    } catch (err) {
+        showToast(err.message, 'error');
+    }
 }
 
 function handleReagendarCita(citaId) {
@@ -1225,7 +1314,7 @@ function actualizarPreviewNotificacion(cita) {
     `;
 }
 
-function enviarNotificacionCita() {
+async function enviarNotificacionCita() {
     if (!activeNotifCitaId) return;
     const cita = OdontoState.citas.find(c => c.id === activeNotifCitaId);
     if (!cita) return;
@@ -1240,24 +1329,50 @@ function enviarNotificacionCita() {
         `;
     }
 
-    setTimeout(() => {
+    try {
+        const res = await apiFetch('/api/notificaciones', {
+            method: 'POST',
+            body: JSON.stringify({
+                cita_id: cita.id,
+                tipo: 'recordatorio',
+                mensaje: `Recordatorio oficial para la cita #${cita.id} con ${cita.odontologoNombre} el ${cita.fecha} a las ${cita.horaInicio}.`
+            })
+        });
+
+        if (res.estado) syncStateFromDb(res.estado);
+        cerrarModalNotificarCita();
+        showToast(`¡Notificación guardada en MySQL y transmitida a ${user.correo}!`, 'success');
+    } catch (err) {
+        showToast('Error al enviar notificación: ' + err.message, 'error');
+    } finally {
         if (sendBtn) {
             sendBtn.disabled = false;
             sendBtn.innerHTML = `
                 <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-                <span>Enviar Notificación a Maria Padilla</span>
+                <span>Enviar Notificación a ${user.nombre}</span>
             `;
         }
-        cerrarModalNotificarCita();
-        showToast(`¡Notificación enviada con éxito! Se despachó el recordatorio oficial de la cita #${cita.id} a ${user.correo}.`, 'success');
-    }, 500);
+    }
 }
 
-function enviarNotificacionRapida(citaId) {
+async function enviarNotificacionRapida(citaId) {
     const cita = OdontoState.citas.find(c => c.id === citaId);
     if (!cita) return;
     const user = OdontoState.currentUser;
-    showToast(`Comprobante y recordatorio de la cita #${cita.id} despachado exitosamente a ${user.correo}.`, 'success');
+
+    try {
+        await apiFetch('/api/notificaciones', {
+            method: 'POST',
+            body: JSON.stringify({
+                cita_id: cita.id,
+                tipo: 'confirmacion',
+                mensaje: `Comprobante y recordatorio rápido de la cita #${cita.id} transmitido.`
+            })
+        });
+        showToast(`Comprobante de la cita #${cita.id} guardado en BD y despachado a ${user.correo}.`, 'success');
+    } catch (err) {
+        showToast('Error: ' + err.message, 'error');
+    }
 }
 
 function handleReprogramarNoAsistida(citaId) {
@@ -1389,13 +1504,19 @@ function renderOdontologoPortal() {
     }).join('');
 }
 
-function doctorIniciarAtencion(citaId) {
-    const cita = OdontoState.citas.find(c => c.id === citaId);
-    if (!cita) return;
-
-    cita.estado = 'En Proceso';
-    showToast(`Atención clínica iniciada para el paciente ${cita.pacienteNombre}. El sillón se encuentra ocupado.`, 'info');
-    renderOdontologoPortal();
+async function doctorIniciarAtencion(citaId) {
+    try {
+        const res = await apiFetch(`/api/citas/${citaId}/iniciar`, { method: 'POST' });
+        if (!res.success) {
+            showToast(res.message || 'Error al iniciar atención', 'error');
+            return;
+        }
+        if (res.estado) syncStateFromDb(res.estado);
+        showToast(res.message || 'Atención clínica iniciada en MySQL.', 'info');
+        renderOdontologoPortal();
+    } catch (err) {
+        showToast(err.message, 'error');
+    }
 }
 
 let activeFinalizarCitaId = null;
@@ -1415,78 +1536,71 @@ function doctorCerrarFinalizarModal() {
     if (modal) modal.classList.add('hidden');
 }
 
-function doctorConfirmarFinalizar() {
+async function doctorConfirmarFinalizar() {
     if (!activeFinalizarCitaId) return;
-    const notas = document.getElementById('doctor-notas-input').value;
-    if (!notas || notas.trim().length < 5) {
+    const notasInput = document.getElementById('doctor-notas-input');
+    const notas = notasInput ? notasInput.value.trim() : '';
+
+    if (!notas || notas.length < 5) {
         const msg = 'Por favor ingrese las observaciones clínicas del procedimiento (mínimo 5 caracteres).';
         showToast(msg, 'warning');
         showDoctorFinalizarAlert(msg, 'warning');
         return;
     }
 
-    const cita = OdontoState.citas.find(c => c.id === activeFinalizarCitaId);
-    if (!cita) return;
+    try {
+        const res = await apiFetch(`/api/citas/${activeFinalizarCitaId}/finalizar`, {
+            method: 'POST',
+            body: JSON.stringify({ observaciones: notas })
+        });
 
-    cita.estado = 'Atendido';
-    cita.observaciones = notas.trim();
+        if (!res.success) {
+            showToast(res.message || 'Error al finalizar la cita.', 'error');
+            showDoctorFinalizarAlert(res.message || 'Error al finalizar la cita.', 'error');
+            return;
+        }
 
-    // Regla 5: Descuento de insumos ÚNICAMENTE al finalizar la cita en Atendido
-    OdontoState.insumos[0].stock -= 1; // Guantes
-    OdontoState.insumos[1].stock -= 1; // Eyector
-    OdontoState.insumos[2].stock -= 1; // Babero
+        if (res.estado) syncStateFromDb(res.estado);
 
-    // Insertar en historial clínico
-    OdontoState.historial.unshift({
-        id: OdontoState.historial.length + 1,
-        pacienteId: cita.pacienteId,
-        fecha: cita.fecha,
-        tipo: 'Atencion Realizada',
-        servicio: cita.servicios.join(', '),
-        doctor: cita.odontologoNombre,
-        resumen: `Procedimiento finalizado exitosamente. Obs: ${notas.trim()}`
-    });
-
-    doctorCerrarFinalizarModal();
-    showToast(`Atención finalizada con éxito. Se insertó en historial y se descontaron insumos del inventario (Regla 5).`, 'success');
-    renderOdontologoPortal();
+        doctorCerrarFinalizarModal();
+        showToast(res.message || 'Atención finalizada con éxito en MySQL.', 'success');
+        renderOdontologoPortal();
+    } catch (err) {
+        showToast(err.message, 'error');
+        showDoctorFinalizarAlert(err.message, 'error');
+    }
 }
 
-function doctorMarcarNoAsistio(citaId) {
+async function doctorMarcarNoAsistio(citaId) {
     const cita = OdontoState.citas.find(c => c.id === citaId);
     if (!cita) return;
 
     // Regla 4: Ventana de tolerancia de 15 minutos
-    const confirmMsg = `CONTROL DE INASISTENCIAS (Regla 4):\n¿Confirma que ya transcurrieron los quince (15) minutos de tolerancia reglamentaria posteriores a las ${cita.horaInicio} sin presentación del paciente ${cita.pacienteNombre}?\n\nAcciones automáticas:\n1. Se marcará como 'No Asistió'.\n2. Se liberará el consultorio.\n3. Se incrementará en 1 la falta del paciente.\n4. Se enviará correo formal invitando a reprogramar.\n5. NO se descontará ningún insumo del inventario (Regla 5).`;
+    const confirmMsg = `CONTROL DE INASISTENCIAS (Regla 4):\n¿Confirma que ya transcurrieron los quince (15) minutos de tolerancia reglamentaria posteriores a las ${cita.horaInicio} sin presentación del paciente ${cita.pacienteNombre}?\n\nAcciones automáticas:\n1. Se marcará como 'No Asistió' en la base de datos.\n2. Se liberará el consultorio.\n3. Se incrementará en 1 la falta del paciente en MySQL.\n4. Se creará notificación formal invitando a reprogramar.\n5. NO se descontará ningún insumo del inventario (Regla 5).`;
     
     if (!confirm(confirmMsg)) return;
 
     const motivo = prompt('Ingrese el motivo o detalle de la falta:', 'Paciente no se presentó a la consulta tras superar los 15 minutos de tolerancia.');
+    if (motivo === null) return;
 
-    cita.estado = 'No Asistio';
-    cita.motivoInasistencia = motivo || 'Ausencia tras 15 minutos de tolerancia.';
+    try {
+        const res = await apiFetch(`/api/citas/${citaId}/no-asistio`, {
+            method: 'POST',
+            body: JSON.stringify({ motivo: motivo })
+        });
 
-    // Actualizar faltas del paciente si coincide con el usuario actual o simulación
-    if (OdontoState.currentUser.id === cita.pacienteId) {
-        OdontoState.currentUser.faltas_acumuladas++;
-        if (OdontoState.currentUser.faltas_acumuladas >= 2) {
-            OdontoState.currentUser.puedeAgendarWeb = false;
+        if (!res.success) {
+            showToast(res.message || 'Error al registrar inasistencia.', 'error');
+            return;
         }
+
+        if (res.estado) syncStateFromDb(res.estado);
+
+        showToast(res.message || 'Inasistencia registrada en la base de datos.', 'warning');
+        renderOdontologoPortal();
+    } catch (err) {
+        showToast(err.message, 'error');
     }
-
-    // Registrar en Historial
-    OdontoState.historial.unshift({
-        id: OdontoState.historial.length + 1,
-        pacienteId: cita.pacienteId,
-        fecha: cita.fecha,
-        tipo: 'Inasistencia Registrada',
-        servicio: cita.servicios.join(', '),
-        doctor: cita.odontologoNombre,
-        resumen: `Inasistencia registrada tras 15 min de tolerancia. Motivo: ${cita.motivoInasistencia}`
-    });
-
-    showToast(`Inasistencia registrada para ${cita.pacienteNombre}. Consultorio liberado y notificación despachada. Stock de insumos intacto.`, 'warning');
-    renderOdontologoPortal();
 }
 
 // -------------------------------------------------------------
@@ -1567,23 +1681,41 @@ function renderAdminAgendaGeneral() {
     }).join('');
 }
 
-function adminConfirmarCita(citaId) {
-    const cita = OdontoState.citas.find(c => c.id === citaId);
-    if (!cita) return;
-
-    cita.estado = 'Asignado';
-    showToast(`Cita #${cita.id} confirmada y asignada. Franja médica reservada en DENTAL CARE.`, 'success');
-    renderAdminPortal();
+async function adminConfirmarCita(citaId) {
+    try {
+        const res = await apiFetch(`/api/citas/${citaId}/estado`, {
+            method: 'POST',
+            body: JSON.stringify({ estado: 'Asignado' })
+        });
+        if (!res.success) {
+            showToast(res.message || 'Error al confirmar cupo.', 'error');
+            return;
+        }
+        if (res.estado) syncStateFromDb(res.estado);
+        showToast(res.message || `Cita #${citaId} confirmada y asignada en MySQL.`, 'success');
+        renderAdminPortal();
+    } catch (err) {
+        showToast(err.message, 'error');
+    }
 }
 
-function adminCambiarEstado(citaId, nuevoEstado) {
+async function adminCambiarEstado(citaId, nuevoEstado) {
     if (!nuevoEstado) return;
-    const cita = OdontoState.citas.find(c => c.id === citaId);
-    if (!cita) return;
-
-    cita.estado = nuevoEstado;
-    showToast(`Estado de la cita #${cita.id} actualizado a ${nuevoEstado}.`, 'info');
-    renderAdminPortal();
+    try {
+        const res = await apiFetch(`/api/citas/${citaId}/estado`, {
+            method: 'POST',
+            body: JSON.stringify({ estado: nuevoEstado })
+        });
+        if (!res.success) {
+            showToast(res.message || 'Error al cambiar estado.', 'error');
+            return;
+        }
+        if (res.estado) syncStateFromDb(res.estado);
+        showToast(res.message || `Estado de la cita #${citaId} actualizado a ${nuevoEstado} en MySQL.`, 'info');
+        renderAdminPortal();
+    } catch (err) {
+        showToast(err.message, 'error');
+    }
 }
 
 function renderAdminInventario() {
@@ -1623,13 +1755,22 @@ function renderAdminInventario() {
     }).join('');
 }
 
-function reabastecerInsumo(insId) {
-    const ins = OdontoState.insumos.find(i => i.id === insId);
-    if (!ins) return;
-
-    ins.stock += 50;
-    showToast(`Se reabastecieron 50 ${ins.unidad} de ${ins.nombre}.`, 'success');
-    renderAdminPortal();
+async function reabastecerInsumo(insId) {
+    try {
+        const res = await apiFetch(`/api/insumos/${insId}/reabastecer`, {
+            method: 'POST',
+            body: JSON.stringify({ cantidad: 50 })
+        });
+        if (!res.success) {
+            showToast(res.message || 'Error al reabastecer insumo.', 'error');
+            return;
+        }
+        if (res.estado) syncStateFromDb(res.estado);
+        showToast(res.message || 'Insumo reabastecido en MySQL.', 'success');
+        renderAdminPortal();
+    } catch (err) {
+        showToast(err.message, 'error');
+    }
 }
 
 function renderAdminReportes() {
@@ -1659,8 +1800,16 @@ function renderAdminReportes() {
     }).join('');
 }
 
-// Inicialización general al cargar el DOM
+// Inicialización general al cargar el DOM con hidratación desde MySQL
 document.addEventListener('DOMContentLoaded', () => {
+    if (window.INITIAL_DB_STATE) {
+        syncStateFromDb(window.INITIAL_DB_STATE);
+    }
     updateUserBadge();
-    navigateToModule('mod-landing');
+
+    const activeMod = (window.INITIAL_ACTIVE_MODULE && window.INITIAL_ACTIVE_MODULE !== 'landing') 
+        ? 'mod-' + window.INITIAL_ACTIVE_MODULE 
+        : 'mod-landing';
+
+    navigateToModule(activeMod);
 });

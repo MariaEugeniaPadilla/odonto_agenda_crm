@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>DENTAL CARE · Clínica Odontológica en Cali | Odonto Agenda</title>
     
     <!-- Favicon SVG con icono institucional de DENTAL CARE -->
@@ -500,8 +501,8 @@
                 </div>
             </div>
 
-            <!-- Formulario amigable -->
-            <form onsubmit="event.preventDefault(); showToast('Sesión iniciada con éxito en DENTAL CARE.', 'success'); navigateToModule('mod-paciente');" class="space-y-4">
+            <!-- Formulario amigable conectado a la BD -->
+            <form id="login-form" onsubmit="handleLoginFormSubmit(event);" class="space-y-4">
                 <div>
                     <label for="login-email-input" class="block text-xs font-semibold text-slate-700 mb-1.5">Correo Electrónico</label>
                     <input type="email" id="login-email-input" value="juan.perez@gmail.com" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition">
@@ -922,6 +923,12 @@
             </p>
         </div>
     </footer>
+
+    <!-- Datos Iniciales Conectados a MySQL (odontoagenda_crm) -->
+    <script>
+        window.INITIAL_DB_STATE = {!! json_encode($initialState ?? null) !!};
+        window.INITIAL_ACTIVE_MODULE = "{{ $activeModule ?? 'landing' }}";
+    </script>
 
     <!-- Lógica Vanilla JS con Soporte y Renderizado de Iconos Vectoriales -->
     <script src="js/prototype.js"></script>

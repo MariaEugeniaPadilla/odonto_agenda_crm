@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PacienteController;
@@ -13,45 +14,99 @@ use App\Http\Controllers\AdminController;
 |--------------------------------------------------------------------------
 */
 
-// Rutas Públicas (El prototipo completo e interactivo se sirve en / y en /prototipo)
+if (!function_exists('renderOdontoView')) {
+    function renderOdontoView($activeModule = 'landing', $userId = null) {
+        $initialState = ApiController::getInitialState($userId);
+        return view('prototype', compact('initialState', 'activeModule'));
+    }
+}
+
+// Rutas Públicas e Interfaces Principales
 Route::get('/', function () {
-    return view('prototype');
+    return renderOdontoView('landing');
 })->name('home');
 
 Route::get('/prototipo', function () {
-    return view('prototype');
+    return renderOdontoView('landing');
 })->name('prototipo');
 
-// Autenticación
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-Route::post('/login', [AuthController::class, 'login'])->name('login.post');
-Route::post('/registro', [AuthController::class, 'register'])->name('register.post');
+// Rutas directas para cada interfaz/módulo
+Route::get('/login', function () {
+    return renderOdontoView('login');
+})->name('login');
+
+Route::get('/paciente/dashboard', function () {
+    return renderOdontoView('paciente', 6);
+})->name('paciente.dashboard');
+
+Route::get('/paciente/agendar', function () {
+    return renderOdontoView('paciente', 6);
+})->name('paciente.agendar');
+
+Route::get('/paciente/citas', function () {
+    return renderOdontoView('paciente', 6);
+})->name('paciente.citas');
+
+Route::get('/paciente/historial', function () {
+    return renderOdontoView('paciente', 6);
+})->name('paciente.historial');
+
+Route::get('/odontologo/agenda', function () {
+    return renderOdontoView('odontologo', 3);
+})->name('odontologo.agenda');
+
+Route::get('/admin/dashboard', function () {
+    return renderOdontoView('admin', 1);
+})->name('admin.dashboard');
+
+Route::get('/admin/agenda', function () {
+    return renderOdontoView('admin', 1);
+})->name('admin.agenda');
+
+Route::get('/admin/servicios', function () {
+    return renderOdontoView('admin', 1);
+})->name('admin.servicios');
+
+Route::get('/admin/inventario', function () {
+    return renderOdontoView('admin', 1);
+})->name('admin.inventario');
+
+Route::get('/admin/reportes', function () {
+    return renderOdontoView('admin', 1);
+})->name('admin.reportes');
+
+// =========================================================================
+// API & Acciones Conectadas a la Base de Datos (MySQL - odontoagenda_crm)
+// =========================================================================
+Route::prefix('api')->name('api.')->group(function () {
+    Route::get('/estado', [ApiController::class, 'estado'])->name('estado');
+    Route::post('/login', [ApiController::class, 'login'])->name('login');
+    Route::post('/switch-user/{id}', [ApiController::class, 'switchUser'])->name('switch_user');
+    
+    // Citas
+    Route::post('/citas', [ApiController::class, 'storeCita'])->name('citas.store');
+    Route::post('/citas/{id}/cancelar', [ApiController::class, 'cancelarCita'])->name('citas.cancelar');
+    Route::post('/citas/{id}/iniciar', [ApiController::class, 'iniciarAtencion'])->name('citas.iniciar');
+    Route::post('/citas/{id}/finalizar', [ApiController::class, 'finalizarAtencion'])->name('citas.finalizar');
+    Route::post('/citas/{id}/no-asistio', [ApiController::class, 'marcarNoAsistio'])->name('citas.no_asistio');
+    Route::post('/citas/{id}/estado', [ApiController::class, 'cambiarEstado'])->name('citas.estado');
+
+    // Insumos e inventario
+    Route::post('/insumos/{id}/reabastecer', [ApiController::class, 'reabastecerInsumo'])->name('insumos.reabastecer');
+
+    // Notificaciones
+    Route::post('/notificaciones', [ApiController::class, 'enviarNotificacion'])->name('notificaciones.store');
+
+    // Historial clínico de pacientes (para consulta del odontólogo)
+    Route::get('/pacientes/{id}/historial', [ApiController::class, 'historialPaciente'])->name('pacientes.historial');
+});
+
+// Soporte de compatibilidad con formularios POST tradicionales
+Route::post('/login', [ApiController::class, 'login'])->name('login.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-// Portal del Paciente (Protegido por Rol)
-Route::prefix('paciente')->name('paciente.')->group(function () {
-    Route::get('/dashboard', [PacienteController::class, 'dashboard'])->name('dashboard');
-    Route::get('/agendar', [PacienteController::class, 'agendar'])->name('agendar');
-    Route::post('/agendar', [PacienteController::class, 'storeCita'])->name('agendar.store');
-    Route::get('/citas', [PacienteController::class, 'citas'])->name('citas');
-    Route::post('/citas/{id}/cancelar', [PacienteController::class, 'cancelarCita'])->name('citas.cancelar');
-    Route::get('/historial', [PacienteController::class, 'historial'])->name('historial');
-});
-
-// Portal del Odontólogo
-Route::prefix('odontologo')->name('odontologo.')->group(function () {
-    Route::get('/agenda', [OdontologoController::class, 'agenda'])->name('agenda');
-    Route::post('/citas/{id}/iniciar', [OdontologoController::class, 'iniciarAtencion'])->name('citas.iniciar');
-    Route::post('/citas/{id}/finalizar', [OdontologoController::class, 'finalizarAtencion'])->name('citas.finalizar');
-    Route::post('/citas/{id}/no-asistio', [OdontologoController::class, 'marcarNoAsistio'])->name('citas.no_asistio');
-});
-
-// Panel Administrativo y de Recepción
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-    Route::get('/agenda', [AdminController::class, 'agendaGeneral'])->name('agenda');
-    Route::post('/citas/{id}/estado', [AdminController::class, 'cambiarEstadoCita'])->name('citas.estado');
-    Route::get('/servicios', [AdminController::class, 'servicios'])->name('servicios');
-    Route::get('/inventario', [AdminController::class, 'inventario'])->name('inventario');
-    Route::get('/reportes', [AdminController::class, 'reportes'])->name('reportes');
-});
+Route::post('/paciente/agendar', [ApiController::class, 'storeCita'])->name('paciente.agendar.store');
+Route::post('/paciente/citas/{id}/cancelar', [ApiController::class, 'cancelarCita'])->name('paciente.citas.cancelar');
+Route::post('/odontologo/citas/{id}/iniciar', [ApiController::class, 'iniciarAtencion'])->name('odontologo.citas.iniciar');
+Route::post('/odontologo/citas/{id}/finalizar', [ApiController::class, 'finalizarAtencion'])->name('odontologo.citas.finalizar');
+Route::post('/odontologo/citas/{id}/no-asistio', [ApiController::class, 'marcarNoAsistio'])->name('odontologo.citas.no_asistio');
+Route::post('/admin/citas/{id}/estado', [ApiController::class, 'cambiarEstado'])->name('admin.citas.estado');
