@@ -1,22 +1,21 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
-use App\Http\Controllers\PublicController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\PacienteController;
-use App\Http\Controllers\OdontologoController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UsuarioController;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes - OdontoAgenda CRM
+| Web Routes - OdontoAgenda CRM (DentalCare)
 |--------------------------------------------------------------------------
 */
 
 if (!function_exists('renderOdontoView')) {
     function renderOdontoView($activeModule = 'landing', $userId = null) {
-        $initialState = ApiController::getInitialState($userId);
+        $actualUserId = $userId ?? (Auth::check() ? Auth::id() : null);
+        $initialState = ApiController::getInitialState($actualUserId);
         return view('prototype', compact('initialState', 'activeModule'));
     }
 }
@@ -30,57 +29,98 @@ Route::get('/prototipo', function () {
     return renderOdontoView('landing');
 })->name('prototipo');
 
-// Rutas directas para cada interfaz/módulo
-Route::get('/login', function () {
-    return renderOdontoView('login');
-})->name('login');
+// -------------------------------------------------------------------------
+// AUTENTICACIÓN, REGISTRO PÚBLICO Y RECUPERACIÓN DE CONTRASEÑA
+// -------------------------------------------------------------------------
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/paciente/dashboard', function () {
-    return renderOdontoView('paciente', 6);
-})->name('paciente.dashboard');
+// Registro público (restringido exclusivamente al rol Paciente)
+Route::get('/registro', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/registro', [AuthController::class, 'register'])->name('register.post');
 
-Route::get('/paciente/agendar', function () {
-    return renderOdontoView('paciente', 6);
-})->name('paciente.agendar');
+// Recuperación y definición de contraseña (Password Broker)
+Route::get('/olvide-contrasena', [AuthController::class, 'showForgotPassword'])->name('password.request');
+Route::post('/olvide-contrasena', [AuthController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('/recuperar-contrasena/{token}', [AuthController::class, 'showResetPassword'])->name('password.reset');
+Route::post('/recuperar-contrasena', [AuthController::class, 'resetPassword'])->name('password.update');
 
-Route::get('/paciente/citas', function () {
-    return renderOdontoView('paciente', 6);
-})->name('paciente.citas');
+// -------------------------------------------------------------------------
+// RUTAS PROTEGIDAS POR ROL CON MIDDLEWARE 'role'
+// -------------------------------------------------------------------------
 
-Route::get('/paciente/historial', function () {
-    return renderOdontoView('paciente', 6);
-})->name('paciente.historial');
+// 1. Rol: Paciente
+Route::middleware(['role:Paciente'])->prefix('paciente')->name('paciente.')->group(function () {
+    Route::get('/dashboard', function () {
+        return renderOdontoView('paciente');
+    })->name('dashboard');
 
-Route::get('/odontologo/agenda', function () {
-    return renderOdontoView('odontologo', 3);
-})->name('odontologo.agenda');
+    Route::get('/agendar', function () {
+        return renderOdontoView('paciente');
+    })->name('agendar');
 
-Route::get('/admin/dashboard', function () {
-    return renderOdontoView('admin', 1);
-})->name('admin.dashboard');
+    Route::get('/citas', function () {
+        return renderOdontoView('paciente');
+    })->name('citas');
 
-Route::get('/admin/agenda', function () {
-    return renderOdontoView('admin', 1);
-})->name('admin.agenda');
+    Route::get('/historial', function () {
+        return renderOdontoView('paciente');
+    })->name('historial');
 
-Route::get('/admin/servicios', function () {
-    return renderOdontoView('admin', 1);
-})->name('admin.servicios');
+    Route::post('/agendar', [ApiController::class, 'storeCita'])->name('agendar.store');
+    Route::post('/citas/{id}/cancelar', [ApiController::class, 'cancelarCita'])->name('citas.cancelar');
+});
 
-Route::get('/admin/inventario', function () {
-    return renderOdontoView('admin', 1);
-})->name('admin.inventario');
+// 2. Rol: Odontólogo
+Route::middleware(['role:Odontólogo'])->prefix('odontologo')->name('odontologo.')->group(function () {
+    Route::get('/agenda', function () {
+        return renderOdontoView('odontologo');
+    })->name('agenda');
 
-Route::get('/admin/reportes', function () {
-    return renderOdontoView('admin', 1);
-})->name('admin.reportes');
+    Route::post('/citas/{id}/iniciar', [ApiController::class, 'iniciarAtencion'])->name('citas.iniciar');
+    Route::post('/citas/{id}/finalizar', [ApiController::class, 'finalizarAtencion'])->name('citas.finalizar');
+    Route::post('/citas/{id}/no-asistio', [ApiController::class, 'marcarNoAsistio'])->name('citas.no_asistio');
+});
+
+// 3. Roles: Administrador y Recepcionista (Supervisión, Inventario, Agenda y Citas)
+Route::middleware(['role:Administrador,Recepcionista'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', function () {
+        return renderOdontoView('admin');
+    })->name('dashboard');
+
+    Route::get('/agenda', function () {
+        return renderOdontoView('admin');
+    })->name('agenda');
+
+    Route::get('/servicios', function () {
+        return renderOdontoView('admin');
+    })->name('servicios');
+
+    Route::get('/inventario', function () {
+        return renderOdontoView('admin');
+    })->name('inventario');
+
+    Route::get('/reportes', function () {
+        return renderOdontoView('admin');
+    })->name('reportes');
+
+    Route::post('/citas/{id}/estado', [ApiController::class, 'cambiarEstado'])->name('citas.estado');
+});
+
+// 4. Exclusivo: Administrador (Gestión de Usuarios del Sistema)
+Route::middleware(['role:Administrador'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/usuarios', function () {
+        return renderOdontoView('admin-usuarios');
+    })->name('usuarios.index');
+});
 
 // =========================================================================
 // API & Acciones Conectadas a la Base de Datos (MySQL - odontoagenda_crm)
 // =========================================================================
 Route::prefix('api')->name('api.')->group(function () {
     Route::get('/estado', [ApiController::class, 'estado'])->name('estado');
-    Route::post('/login', [ApiController::class, 'login'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/switch-user/{id}', [ApiController::class, 'switchUser'])->name('switch_user');
     
     // Citas
@@ -99,14 +139,14 @@ Route::prefix('api')->name('api.')->group(function () {
 
     // Historial clínico de pacientes (para consulta del odontólogo)
     Route::get('/pacientes/{id}/historial', [ApiController::class, 'historialPaciente'])->name('pacientes.historial');
-});
 
-// Soporte de compatibilidad con formularios POST tradicionales
-Route::post('/login', [ApiController::class, 'login'])->name('login.post');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::post('/paciente/agendar', [ApiController::class, 'storeCita'])->name('paciente.agendar.store');
-Route::post('/paciente/citas/{id}/cancelar', [ApiController::class, 'cancelarCita'])->name('paciente.citas.cancelar');
-Route::post('/odontologo/citas/{id}/iniciar', [ApiController::class, 'iniciarAtencion'])->name('odontologo.citas.iniciar');
-Route::post('/odontologo/citas/{id}/finalizar', [ApiController::class, 'finalizarAtencion'])->name('odontologo.citas.finalizar');
-Route::post('/odontologo/citas/{id}/no-asistio', [ApiController::class, 'marcarNoAsistio'])->name('odontologo.citas.no_asistio');
-Route::post('/admin/citas/{id}/estado', [ApiController::class, 'cambiarEstado'])->name('admin.citas.estado');
+    // Módulo de Gestión de Usuarios (Exclusivo Administrador con UserPolicy)
+    Route::prefix('admin/usuarios')->middleware(['role:Administrador'])->name('usuarios.')->group(function () {
+        Route::get('/', [UsuarioController::class, 'index'])->name('index');
+        Route::post('/', [UsuarioController::class, 'store'])->name('store');
+        Route::put('/{usuario}', [UsuarioController::class, 'update'])->name('update');
+        Route::patch('/{usuario}/toggle-activo', [UsuarioController::class, 'toggleActivo'])->name('toggle_activo');
+        Route::post('/{usuario}/reenviar-acceso', [UsuarioController::class, 'resendAccess'])->name('resend_access');
+        Route::delete('/{usuario}', [UsuarioController::class, 'destroy'])->name('destroy');
+    });
+});
