@@ -168,6 +168,11 @@ function syncStateFromDb(dbState) {
     updateUserBadge();
 }
 
+function escapeJs(str) {
+    if (!str) return '';
+    return String(str).replace(/'/g, "\\'").replace(/"/g, '&quot;');
+}
+
 // Estado inicial del sistema (hidratado dinámicamente desde MySQL)
 const OdontoState = {
     currentUser: {
@@ -1156,7 +1161,6 @@ async function submitWizardBooking() {
         showWizardStepAlert(err.message, 'error');
     }
 }
-}
 
 function checkDoctorCollision(doctorId, fecha, horaInicioStr, duracionMin) {
     if (!doctorId || !fecha || !horaInicioStr) return false;
@@ -1441,12 +1445,16 @@ function renderOdontologoPortal() {
         if (c.estado === 'Solicitado' || c.estado === 'Asignado') {
             statusBadge = `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold ${c.estado === 'Asignado' ? 'bg-emerald-100 text-emerald-800' : 'bg-sky-100 text-sky-800'}">${c.estado === 'Asignado' ? AppIcons.check("w-3 h-3") + 'Confirmada' : AppIcons.clock("w-3 h-3") + 'Solicitada'}</span>`;
             actionButtons = `
-                <div class="flex flex-wrap gap-2 mt-3 pt-3 border-t border-slate-100">
-                    <button onclick="doctorIniciarAtencion(${c.id})" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold shadow-sm transition">
+                <div class="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-slate-100">
+                    <button type="button" onclick="verHistorialPacienteDesdeOdontologo(${c.pacienteId}, '${escapeJs(c.pacienteNombre)}', ${c.id})" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-primary-300 bg-primary-50/80 hover:bg-primary-100 text-primary-900 text-xs font-bold shadow-soft-xs transition" title="Consultar antecedentes clínicos y evolución antes de llamar al paciente">
+                        ${AppIcons.clipboardList("w-3.5 h-3.5 text-primary-700")}
+                        <span>Ver Historial Clínico</span>
+                    </button>
+                    <button type="button" onclick="doctorIniciarAtencion(${c.id})" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold shadow-sm transition">
                         ${AppIcons.play("w-3 h-3")}
                         Iniciar Atención
                     </button>
-                    <button onclick="doctorMarcarNoAsistio(${c.id})" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-amber-400 bg-amber-50 hover:bg-amber-100 text-amber-900 text-xs font-bold transition">
+                    <button type="button" onclick="doctorMarcarNoAsistio(${c.id})" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-amber-400 bg-amber-50 hover:bg-amber-100 text-amber-900 text-xs font-bold transition">
                         ${AppIcons.clock("w-3.5 h-3.5 text-amber-800")}
                         Registrar No Asistió (15 min)
                     </button>
@@ -1455,8 +1463,12 @@ function renderOdontologoPortal() {
         } else if (c.estado === 'En Proceso') {
             statusBadge = '<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-purple-100 text-purple-800 animate-pulse"><span class="w-2 h-2 rounded-full bg-purple-600"></span>En Sillón (Atención Activa)</span>';
             actionButtons = `
-                <div class="flex flex-wrap gap-2 mt-3 pt-3 border-t border-slate-100">
-                    <button onclick="doctorAbrirFinalizar(${c.id})" class="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition flex items-center gap-1.5">
+                <div class="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-slate-100">
+                    <button type="button" onclick="verHistorialPacienteDesdeOdontologo(${c.pacienteId}, '${escapeJs(c.pacienteNombre)}', ${c.id})" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-purple-300 bg-purple-50 hover:bg-purple-100 text-purple-900 text-xs font-bold shadow-soft-xs transition" title="Consultar antecedentes clínicos mientras el paciente está en el sillón">
+                        ${AppIcons.clipboardList("w-3.5 h-3.5 text-purple-700")}
+                        <span>Consultar Historial Clínico</span>
+                    </button>
+                    <button type="button" onclick="doctorAbrirFinalizar(${c.id})" class="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition flex items-center gap-1.5">
                         ${AppIcons.fileEdit("w-4 h-4")}
                         <span>Finalizar y Registrar Observaciones</span>
                     </button>
@@ -1465,19 +1477,36 @@ function renderOdontologoPortal() {
         } else if (c.estado === 'Atendido') {
             statusBadge = '<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-800">' + AppIcons.check("w-3 h-3") + 'Atendido</span>';
             actionButtons = `
-                <div class="mt-2 text-xs text-slate-500 italic bg-slate-50 p-2.5 rounded-lg border border-slate-100">
-                    <strong>Notas clínicas:</strong> ${c.observaciones || 'Procedimiento completado sin contratiempos.'}
+                <div class="mt-2 text-xs text-slate-500 bg-slate-50 p-2.5 rounded-lg border border-slate-100 flex flex-wrap items-center justify-between gap-2">
+                    <span class="italic"><strong>Notas clínicas:</strong> ${c.observaciones || 'Procedimiento completado sin contratiempos.'}</span>
+                    <button type="button" onclick="verHistorialPacienteDesdeOdontologo(${c.pacienteId}, '${escapeJs(c.pacienteNombre)}', ${c.id})" class="inline-flex items-center gap-1 text-primary-700 hover:text-primary-900 font-bold hover:underline">
+                        ${AppIcons.clipboardList("w-3.5 h-3.5 text-primary-600")}
+                        <span>Ver Ficha del Paciente</span>
+                    </button>
                 </div>
             `;
         } else if (c.estado === 'No Asistio') {
             statusBadge = '<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300">' + AppIcons.alertTriangle("w-3.5 h-3.5 text-amber-800") + 'No Asistió (Falta Registrada)</span>';
             actionButtons = `
-                <div class="mt-2 text-xs text-amber-800 bg-amber-50 p-2.5 rounded-lg border border-amber-200">
-                    <strong>Motivo de falta:</strong> ${c.motivoInasistencia || 'Paciente ausente tras superar los 15 minutos de tolerancia.'}
+                <div class="mt-2 text-xs text-amber-800 bg-amber-50 p-2.5 rounded-lg border border-amber-200 flex flex-wrap items-center justify-between gap-2">
+                    <span><strong>Motivo de falta:</strong> ${c.motivoInasistencia || 'Paciente ausente tras superar los 15 minutos de tolerancia.'}</span>
+                    <button type="button" onclick="verHistorialPacienteDesdeOdontologo(${c.pacienteId}, '${escapeJs(c.pacienteNombre)}', ${c.id})" class="inline-flex items-center gap-1 text-amber-900 hover:text-amber-950 font-bold hover:underline">
+                        ${AppIcons.clipboardList("w-3.5 h-3.5 text-amber-800")}
+                        <span>Ver Historial del Paciente</span>
+                    </button>
                 </div>
             `;
         } else if (c.estado === 'Cancelado') {
             statusBadge = '<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-slate-200 text-slate-600">Cancelada</span>';
+            actionButtons = `
+                <div class="mt-2 text-xs text-slate-500 bg-slate-50 p-2 rounded-lg border border-slate-100 flex flex-wrap items-center justify-between gap-2">
+                    <span>Cita cancelada</span>
+                    <button type="button" onclick="verHistorialPacienteDesdeOdontologo(${c.pacienteId}, '${escapeJs(c.pacienteNombre)}', ${c.id})" class="inline-flex items-center gap-1 text-slate-600 hover:text-slate-900 font-bold hover:underline">
+                        ${AppIcons.clipboardList("w-3 h-3 text-slate-500")}
+                        <span>Ver Historial</span>
+                    </button>
+                </div>
+            `;
         }
 
         return `
@@ -1525,14 +1554,268 @@ function doctorAbrirFinalizar(citaId) {
     clearDoctorFinalizarAlert();
     const notasInput = document.getElementById('doctor-notas-input');
     if (notasInput) notasInput.value = '';
+
+    // Cargar antecedentes clínicos en el contenedor interno del modal
+    const box = document.getElementById('doctor-finalizar-historial-box');
+    const chevron = document.getElementById('doctor-finalizar-historial-chevron');
+    if (box) {
+        box.classList.add('hidden');
+        if (chevron) chevron.classList.remove('rotate-180');
+        box.innerHTML = `<div class="p-3 text-center text-slate-400">Cargando antecedentes clínicos del paciente...</div>`;
+    }
+
+    const cita = OdontoState.citas.find(c => c.id === citaId);
+    if (cita && box) {
+        apiFetch(`/api/pacientes/${cita.pacienteId}/historial`)
+            .then(res => {
+                if (!res || !res.success || !box) return;
+                const previas = (res.citas || []).filter(c => c.id !== citaId && (c.estado === 'Atendido' || c.observaciones || c.estado === 'No Asistio'));
+                if (previas.length === 0 && (!res.historial || res.historial.length === 0)) {
+                    box.innerHTML = `
+                        <div class="p-3 text-center text-slate-500 bg-slate-50 rounded-xl">
+                            No se registran antecedentes previos para este paciente. Esta es su primera atención clínica registrada.
+                        </div>
+                    `;
+                } else {
+                    const items = previas.slice(0, 4).map(p => {
+                        const isAtendido = p.estado === 'Atendido';
+                        const isFalta = p.estado === 'No Asistio';
+                        const badgeClass = isAtendido ? 'bg-emerald-100 text-emerald-800' : (isFalta ? 'bg-rose-100 text-rose-800' : 'bg-slate-200 text-slate-700');
+                        return `
+                            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1">
+                                <div class="flex items-center justify-between text-slate-800 font-semibold text-[11px]">
+                                    <span>${p.fecha} · ${(p.servicios || []).join(', ') || 'Procedimiento'}</span>
+                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${badgeClass}">${p.estado}</span>
+                                </div>
+                                ${p.observaciones ? `<div class="text-slate-600 text-[11px] italic bg-white p-2 rounded-lg border border-slate-100 font-normal">Dr(a). ${p.doctor}: "${p.observaciones}"</div>` : ''}
+                                ${p.motivoInasistencia ? `<div class="text-rose-700 text-[11px] font-medium">Inasistencia: ${p.motivoInasistencia}</div>` : ''}
+                            </div>
+                        `;
+                    }).join('');
+
+                    box.innerHTML = `
+                        <div class="space-y-2">
+                            ${items}
+                            <div class="pt-1.5 flex justify-end">
+                                <button type="button" onclick="verHistorialPacienteDesdeOdontologo(${cita.pacienteId}, '${escapeJs(cita.pacienteNombre)}', ${cita.id})" class="text-primary-700 hover:text-primary-900 font-bold underline text-xs inline-flex items-center gap-1">
+                                    <span>Ver Ficha y Cronología Completa</span> &rarr;
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }
+            })
+            .catch(() => {
+                if (box) box.innerHTML = `<div class="p-2.5 text-center text-rose-600">No se pudieron cargar los antecedentes.</div>`;
+            });
+    }
+
     const modal = document.getElementById('doctor-finalizar-modal');
     if (modal) modal.classList.remove('hidden');
+}
+
+function toggleDoctorFinalizarHistorial() {
+    const box = document.getElementById('doctor-finalizar-historial-box');
+    const chevron = document.getElementById('doctor-finalizar-historial-chevron');
+    if (!box) return;
+    const isHidden = box.classList.contains('hidden');
+    if (isHidden) {
+        box.classList.remove('hidden');
+        if (chevron) chevron.classList.add('rotate-180');
+    } else {
+        box.classList.add('hidden');
+        if (chevron) chevron.classList.remove('rotate-180');
+    }
 }
 
 function doctorCerrarFinalizarModal() {
     activeFinalizarCitaId = null;
     clearDoctorFinalizarAlert();
     const modal = document.getElementById('doctor-finalizar-modal');
+    if (modal) modal.classList.add('hidden');
+}
+
+async function verHistorialPacienteDesdeOdontologo(pacienteId, pacienteNombre, citaId = null) {
+    const modal = document.getElementById('paciente-historial-modal');
+    const infoContainer = document.getElementById('paciente-historial-info');
+    const timelineContainer = document.getElementById('paciente-historial-timeline');
+    const contadorEl = document.getElementById('paciente-historial-contador');
+    const tituloEl = document.getElementById('paciente-historial-titulo');
+
+    if (!modal) return;
+
+    if (tituloEl) tituloEl.textContent = `Historial Clínico: ${pacienteNombre}`;
+    if (contadorEl) contadorEl.textContent = 'Cargando registros...';
+
+    if (infoContainer) {
+        infoContainer.innerHTML = `
+            <div class="w-full flex items-center justify-center py-4 text-slate-400">
+                <span class="inline-flex items-center gap-2">
+                    <svg class="animate-spin w-4 h-4 text-primary-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
+                    <span>Cargando datos del paciente desde MySQL...</span>
+                </span>
+            </div>
+        `;
+    }
+
+    if (timelineContainer) {
+        timelineContainer.innerHTML = `
+            <div class="p-8 text-center text-slate-400 text-xs">
+                Consultando base de datos de atenciones previas...
+            </div>
+        `;
+    }
+
+    modal.classList.remove('hidden');
+
+    try {
+        const res = await apiFetch(`/api/pacientes/${pacienteId}/historial`);
+        if (!res.success) {
+            showToast(res.message || 'No se pudo cargar el historial del paciente.', 'error');
+            if (timelineContainer) timelineContainer.innerHTML = `<div class="p-4 text-rose-600 bg-rose-50 rounded-xl">Error: ${res.message || 'No se pudo obtener el historial.'}</div>`;
+            return;
+        }
+
+        const pac = res.paciente || {};
+        const citas = res.citas || [];
+        const historial = res.historial || [];
+
+        // Render Ficha Resumen
+        if (infoContainer) {
+            const faltas = pac.faltas_acumuladas || 0;
+            const faltasBadge = faltas === 0
+                ? '<span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800">0 Inasistencias (Excelente)</span>'
+                : (faltas >= 3
+                    ? '<span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-rose-100 text-rose-800">3 Faltas (Agendamiento Web Bloqueado)</span>'
+                    : `<span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-100 text-amber-800">${faltas} Inasistencia(s)</span>`);
+
+            infoContainer.innerHTML = `
+                <div class="space-y-1">
+                    <div class="flex items-center gap-2">
+                        <span class="font-bold text-secondary-900 text-sm">${pac.nombre}</span>
+                        ${faltasBadge}
+                    </div>
+                    <div class="flex flex-wrap items-center gap-3 text-slate-600 text-xs">
+                        <span><strong>Doc:</strong> ${pac.documento_identidad || 'Sin documento'}</span>
+                        <span>·</span>
+                        <span><strong>Tel:</strong> ${pac.telefono || 'Sin teléfono'}</span>
+                        <span>·</span>
+                        <span><strong>Email:</strong> ${pac.correo || 'Sin correo'}</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-[11px] text-slate-500">Historial registrado</div>
+                    <div class="font-bold text-secondary-900 text-sm">${citas.length} citas / ${historial.length} atenciones</div>
+                </div>
+            `;
+        }
+
+        if (contadorEl) {
+            contadorEl.textContent = `${citas.length} registros clínicos`;
+        }
+
+        // Render Timeline
+        if (timelineContainer) {
+            if (citas.length === 0 && historial.length === 0) {
+                timelineContainer.innerHTML = `
+                    <div class="p-8 text-center bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                        <div class="w-12 h-12 mx-auto rounded-full bg-slate-100 text-slate-400 flex items-center justify-center">
+                            ${AppIcons.clipboardList("w-6 h-6")}
+                        </div>
+                        <h5 class="font-bold text-secondary-900">Paciente sin antecedentes previos</h5>
+                        <p class="text-slate-500 text-xs max-w-sm mx-auto">No existen registros de citas anteriores o procedimientos finalizados para este paciente. Las observaciones que registre al finalizar su consulta iniciarán su historia clínica.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const itemsHtml = citas.map((c) => {
+                const isCurrent = citaId && c.id === citaId;
+                const isAtendido = c.estado === 'Atendido';
+                const isEnProceso = c.estado === 'En Proceso';
+                const isNoAsistio = c.estado === 'No Asistio';
+                const isCancelado = c.estado === 'Cancelado';
+
+                let badge = `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800">${c.estado}</span>`;
+                let borderHighlight = 'border-slate-200';
+                let dotBg = 'bg-slate-300';
+
+                if (isAtendido) {
+                    badge = `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">Atendido con Éxito</span>`;
+                    dotBg = 'bg-emerald-500';
+                } else if (isEnProceso) {
+                    badge = `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-primary-100 text-primary-800 animate-pulse">En Sillón Ahora</span>`;
+                    borderHighlight = 'border-primary-400 ring-2 ring-primary-100';
+                    dotBg = 'bg-primary-600';
+                } else if (isNoAsistio) {
+                    badge = `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-rose-800">Inasistencia Injustificada</span>`;
+                    dotBg = 'bg-rose-500';
+                } else if (isCancelado) {
+                    badge = `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-200 text-slate-700">Cancelada</span>`;
+                    dotBg = 'bg-slate-400';
+                }
+
+                return `
+                    <div class="relative pl-6 pb-4 last:pb-0">
+                        <div class="absolute left-2.5 top-3 bottom-0 w-0.5 bg-slate-200 -z-0"></div>
+                        <div class="absolute left-1 top-2 w-3.5 h-3.5 rounded-full ${dotBg} ring-4 ring-white z-10"></div>
+
+                        <div class="bg-white p-4 rounded-2xl border ${borderHighlight} shadow-soft-xs space-y-2.5">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-bold text-secondary-900 text-xs">${c.fecha}</span>
+                                    <span class="text-slate-400">·</span>
+                                    <span class="text-slate-600 font-medium">${c.horaInicio} - ${c.horaFin}</span>
+                                    ${isCurrent ? '<span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-primary-600 text-white">Consulta Actual</span>' : ''}
+                                </div>
+                                ${badge}
+                            </div>
+
+                            <div class="text-xs text-slate-700 space-y-1">
+                                <div><strong>Tratamiento / Procedimiento:</strong> ${(c.servicios || []).join(', ') || 'Consulta general'}</div>
+                                <div class="text-slate-500"><strong>Profesional a cargo:</strong> Dr(a). ${c.doctor || 'Especialista'}</div>
+                            </div>
+
+                            ${c.observaciones ? `
+                                <div class="p-3 rounded-xl bg-slate-50/90 border border-slate-200/70 text-secondary-900 text-xs">
+                                    <div class="font-semibold text-[11px] text-primary-800 flex items-center gap-1.5 mb-1">
+                                        ${AppIcons.clipboardList("w-3.5 h-3.5 text-primary-600")}
+                                        <span>Evolución / Observaciones Clínicas:</span>
+                                    </div>
+                                    <div class="italic text-slate-700 whitespace-pre-wrap">${c.observaciones}</div>
+                                </div>
+                            ` : ''}
+
+                            ${c.motivoInasistencia ? `
+                                <div class="p-2.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-900 text-xs space-y-0.5">
+                                    <div class="font-bold text-[11px] flex items-center gap-1 text-rose-800">
+                                        ${AppIcons.alertTriangle("w-3.5 h-3.5 text-rose-600")}
+                                        <span>Motivo de Falta Registrado:</span>
+                                    </div>
+                                    <div class="text-rose-700 italic">${c.motivoInasistencia}</div>
+                                </div>
+                            ` : ''}
+
+                            <div class="flex items-center justify-between text-[11px] text-slate-400 pt-1 border-t border-slate-100">
+                                <span>Duración: ${c.duracionMin || 30} min</span>
+                                <span>Costo: $${(c.costo || 0).toLocaleString('es-CO')} COP</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            timelineContainer.innerHTML = itemsHtml;
+        }
+
+    } catch (err) {
+        showToast(err.message || 'Error al conectar con el servidor.', 'error');
+        if (timelineContainer) timelineContainer.innerHTML = `<div class="p-4 text-rose-600 bg-rose-50 rounded-xl">Error de comunicación: ${err.message}</div>`;
+    }
+}
+
+function cerrarHistorialPacienteModal() {
+    const modal = document.getElementById('paciente-historial-modal');
     if (modal) modal.classList.add('hidden');
 }
 

@@ -883,6 +883,23 @@
 
             <div id="doctor-finalizar-alert" class="empty:hidden"></div>
 
+            <!-- Panel de Consulta de Historial Clínico DURANTE la Consulta -->
+            <div class="border border-teal-200/90 rounded-2xl overflow-hidden bg-primary-50/40">
+                <button type="button" onclick="toggleDoctorFinalizarHistorial()" class="w-full px-4 py-2.5 flex items-center justify-between text-left hover:bg-primary-100/50 transition">
+                    <span class="inline-flex items-center gap-2 text-xs font-bold text-secondary-900">
+                        <svg class="w-4 h-4 text-primary-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>
+                        <span>Historial Clínico Previo del Paciente</span>
+                    </span>
+                    <span id="doctor-finalizar-historial-toggle-btn" class="text-xs font-bold text-primary-700 flex items-center gap-1">
+                        <span>Ver antecedentes</span>
+                        <svg id="doctor-finalizar-historial-chevron" class="w-3.5 h-3.5 transform transition-transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+                    </span>
+                </button>
+                <div id="doctor-finalizar-historial-box" class="hidden p-3.5 border-t border-teal-100 bg-white max-h-48 overflow-y-auto space-y-2 text-xs">
+                    <!-- Se carga dinámicamente con los eventos clínicos y observaciones previas del paciente -->
+                </div>
+            </div>
+
             <div>
                 <label for="doctor-notas-input" class="block text-xs font-semibold text-slate-700 mb-1.5">Observaciones Clínicas del Procedimiento</label>
                 <textarea id="doctor-notas-input" rows="4" placeholder="Ej: Se completó limpieza ultrasónica y profilaxis coronal sin complicaciones. Se programa control en 6 meses." class="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary-500"></textarea>
@@ -895,6 +912,59 @@
                 <button type="button" onclick="doctorConfirmarFinalizar()" class="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white text-xs font-heading font-semibold shadow-soft-sm transition">
                     <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
                     <span>Guardar y Finalizar Cita</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- MODAL DE HISTORIAL CLÍNICO DEL PACIENTE (PARA ODONTÓLOGOS) -->
+    <!-- Permite ver antecedentes antes y durante la atención clínica -->
+    <!-- ===================================================================== -->
+    <div id="paciente-historial-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-secondary-900/60 backdrop-blur-sm hidden" role="dialog" aria-modal="true" aria-labelledby="paciente-historial-titulo">
+        <div class="bg-white w-full max-w-2xl max-h-[90vh] rounded-3xl shadow-soft-xl border border-slate-200 flex flex-col overflow-hidden">
+            <!-- Header del Modal -->
+            <div class="p-6 pb-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/70">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-2xl bg-primary-100 text-primary-700 flex items-center justify-center shadow-soft-xs flex-shrink-0">
+                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>
+                    </div>
+                    <div>
+                        <span class="text-xs font-semibold text-primary-700 uppercase tracking-wide">Ficha Clínica · DENTAL CARE</span>
+                        <h3 id="paciente-historial-titulo" class="font-heading font-bold text-secondary-900 text-lg">Historial Clínico del Paciente</h3>
+                        <p id="paciente-historial-subtitulo" class="text-xs text-slate-500">Consultas previas, tratamientos realizados y evolución médica</p>
+                    </div>
+                </div>
+                <button onclick="cerrarHistorialPacienteModal()" class="text-slate-400 hover:text-slate-600 text-2xl font-bold p-1 leading-none rounded-xl hover:bg-slate-100 transition" aria-label="Cerrar modal">&times;</button>
+            </div>
+
+            <!-- Contenido Desplazable -->
+            <div class="p-6 overflow-y-auto space-y-5 flex-1 text-xs">
+                <!-- Ficha Resumen del Paciente -->
+                <div id="paciente-historial-info" class="p-4 rounded-2xl bg-gradient-to-br from-primary-50/60 to-slate-50 border border-primary-100/80 flex flex-wrap items-center justify-between gap-3">
+                    <!-- Dinámico: Nombre, Documento, Teléfono, Faltas, Estado -->
+                </div>
+
+                <!-- Cabecera de Sección Cronológica -->
+                <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                    <span class="font-heading font-bold text-secondary-900 text-sm">Registro Cronológico de Atenciones Clínicas</span>
+                    <span id="paciente-historial-contador" class="text-slate-500 font-medium">0 eventos</span>
+                </div>
+
+                <!-- Timeline de Atenciones Clínicas y Observaciones -->
+                <div id="paciente-historial-timeline" class="space-y-3">
+                    <!-- Dinámico: Eventos clínicos pasados con notas del odontólogo -->
+                </div>
+            </div>
+
+            <!-- Footer del Modal -->
+            <div class="p-4 px-6 border-t border-slate-100 bg-slate-50/70 flex items-center justify-between">
+                <span class="text-[11px] text-slate-400 flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5 text-primary-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+                    <span>Información confidencial para uso exclusivo del profesional de salud en consulta</span>
+                </span>
+                <button type="button" onclick="cerrarHistorialPacienteModal()" class="px-4 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-semibold transition">
+                    Cerrar Ficha
                 </button>
             </div>
         </div>
