@@ -52,6 +52,11 @@ class Usuario extends Authenticatable
         return $this->correo;
     }
 
+    public function routeNotificationForMail($notification = null)
+    {
+        return $this->correo;
+    }
+
     public function role()
     {
         return $this->belongsTo(Role::class, 'role_id');

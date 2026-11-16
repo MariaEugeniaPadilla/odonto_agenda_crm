@@ -164,9 +164,14 @@
                     <span>Agenda Especialista</span>
                 </button>
 
-                <button data-target="mod-admin" onclick="navigateToModule('mod-admin')" class="nav-tab-btn px-3.5 py-2 rounded-xl text-xs md:text-sm font-medium bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/80 flex items-center gap-1.5 transition">
+                <button data-target="mod-admin" onclick="navigateToModule('mod-admin'); switchAdminTab('operaciones');" class="nav-tab-btn px-3.5 py-2 rounded-xl text-xs md:text-sm font-medium bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/80 flex items-center gap-1.5 transition">
                     <svg class="w-4 h-4 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
                     <span>Admin & Ausentismo</span>
+                </button>
+
+                <button id="nav-btn-usuarios" data-target="mod-admin" onclick="navigateToModule('mod-admin'); switchAdminTab('usuarios');" class="nav-tab-btn px-3.5 py-2 rounded-xl text-xs md:text-sm font-medium bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/80 flex items-center gap-1.5 transition">
+                    <svg class="w-4 h-4 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    <span>Usuarios</span>
                 </button>
 
                 <!-- CTA PRINCIPAL: AGENDAR CITA CON ODONTO AGENDA -->
@@ -515,15 +520,24 @@
 
                 <div class="flex items-center justify-between text-xs pt-1">
                     <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" checked class="w-4 h-4 rounded text-primary-600 focus:ring-primary-500 border-slate-300">
-                        <span class="text-slate-600 font-medium">Recordar sesión</span>
+                        <input type="checkbox" id="login-remember-input" checked class="w-4 h-4 rounded text-primary-600 focus:ring-primary-500 border-slate-300">
+                        <span class="text-slate-600 font-medium">Recordarme</span>
                     </label>
-                    <a href="#" onclick="event.preventDefault(); showToast('Enlace de recuperación enviado al correo registrado.', 'info');" class="text-primary-700 hover:text-primary-800 font-semibold hover:underline">¿Olvidaste tu contraseña?</a>
+                    <a href="{{ route('password.request') }}" class="text-primary-700 hover:text-primary-800 font-semibold hover:underline">¿Olvidaste tu contraseña?</a>
                 </div>
 
                 <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 text-white font-heading font-semibold text-sm shadow-soft-sm hover:shadow-soft-md transition">
                     Iniciar Sesión
                 </button>
+
+                @if(config('app.registro_publico', true))
+                    <div class="pt-2 text-center text-xs text-slate-500">
+                        ¿Eres paciente nuevo?
+                        <a href="{{ route('register') }}" class="text-primary-700 hover:text-primary-800 font-bold hover:underline ml-1">
+                            Registrarse como Paciente &rarr;
+                        </a>
+                    </div>
+                @endif
             </form>
 
             <!-- Atajos rápidos para demostración sin fricciones -->
