@@ -6,8 +6,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>DENTAL CARE · Clínica Odontológica en Cali | Odonto Agenda</title>
     
-    <!-- Favicon SVG con icono institucional de DENTAL CARE -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2314b8a6'/%3E%3Cstop offset='100%25' stop-color='%231a3a5c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Cpath d='M16 6c-3.8 0-5.8 2-5.8 5 0 3.2 1.4 5.6 2.2 8.6.6 2.2 1.6 4.4 3.1 4.4 1 0 1.4-1.6 1.8-3.4.3-1 .6-1 .9 0 .4 1.8.8 3.4 1.8 3.4 1.5 0 2.5-2.2 3.1-4.4.8-3 2.2-5.4 2.2-8.6 0-3-2-5-5.8-5z' fill='white'/%3E%3Cpath d='M13.2 13.5c1.4 1.6 4.2 1.6 5.6 0' stroke='%230d9488' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E">
+    <!-- Favicon Oficial DENTAL CARE -->
+    <link rel="icon" type="image/png" href="{{ asset('images/dentalcare-icon.png') }}">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -79,8 +79,9 @@
         <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2.5">
             <div class="flex items-center gap-2">
                 <span class="inline-flex items-center justify-center w-2 h-2 rounded-full bg-accent-400 animate-pulse" aria-hidden="true"></span>
-                <span class="font-heading font-semibold tracking-wide text-primary-300 uppercase text-[11px]">Odonto Agenda</span>
-                <span class="text-secondary-300 hidden md:inline text-[11px]">· Panel de Pruebas de Roles</span>
+                <img src="{{ asset('images/odontoagenda-icon.png') }}" class="w-3.5 h-3.5 object-contain" alt="">
+                <span class="font-heading font-semibold tracking-wide text-primary-300 uppercase text-[11px]">OdontoAgenda CRM</span>
+                <span class="text-secondary-400 hidden md:inline text-[11px]">· Panel de Pruebas de Roles</span>
             </div>
 
             <!-- Selector de Roles Discreto -->
@@ -118,28 +119,9 @@
     <header class="glass-nav border-b border-slate-200/80 sticky top-8 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-4">
             
-            <!-- LOGO INSTITUCIONAL COMPLETO DE DENTAL CARE (SVG INLINE) -->
-            <div class="flex items-center gap-3 cursor-pointer group" onclick="navigateToModule('mod-landing')" role="button" aria-label="Ir a la página de inicio">
-                <!-- Icono DENTAL CARE (diente estilizado con destello y sonrisa) -->
-                <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-primary-500 to-secondary-800 flex items-center justify-center text-white shadow-soft-sm group-hover:shadow-soft-md transition transform group-hover:scale-[1.02] flex-shrink-0">
-                    <svg class="w-6 h-6" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <!-- Silueta moderna de diente con cúspides anatómicas -->
-                        <path d="M16 5.5C12 5.5 10 7.5 10 10.8C10 14 11.4 16.5 12.2 19.8C12.8 22.2 13.9 24.8 15.6 24.8C16.6 24.8 17 23 17.5 21C17.8 19.8 18.2 19.8 18.5 21C19 23 19.4 24.8 20.4 24.8C22.1 24.8 23.2 22.2 23.8 19.8C24.6 16.5 26 14 26 10.8C26 7.5 24 5.5 16 5.5Z" fill="white"/>
-                        <!-- Línea de sonrisa sutil que denota felicidad y salud -->
-                        <path d="M13 13C14.5 14.8 17.5 14.8 19 13" stroke="#0d9488" stroke-width="1.8" stroke-linecap="round"/>
-                        <!-- Destello de blancura y salud dental -->
-                        <path d="M23 4.5L23.6 5.8L25 6.5L23.6 7.2L23 8.5L22.4 7.2L21 6.5L22.4 5.8L23 4.5Z" fill="#a7f3d0"/>
-                    </svg>
-                </div>
-
-                <!-- Tipografía Institucional de la Marca -->
-                <div class="flex flex-col">
-                    <div class="flex items-center gap-1 leading-none">
-                        <span class="font-heading font-extrabold text-xl tracking-tight text-secondary-900">DENTAL</span>
-                        <span class="font-heading font-extrabold text-xl tracking-tight text-primary-600">CARE</span>
-                    </div>
-                    <span class="text-[10px] font-medium tracking-wider text-slate-400 uppercase mt-0.5">Clínica Odontológica · Cali</span>
-                </div>
+            <!-- LOGO INSTITUCIONAL OFICIAL DE DENTAL CARE -->
+            <div class="flex items-center cursor-pointer group py-1" onclick="navigateToModule('mod-landing')" role="button" aria-label="Ir a la página de inicio">
+                <img src="{{ asset('images/dentalcare-clean.png') }}" alt="Dental Care - Sonrisas saludables" class="h-10 sm:h-12 w-auto object-contain transition transform group-hover:scale-[1.02]">
             </div>
 
             <!-- Botones de Navegación del Prototipo -->
@@ -198,9 +180,9 @@
                 
                 <!-- Columna Izquierda: Mensaje y Propuesta de Valor -->
                 <div class="lg:col-span-7 space-y-6">
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary-100/80 text-primary-800 text-xs font-semibold border border-primary-200/60 shadow-soft-xs">
-                        <span class="w-2 h-2 rounded-full bg-primary-500 animate-pulse" aria-hidden="true"></span>
-                        <span>Clínica Odontológica DENTAL CARE · Cali, Colombia</span>
+                    <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-primary-900 text-xs font-semibold border border-primary-200/80 shadow-soft-xs">
+                        <img src="{{ asset('images/dentalcare-icon.png') }}" class="w-5 h-5 object-contain flex-shrink-0" alt="Dental Care">
+                        <span>Clínica Odontológica DENTAL CARE · Sonrisas Saludables</span>
                     </div>
 
                     <h1 class="font-heading font-bold text-2xl sm:text-3xl lg:text-[34px] text-secondary-900 tracking-tight leading-snug">
@@ -243,9 +225,9 @@
                 <!-- Columna Derecha: Tarjeta de Reserva Rápida con Odonto Agenda -->
                 <div class="lg:col-span-5">
                     <div class="dental-card p-6 sm:p-7 space-y-5 bg-white">
-                        <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+                        <div class="flex items-center justify-between pb-4 border-b border-slate-100 gap-3">
                             <div>
-                                <span class="text-[11px] font-semibold text-primary-700 uppercase tracking-wider block">Odonto Agenda</span>
+                                <img src="{{ asset('images/odontoagenda-clean.png') }}" alt="OdontoAgenda CRM" class="h-6 sm:h-7 w-auto object-contain mb-1">
                                 <h2 class="font-heading font-bold text-secondary-900 text-base">Reserva Rápida de Atención</h2>
                             </div>
                             <span class="text-xs px-3 py-1 rounded-full bg-accent-100 text-accent-800 font-semibold flex items-center gap-1.5 border border-accent-200">
@@ -492,16 +474,15 @@
     <section id="mod-login" class="app-module flex-1 py-12 px-4 sm:px-6 hidden">
         <div class="max-w-md mx-auto dental-card p-8 bg-white space-y-6">
             
-            <!-- Encabezado de Login con Logo Icono -->
-            <div class="text-center space-y-2">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary-500 to-secondary-800 text-white mx-auto flex items-center justify-center shadow-soft-sm">
-                    <svg class="w-6 h-6" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path d="M16 6c-3.8 0-5.8 2-5.8 5 0 3.2 1.4 5.6 2.2 8.6.6 2.2 1.6 4.4 3.1 4.4 1 0 1.4-1.6 1.8-3.4.3-1 .6-1 .9 0 .4 1.8.8 3.4 1.8 3.4 1.5 0 2.5-2.2 3.1-4.4.8-3 2.2-5.4 2.2-8.6 0-3-2-5-5.8-5z" fill="white"/>
-                        <path d="M13.2 13.5c1.4 1.6 4.2 1.6 5.6 0" stroke="#0d9488" stroke-width="1.5" stroke-linecap="round"/>
-                    </svg>
+            <!-- Encabezado de Login con Logo Oficial -->
+            <div class="text-center space-y-3">
+                <img src="{{ asset('images/dentalcare-clean.png') }}" alt="Dental Care - Sonrisas saludables" class="h-14 mx-auto object-contain">
+                <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-[11px] text-slate-600 font-medium">
+                    <img src="{{ asset('images/odontoagenda-icon.png') }}" class="w-3.5 h-3.5 object-contain" alt="">
+                    <span>Plataforma OdontoAgenda CRM</span>
                 </div>
                 <div>
-                    <h2 class="font-heading font-bold text-xl text-secondary-900">Ingreso a Odonto Agenda</h2>
+                    <h2 class="font-heading font-bold text-xl text-secondary-900">Ingreso al Sistema</h2>
                     <p class="text-xs text-slate-500 mt-0.5">Accede a tu cuenta de paciente o equipo de DENTAL CARE</p>
                 </div>
             </div>
@@ -573,11 +554,14 @@
         <!-- Saludo Personalizado y Acción de Agendamiento -->
         <div class="dental-card p-6 flex flex-wrap items-center justify-between gap-4 bg-white">
             <div class="flex items-center gap-4">
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-50 to-primary-100 text-primary-700 flex items-center justify-center shadow-soft-xs flex-shrink-0">
-                    <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <div class="w-14 h-14 rounded-2xl bg-white border border-primary-100 p-2 flex items-center justify-center shadow-soft-xs flex-shrink-0">
+                    <img src="{{ asset('images/dentalcare-icon.png') }}" alt="Dental Care" class="w-10 h-10 object-contain">
                 </div>
                 <div>
-                    <span class="text-xs font-semibold text-primary-700 uppercase tracking-wide">Portal del Paciente</span>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold text-primary-700 uppercase tracking-wide">Portal del Paciente</span>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-primary-50 text-primary-700 border border-primary-200 font-medium">Dental Care</span>
+                    </div>
                     <h2 class="font-heading font-bold text-xl text-secondary-900">Hola, <span id="pac-user-name">Juan Carlos Pérez</span></h2>
                     <p class="text-xs text-slate-500 mt-0.5">Bienvenido a tu espacio personal de salud oral en DENTAL CARE Cali.</p>
                 </div>
@@ -649,23 +633,31 @@
         <!-- Header del Odontólogo Especialista -->
         <div class="dental-card p-6 flex flex-wrap items-center justify-between gap-4 bg-white">
             <div class="flex items-center gap-4">
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-50 to-amber-100 text-amber-700 flex items-center justify-center shadow-soft-xs flex-shrink-0">
-                    <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>
+                <div class="w-14 h-14 rounded-2xl bg-white border border-amber-200/80 p-2 flex items-center justify-center shadow-soft-xs flex-shrink-0">
+                    <img src="{{ asset('images/dentalcare-icon.png') }}" alt="Dental Care" class="w-10 h-10 object-contain">
                 </div>
                 <div>
-                    <span class="text-xs font-semibold text-amber-700 uppercase tracking-wide">Consultorio Clínico · DENTAL CARE</span>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold text-amber-700 uppercase tracking-wide">Consultorio Clínico</span>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200 font-medium">Dental Care</span>
+                    </div>
                     <h2 class="font-heading font-bold text-xl text-secondary-900"><span id="odo-doctor-name">Dra. Camila Morales</span></h2>
                     <p class="text-xs text-slate-500 mt-0.5">Especialista en Ortodoncia y Ortopedia Maxilar · Cali</p>
                 </div>
             </div>
 
-            <!-- Selector de Fecha de Atención -->
-            <div class="flex items-center gap-2.5">
-                <label for="odo-agenda-date" class="text-xs font-semibold text-slate-600 flex items-center gap-1.5">
-                    <svg class="w-3.5 h-3.5 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
-                    <span>Fecha:</span>
-                </label>
-                <input type="date" id="odo-agenda-date" onchange="renderOdontologoPortal()" class="px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500">
+            <!-- Selector de Fecha de Atención y Marca CRM -->
+            <div class="flex items-center gap-3">
+                <div class="hidden md:flex items-center px-3 py-1.5 bg-slate-50 rounded-xl border border-slate-200/70" title="Plataforma OdontoAgenda CRM">
+                    <img src="{{ asset('images/odontoagenda-clean.png') }}" alt="OdontoAgenda CRM" class="h-5 w-auto object-contain">
+                </div>
+                <div class="flex items-center gap-2.5">
+                    <label for="odo-agenda-date" class="text-xs font-semibold text-slate-600 flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+                        <span>Fecha:</span>
+                    </label>
+                    <input type="date" id="odo-agenda-date" onchange="renderOdontologoPortal()" class="px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                </div>
             </div>
         </div>
 
@@ -717,16 +709,22 @@
         <!-- Header Administrativo con Selector de Pestañas (Operaciones vs Usuarios) -->
         <div class="dental-card p-6 flex flex-wrap items-center justify-between gap-4 bg-white">
             <div class="flex items-center gap-4">
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-secondary-50 to-secondary-100 text-secondary-800 flex items-center justify-center shadow-soft-xs flex-shrink-0">
-                    <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+                <div class="w-14 h-14 rounded-2xl bg-white border border-slate-200 p-2 flex items-center justify-center shadow-soft-xs flex-shrink-0">
+                    <img src="{{ asset('images/odontoagenda-icon.png') }}" alt="OdontoAgenda CRM" class="w-10 h-10 object-contain">
                 </div>
                 <div>
-                    <span class="text-xs font-semibold text-secondary-700 uppercase tracking-wide">Administración & Recepción</span>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold text-secondary-700 uppercase tracking-wide">Administración & Recepción</span>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200 font-medium">OdontoAgenda</span>
+                    </div>
                     <h2 class="font-heading font-bold text-xl text-secondary-900">Panel de Control Operativo · DENTAL CARE</h2>
                     <p class="text-xs text-slate-500 mt-0.5">Supervisión integral de citas, insumos médicos y administración de usuarios</p>
                 </div>
             </div>
-            <div class="flex flex-wrap items-center gap-2">
+            <div class="flex flex-wrap items-center gap-2.5">
+                <div class="hidden lg:flex items-center px-3 py-2 bg-slate-50 rounded-xl border border-slate-200/80 mr-1" title="Plataforma OdontoAgenda CRM">
+                    <img src="{{ asset('images/odontoagenda-clean.png') }}" alt="OdontoAgenda CRM" class="h-6 w-auto object-contain">
+                </div>
                 <!-- Selector de Pestañas del Panel Admin -->
                 <div class="bg-slate-100 p-1 rounded-2xl flex items-center gap-1 text-xs font-semibold border border-slate-200/80">
                     <button type="button" id="admin-tab-btn-operaciones" onclick="switchAdminTab('operaciones')" class="px-3.5 py-1.5 rounded-xl bg-white text-secondary-900 shadow-soft-xs transition flex items-center gap-1.5">
@@ -1154,10 +1152,18 @@
         <div class="bg-white w-full max-w-2xl rounded-3xl shadow-soft-xl border border-slate-200 overflow-hidden flex flex-col max-h-[92vh]">
             
             <!-- Encabezado del Wizard con Marca DENTAL CARE -->
-            <div class="p-6 bg-gradient-to-r from-primary-600 via-teal-600 to-secondary-800 text-white flex items-center justify-between">
-                <div>
-                    <span id="wizard-step-number" class="text-xs uppercase font-extrabold tracking-wider text-primary-200 block">Paso 1 de 4</span>
-                    <h3 id="wizard-step-title" class="font-heading text-lg font-bold mt-0.5 text-white">Agendar Cita Odontológica</h3>
+            <div class="p-5 sm:p-6 bg-gradient-to-r from-primary-600 via-teal-600 to-secondary-800 text-white flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-2xl bg-white p-1.5 flex items-center justify-center shadow-soft-xs flex-shrink-0">
+                        <img src="{{ asset('images/dentalcare-icon.png') }}" class="w-8 h-8 object-contain" alt="Dental Care">
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span id="wizard-step-number" class="text-xs uppercase font-extrabold tracking-wider text-primary-200 block">Paso 1 de 4</span>
+                            <span class="text-[10px] px-1.5 py-0.5 rounded bg-white/20 text-white font-medium">Dental Care</span>
+                        </div>
+                        <h3 id="wizard-step-title" class="font-heading text-lg font-bold mt-0.5 text-white">Agendar Cita Odontológica</h3>
+                    </div>
                 </div>
                 <button onclick="closeBookingWizard()" class="text-primary-100 hover:text-white text-2xl font-bold leading-none p-1 rounded-lg hover:bg-white/10 transition" aria-label="Cerrar asistente de agendamiento">&times;</button>
             </div>
@@ -1301,19 +1307,29 @@
     <!-- ===================================================================== -->
     <!-- PIE DE PÁGINA CORPORATIVO INSTITUCIONAL -->
     <!-- ===================================================================== -->
-    <footer class="bg-white border-t border-slate-200/80 py-8 text-center text-xs text-slate-500 mt-auto">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 space-y-2">
-            <div class="flex items-center justify-center gap-2">
-                <span class="font-heading font-extrabold text-sm tracking-tight text-secondary-900">DENTAL</span>
-                <span class="font-heading font-extrabold text-sm tracking-tight text-primary-600">CARE</span>
-                <span class="text-slate-300">·</span>
-                <span class="text-slate-600 font-medium">Clínica Odontológica Especializada</span>
-                <span class="text-slate-300">·</span>
-                <span>Cali, Colombia</span>
+    <footer class="bg-white border-t border-slate-200/80 py-10 text-xs text-slate-500 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 space-y-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-slate-100">
+                <!-- Marca Dental Care -->
+                <div class="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+                    <img src="{{ asset('images/dentalcare-clean.png') }}" alt="Dental Care - Sonrisas saludables" class="h-11 w-auto object-contain">
+                    <div class="border-t sm:border-t-0 sm:border-l border-slate-200 pt-2 sm:pt-0 sm:pl-3 text-slate-500 text-xs">
+                        <span class="font-semibold block text-slate-700">Clínica Odontológica Especializada</span>
+                        <span>Cali, Colombia · Atención ética, moderna y de calidad</span>
+                    </div>
+                </div>
+
+                <!-- Marca OdontoAgenda CRM -->
+                <div class="flex items-center gap-3 bg-slate-50 px-4 py-2.5 rounded-2xl border border-slate-200/80">
+                    <span class="text-slate-400 text-[11px] font-medium hidden sm:inline">Tecnología de gestión:</span>
+                    <img src="{{ asset('images/odontoagenda-clean.png') }}" alt="OdontoAgenda - CRM para Clínicas Dentales" class="h-7 w-auto object-contain">
+                </div>
             </div>
-            <p class="text-slate-400">
-                Agenda en línea impulsada por <strong>Odonto Agenda</strong> · Todos los derechos reservados · 2026
-            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-2 text-slate-400 text-[11px] text-center sm:text-left">
+                <p>Dental Care © {{ date('Y') }} · Sonrisas saludables · Todos los derechos reservados.</p>
+                <p>Plataforma impulsada por <strong>OdontoAgenda CRM</strong></p>
+            </div>
         </div>
     </footer>
 
