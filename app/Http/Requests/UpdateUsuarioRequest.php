@@ -11,7 +11,10 @@ class UpdateUsuarioRequest extends FormRequest
     public function authorize(): bool
     {
         $targetUser = $this->route('usuario');
-        return $this->user() && $this->user()->can('update', $targetUser);
+        if (!$targetUser instanceof \App\Models\Usuario) {
+            $targetUser = \App\Models\Usuario::find($targetUser);
+        }
+        return $this->user() && $targetUser && $this->user()->can('update', $targetUser);
     }
 
     public function rules(): array

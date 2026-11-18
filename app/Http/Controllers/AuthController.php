@@ -214,7 +214,7 @@ class AuthController extends Controller
     public function resetPassword(ResetPasswordRequest $request)
     {
         $credentials = [
-            'email' => $request->input('correo'),
+            'correo' => $request->input('correo'),
             'password' => $request->input('contrasena'),
             'password_confirmation' => $request->input('contrasena_confirmation'),
             'token' => $request->input('token'),
