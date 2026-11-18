@@ -4,8 +4,9 @@
 
 @section('content')
 <div class="text-center space-y-2 mb-6">
+    <img src="{{ asset('images/dentalcare-clean.png') }}" alt="Dental Care - Sonrisas saludables" class="h-12 mx-auto object-contain mb-2">
     <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-primary-50 text-primary-800 border border-primary-200">
-        <span>Portal del Paciente</span>
+        <span>Portal del Paciente · Registro</span>
     </div>
     <h2 class="font-heading font-bold text-2xl text-secondary-900">Crear Cuenta de Paciente</h2>
     <p class="text-xs text-slate-500">Regístrate para agendar consultas en línea y consultar tu historial</p>

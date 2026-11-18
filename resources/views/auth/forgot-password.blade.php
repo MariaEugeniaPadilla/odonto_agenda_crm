@@ -4,9 +4,7 @@
 
 @section('content')
 <div class="text-center space-y-2 mb-6">
-    <div class="w-12 h-12 rounded-2xl bg-primary-50 text-primary-600 flex items-center justify-center mx-auto mb-2">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
-    </div>
+    <img src="{{ asset('images/dentalcare-clean.png') }}" alt="Dental Care - Sonrisas saludables" class="h-11 mx-auto object-contain mb-3">
     <h2 class="font-heading font-bold text-2xl text-secondary-900">¿Olvidaste tu contraseña?</h2>
     <p class="text-xs text-slate-500 max-w-xs mx-auto">Ingresa tu correo registrado y te enviaremos un enlace seguro para restablecer o definir tu contraseña.</p>
 </div>

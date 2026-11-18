@@ -4,7 +4,12 @@
 
 @section('content')
 <div class="text-center space-y-2 mb-6">
-    <h2 class="font-heading font-bold text-2xl text-secondary-900">Ingreso a DentalCare</h2>
+    <img src="{{ asset('images/dentalcare-clean.png') }}" alt="Dental Care - Sonrisas saludables" class="h-12 mx-auto object-contain mb-2">
+    <div class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-slate-100 border border-slate-200 text-[11px] text-slate-600 font-medium">
+        <img src="{{ asset('images/odontoagenda-icon.png') }}" class="w-3.5 h-3.5 object-contain" alt="">
+        <span>OdontoAgenda CRM</span>
+    </div>
+    <h2 class="font-heading font-bold text-2xl text-secondary-900 mt-1">Iniciar Sesión</h2>
     <p class="text-xs text-slate-500">Accede con tus credenciales de paciente o personal de la clínica</p>
 </div>
 

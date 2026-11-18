@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'DENTAL CARE') · OdontoAgenda CRM</title>
     
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2314b8a6'/%3E%3Cstop offset='100%25' stop-color='%231a3a5c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Cpath d='M16 6c-3.8 0-5.8 2-5.8 5 0 3.2 1.4 5.6 2.2 8.6.6 2.2 1.6 4.4 3.1 4.4 1 0 1.4-1.6 1.8-3.4.3-1 .6-1 .9 0 .4 1.8.8 3.4 1.8 3.4 1.5 0 2.5-2.2 3.1-4.4.8-3 2.2-5.4 2.2-8.6 0-3-2-5-5.8-5z' fill='white'/%3E%3Cpath d='M13.2 13.5c1.4 1.6 4.2 1.6 5.6 0' stroke='%230d9488' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E">
+    <link rel="icon" type="image/png" href="{{ asset('images/dentalcare-icon.png') }}">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -40,19 +40,10 @@
 </head>
 <body class="h-full flex flex-col font-sans text-slate-800 antialiased selection:bg-primary-500 selection:text-white">
     <!-- Barra superior institucional -->
-    <header class="bg-white border-b border-slate-200/80 py-3.5 px-6">
+    <header class="bg-white border-b border-slate-200/80 py-3 px-6">
         <div class="max-w-5xl mx-auto flex items-center justify-between">
-            <a href="{{ route('home') }}" class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-secondary-800 flex items-center justify-center text-white shadow-sm">
-                    <svg class="w-5 h-5" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16 6c-3.8 0-5.8 2-5.8 5 0 3.2 1.4 5.6 2.2 8.6.6 2.2 1.6 4.4 3.1 4.4 1 0 1.4-1.6 1.8-3.4.3-1 .6-1 .9 0 .4 1.8.8 3.4 1.8 3.4 1.5 0 2.5-2.2 3.1-4.4.8-3 2.2-5.4 2.2-8.6 0-3-2-5-5.8-5z" fill="white"/>
-                        <path d="M13.2 13.5c1.4 1.6 4.2 1.6 5.6 0" stroke="#0d9488" stroke-width="1.5" stroke-linecap="round"/>
-                    </svg>
-                </div>
-                <div>
-                    <span class="font-heading font-extrabold text-base tracking-tight text-secondary-900 block leading-none">DENTAL<span class="text-primary-600">CARE</span></span>
-                    <span class="text-[10px] text-slate-400 font-medium">Clínica Odontológica Especializada</span>
-                </div>
+            <a href="{{ route('home') }}" class="flex items-center gap-3 group" title="Ir al inicio de DentalCare">
+                <img src="{{ asset('images/dentalcare-clean.png') }}" alt="Dental Care - Sonrisas saludables" class="h-10 sm:h-11 w-auto object-contain transition transform group-hover:scale-[1.02]">
             </a>
             <div class="text-xs">
                 <a href="{{ route('home') }}" class="text-slate-600 hover:text-primary-700 font-semibold transition flex items-center gap-1">
@@ -103,8 +94,17 @@
         </div>
     </main>
 
-    <footer class="py-4 text-center text-xs text-slate-400 border-t border-slate-100">
-        DentalCare © {{ date('Y') }} · Plataforma Segura OdontoAgenda CRM · Cali, Colombia
+    <footer class="py-5 text-center text-xs text-slate-400 border-t border-slate-100 bg-white">
+        <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div class="flex items-center gap-2 text-slate-500">
+                <img src="{{ asset('images/dentalcare-icon.png') }}" class="w-4 h-4 object-contain inline" alt="">
+                <span>Dental Care © {{ date('Y') }} · Sonrisas saludables · Cali, Colombia</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="text-[11px] text-slate-400">Plataforma Segura:</span>
+                <img src="{{ asset('images/odontoagenda-clean.png') }}" alt="OdontoAgenda CRM" class="h-5 w-auto object-contain opacity-80">
+            </div>
+        </div>
     </footer>
 </body>
 </html>
