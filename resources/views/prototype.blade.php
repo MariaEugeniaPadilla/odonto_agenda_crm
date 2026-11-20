@@ -68,7 +68,7 @@
             }
         }
     </script>
-    <link rel="stylesheet" href="css/prototype.css">
+    <link rel="stylesheet" href="{{ asset('css/prototype.css') }}">
 </head>
 <body class="min-h-full flex flex-col font-sans text-slate-800 antialiased selection:bg-primary-500 selection:text-white">
 
@@ -1340,6 +1340,6 @@
     </script>
 
     <!-- Lógica Vanilla JS con Soporte y Renderizado de Iconos Vectoriales -->
-    <script src="js/prototype.js"></script>
+    <script src="{{ asset('js/prototype.js') }}"></script>
 </body>
 </html>
