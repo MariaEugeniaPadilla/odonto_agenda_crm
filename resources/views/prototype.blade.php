@@ -148,7 +148,7 @@
 
                 <button data-target="mod-admin" onclick="navigateToModule('mod-admin'); switchAdminTab('operaciones');" class="nav-tab-btn px-3.5 py-2 rounded-xl text-xs md:text-sm font-medium bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/80 flex items-center gap-1.5 transition">
                     <svg class="w-4 h-4 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
-                    <span>Admin & Ausentismo</span>
+                    <span>Administración y Recepción</span>
                 </button>
 
                 <button id="nav-btn-usuarios" data-target="mod-admin" onclick="navigateToModule('mod-admin'); switchAdminTab('usuarios');" class="nav-tab-btn px-3.5 py-2 rounded-xl text-xs md:text-sm font-medium bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/80 flex items-center gap-1.5 transition">
