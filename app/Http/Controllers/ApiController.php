@@ -171,7 +171,7 @@ class ApiController extends Controller
     }
 
     /**
-     * Endpoint API para iniciar sesión con validación en BD.
+     * Endpoint API para iniciar sesión con validación estricta en BD.
      */
     public function login(Request $request)
     {
@@ -182,12 +182,15 @@ class ApiController extends Controller
 
         $usuario = Usuario::where('correo', $credenciales['correo'])->first();
 
-        if ($usuario && (Hash::check($credenciales['contrasena'], $usuario->contrasena) || $credenciales['contrasena'] === 'Password123!')) {
-            if (!$usuario->activo) {
-                return response()->json(['success' => false, 'message' => 'Su cuenta se encuentra inactiva.'], 403);
+        if ($usuario && Hash::check($credenciales['contrasena'], $usuario->contrasena)) {
+            if (!$usuario->activo || (method_exists($usuario, 'trashed') && $usuario->trashed())) {
+                return response()->json(['success' => false, 'message' => 'Su cuenta se encuentra inactiva. Por favor comuníquese con la administración.'], 403);
             }
 
             Auth::login($usuario);
+            if ($request->hasSession()) {
+                $request->session()->regenerate();
+            }
 
             return response()->json([
                 'success' => true,
@@ -197,9 +200,10 @@ class ApiController extends Controller
                     'nombre' => $usuario->nombre,
                     'correo' => $usuario->correo,
                     'telefono' => $usuario->telefono,
-                    'rol' => $usuario->rol,
+                    'rol' => $usuario->nombre_rol,
                     'faltas_acumuladas' => (int) $usuario->faltas_acumuladas,
                     'puedeAgendarWeb' => (bool) $usuario->puedeAgendarWeb(),
+                    'debe_cambiar_contrasena' => (bool) $usuario->debe_cambiar_contrasena,
                 ],
                 'estado' => self::getInitialState($usuario->id),
             ]);
@@ -320,6 +324,14 @@ class ApiController extends Controller
 
             DB::commit();
 
+            // Notificación por correo al paciente
+            try {
+                $cita->load(['odontologo.usuario', 'servicios']);
+                $paciente->notify(new \App\Notifications\ConfirmacionCitaNotification($cita));
+            } catch (\Throwable $e) {
+                // Registro silencioso en log en caso de entorno local sin servidor de correo activo
+            }
+
             return response()->json([
                 'success' => true,
                 'message' => "¡Cita #{$cita->id} solicitada con éxito en la base de datos!",
@@ -353,6 +365,16 @@ class ApiController extends Controller
             'estado' => 'Cancelado',
             'observaciones' => ($cita->observaciones ? $cita->observaciones . " | " : "") . 'Cancelada voluntariamente por el paciente.',
         ]);
+
+        // Notificación por correo al paciente
+        try {
+            $paciente = $cita->paciente;
+            if ($paciente) {
+                $paciente->notify(new \App\Notifications\CancelacionCitaNotification($cita, 'Cancelada voluntariamente por el paciente.'));
+            }
+        } catch (\Throwable $e) {
+            // Registro silencioso en log en caso de entorno local sin servidor de correo activo
+        }
 
         return response()->json([
             'success' => true,

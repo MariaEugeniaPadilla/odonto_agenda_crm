@@ -6,8 +6,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>DENTAL CARE · Clínica Odontológica en Cali | Odonto Agenda</title>
     
-    <!-- Favicon SVG con icono institucional de DENTAL CARE -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2314b8a6'/%3E%3Cstop offset='100%25' stop-color='%231a3a5c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Cpath d='M16 6c-3.8 0-5.8 2-5.8 5 0 3.2 1.4 5.6 2.2 8.6.6 2.2 1.6 4.4 3.1 4.4 1 0 1.4-1.6 1.8-3.4.3-1 .6-1 .9 0 .4 1.8.8 3.4 1.8 3.4 1.5 0 2.5-2.2 3.1-4.4.8-3 2.2-5.4 2.2-8.6 0-3-2-5-5.8-5z' fill='white'/%3E%3Cpath d='M13.2 13.5c1.4 1.6 4.2 1.6 5.6 0' stroke='%230d9488' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E">
+    <!-- Favicon Oficial DENTAL CARE -->
+    <link rel="icon" type="image/png" href="{{ asset('images/dentalcare-icon.png') }}">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -68,7 +68,7 @@
             }
         }
     </script>
-    <link rel="stylesheet" href="css/prototype.css">
+    <link rel="stylesheet" href="{{ asset('css/prototype.css') }}">
 </head>
 <body class="min-h-full flex flex-col font-sans text-slate-800 antialiased selection:bg-primary-500 selection:text-white">
 
@@ -79,8 +79,9 @@
         <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2.5">
             <div class="flex items-center gap-2">
                 <span class="inline-flex items-center justify-center w-2 h-2 rounded-full bg-accent-400 animate-pulse" aria-hidden="true"></span>
-                <span class="font-heading font-semibold tracking-wide text-primary-300 uppercase text-[11px]">Odonto Agenda</span>
-                <span class="text-secondary-300 hidden md:inline text-[11px]">· Panel de Pruebas de Roles</span>
+                <img src="{{ asset('images/odontoagenda-icon.png') }}" class="w-3.5 h-3.5 object-contain" alt="">
+                <span class="font-heading font-semibold tracking-wide text-primary-300 uppercase text-[11px]">OdontoAgenda CRM</span>
+                <span class="text-secondary-400 hidden md:inline text-[11px]">· Panel de Pruebas de Roles</span>
             </div>
 
             <!-- Selector de Roles Discreto -->
@@ -118,28 +119,9 @@
     <header class="glass-nav border-b border-slate-200/80 sticky top-8 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-4">
             
-            <!-- LOGO INSTITUCIONAL COMPLETO DE DENTAL CARE (SVG INLINE) -->
-            <div class="flex items-center gap-3 cursor-pointer group" onclick="navigateToModule('mod-landing')" role="button" aria-label="Ir a la página de inicio">
-                <!-- Icono DENTAL CARE (diente estilizado con destello y sonrisa) -->
-                <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-primary-500 to-secondary-800 flex items-center justify-center text-white shadow-soft-sm group-hover:shadow-soft-md transition transform group-hover:scale-[1.02] flex-shrink-0">
-                    <svg class="w-6 h-6" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <!-- Silueta moderna de diente con cúspides anatómicas -->
-                        <path d="M16 5.5C12 5.5 10 7.5 10 10.8C10 14 11.4 16.5 12.2 19.8C12.8 22.2 13.9 24.8 15.6 24.8C16.6 24.8 17 23 17.5 21C17.8 19.8 18.2 19.8 18.5 21C19 23 19.4 24.8 20.4 24.8C22.1 24.8 23.2 22.2 23.8 19.8C24.6 16.5 26 14 26 10.8C26 7.5 24 5.5 16 5.5Z" fill="white"/>
-                        <!-- Línea de sonrisa sutil que denota felicidad y salud -->
-                        <path d="M13 13C14.5 14.8 17.5 14.8 19 13" stroke="#0d9488" stroke-width="1.8" stroke-linecap="round"/>
-                        <!-- Destello de blancura y salud dental -->
-                        <path d="M23 4.5L23.6 5.8L25 6.5L23.6 7.2L23 8.5L22.4 7.2L21 6.5L22.4 5.8L23 4.5Z" fill="#a7f3d0"/>
-                    </svg>
-                </div>
-
-                <!-- Tipografía Institucional de la Marca -->
-                <div class="flex flex-col">
-                    <div class="flex items-center gap-1 leading-none">
-                        <span class="font-heading font-extrabold text-xl tracking-tight text-secondary-900">DENTAL</span>
-                        <span class="font-heading font-extrabold text-xl tracking-tight text-primary-600">CARE</span>
-                    </div>
-                    <span class="text-[10px] font-medium tracking-wider text-slate-400 uppercase mt-0.5">Clínica Odontológica · Cali</span>
-                </div>
+            <!-- LOGO INSTITUCIONAL OFICIAL DE DENTAL CARE -->
+            <div class="flex items-center cursor-pointer group py-1" onclick="navigateToModule('mod-landing')" role="button" aria-label="Ir a la página de inicio">
+                <img src="{{ asset('images/dentalcare-clean.png') }}" alt="Dental Care - Sonrisas saludables" class="h-10 sm:h-12 w-auto object-contain transition transform group-hover:scale-[1.02]">
             </div>
 
             <!-- Botones de Navegación del Prototipo -->
@@ -164,9 +146,14 @@
                     <span>Agenda Especialista</span>
                 </button>
 
-                <button data-target="mod-admin" onclick="navigateToModule('mod-admin')" class="nav-tab-btn px-3.5 py-2 rounded-xl text-xs md:text-sm font-medium bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/80 flex items-center gap-1.5 transition">
+                <button data-target="mod-admin" onclick="navigateToModule('mod-admin'); switchAdminTab('operaciones');" class="nav-tab-btn px-3.5 py-2 rounded-xl text-xs md:text-sm font-medium bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/80 flex items-center gap-1.5 transition">
                     <svg class="w-4 h-4 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
-                    <span>Admin & Ausentismo</span>
+                    <span>Administración y Recepción</span>
+                </button>
+
+                <button id="nav-btn-usuarios" data-target="mod-admin" onclick="navigateToModule('mod-admin'); switchAdminTab('usuarios');" class="nav-tab-btn px-3.5 py-2 rounded-xl text-xs md:text-sm font-medium bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/80 flex items-center gap-1.5 transition">
+                    <svg class="w-4 h-4 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    <span>Usuarios</span>
                 </button>
 
                 <!-- CTA PRINCIPAL: AGENDAR CITA CON ODONTO AGENDA -->
@@ -193,9 +180,9 @@
                 
                 <!-- Columna Izquierda: Mensaje y Propuesta de Valor -->
                 <div class="lg:col-span-7 space-y-6">
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary-100/80 text-primary-800 text-xs font-semibold border border-primary-200/60 shadow-soft-xs">
-                        <span class="w-2 h-2 rounded-full bg-primary-500 animate-pulse" aria-hidden="true"></span>
-                        <span>Clínica Odontológica DENTAL CARE · Cali, Colombia</span>
+                    <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-primary-900 text-xs font-semibold border border-primary-200/80 shadow-soft-xs">
+                        <img src="{{ asset('images/dentalcare-icon.png') }}" class="w-5 h-5 object-contain flex-shrink-0" alt="Dental Care">
+                        <span>Clínica Odontológica DENTAL CARE · Sonrisas Saludables</span>
                     </div>
 
                     <h1 class="font-heading font-bold text-2xl sm:text-3xl lg:text-[34px] text-secondary-900 tracking-tight leading-snug">
@@ -238,9 +225,9 @@
                 <!-- Columna Derecha: Tarjeta de Reserva Rápida con Odonto Agenda -->
                 <div class="lg:col-span-5">
                     <div class="dental-card p-6 sm:p-7 space-y-5 bg-white">
-                        <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+                        <div class="flex items-center justify-between pb-4 border-b border-slate-100 gap-3">
                             <div>
-                                <span class="text-[11px] font-semibold text-primary-700 uppercase tracking-wider block">Odonto Agenda</span>
+                                <img src="{{ asset('images/odontoagenda-clean.png') }}" alt="OdontoAgenda CRM" class="h-6 sm:h-7 w-auto object-contain mb-1">
                                 <h2 class="font-heading font-bold text-secondary-900 text-base">Reserva Rápida de Atención</h2>
                             </div>
                             <span class="text-xs px-3 py-1 rounded-full bg-accent-100 text-accent-800 font-semibold flex items-center gap-1.5 border border-accent-200">
@@ -487,16 +474,15 @@
     <section id="mod-login" class="app-module flex-1 py-12 px-4 sm:px-6 hidden">
         <div class="max-w-md mx-auto dental-card p-8 bg-white space-y-6">
             
-            <!-- Encabezado de Login con Logo Icono -->
-            <div class="text-center space-y-2">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary-500 to-secondary-800 text-white mx-auto flex items-center justify-center shadow-soft-sm">
-                    <svg class="w-6 h-6" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path d="M16 6c-3.8 0-5.8 2-5.8 5 0 3.2 1.4 5.6 2.2 8.6.6 2.2 1.6 4.4 3.1 4.4 1 0 1.4-1.6 1.8-3.4.3-1 .6-1 .9 0 .4 1.8.8 3.4 1.8 3.4 1.5 0 2.5-2.2 3.1-4.4.8-3 2.2-5.4 2.2-8.6 0-3-2-5-5.8-5z" fill="white"/>
-                        <path d="M13.2 13.5c1.4 1.6 4.2 1.6 5.6 0" stroke="#0d9488" stroke-width="1.5" stroke-linecap="round"/>
-                    </svg>
+            <!-- Encabezado de Login con Logo Oficial -->
+            <div class="text-center space-y-3">
+                <img src="{{ asset('images/dentalcare-clean.png') }}" alt="Dental Care - Sonrisas saludables" class="h-14 mx-auto object-contain">
+                <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-[11px] text-slate-600 font-medium">
+                    <img src="{{ asset('images/odontoagenda-icon.png') }}" class="w-3.5 h-3.5 object-contain" alt="">
+                    <span>Plataforma OdontoAgenda CRM</span>
                 </div>
                 <div>
-                    <h2 class="font-heading font-bold text-xl text-secondary-900">Ingreso a Odonto Agenda</h2>
+                    <h2 class="font-heading font-bold text-xl text-secondary-900">Ingreso al Sistema</h2>
                     <p class="text-xs text-slate-500 mt-0.5">Accede a tu cuenta de paciente o equipo de DENTAL CARE</p>
                 </div>
             </div>
@@ -515,15 +501,24 @@
 
                 <div class="flex items-center justify-between text-xs pt-1">
                     <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" checked class="w-4 h-4 rounded text-primary-600 focus:ring-primary-500 border-slate-300">
-                        <span class="text-slate-600 font-medium">Recordar sesión</span>
+                        <input type="checkbox" id="login-remember-input" checked class="w-4 h-4 rounded text-primary-600 focus:ring-primary-500 border-slate-300">
+                        <span class="text-slate-600 font-medium">Recordarme</span>
                     </label>
-                    <a href="#" onclick="event.preventDefault(); showToast('Enlace de recuperación enviado al correo registrado.', 'info');" class="text-primary-700 hover:text-primary-800 font-semibold hover:underline">¿Olvidaste tu contraseña?</a>
+                    <a href="{{ route('password.request') }}" class="text-primary-700 hover:text-primary-800 font-semibold hover:underline">¿Olvidaste tu contraseña?</a>
                 </div>
 
                 <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 text-white font-heading font-semibold text-sm shadow-soft-sm hover:shadow-soft-md transition">
                     Iniciar Sesión
                 </button>
+
+                @if(config('app.registro_publico', true))
+                    <div class="pt-2 text-center text-xs text-slate-500">
+                        ¿Eres paciente nuevo?
+                        <a href="{{ route('register') }}" class="text-primary-700 hover:text-primary-800 font-bold hover:underline ml-1">
+                            Registrarse como Paciente &rarr;
+                        </a>
+                    </div>
+                @endif
             </form>
 
             <!-- Atajos rápidos para demostración sin fricciones -->
@@ -559,11 +554,14 @@
         <!-- Saludo Personalizado y Acción de Agendamiento -->
         <div class="dental-card p-6 flex flex-wrap items-center justify-between gap-4 bg-white">
             <div class="flex items-center gap-4">
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-50 to-primary-100 text-primary-700 flex items-center justify-center shadow-soft-xs flex-shrink-0">
-                    <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <div class="w-14 h-14 rounded-2xl bg-white border border-primary-100 p-2 flex items-center justify-center shadow-soft-xs flex-shrink-0">
+                    <img src="{{ asset('images/dentalcare-icon.png') }}" alt="Dental Care" class="w-10 h-10 object-contain">
                 </div>
                 <div>
-                    <span class="text-xs font-semibold text-primary-700 uppercase tracking-wide">Portal del Paciente</span>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold text-primary-700 uppercase tracking-wide">Portal del Paciente</span>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-primary-50 text-primary-700 border border-primary-200 font-medium">Dental Care</span>
+                    </div>
                     <h2 class="font-heading font-bold text-xl text-secondary-900">Hola, <span id="pac-user-name">Juan Carlos Pérez</span></h2>
                     <p class="text-xs text-slate-500 mt-0.5">Bienvenido a tu espacio personal de salud oral en DENTAL CARE Cali.</p>
                 </div>
@@ -635,23 +633,31 @@
         <!-- Header del Odontólogo Especialista -->
         <div class="dental-card p-6 flex flex-wrap items-center justify-between gap-4 bg-white">
             <div class="flex items-center gap-4">
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-50 to-amber-100 text-amber-700 flex items-center justify-center shadow-soft-xs flex-shrink-0">
-                    <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>
+                <div class="w-14 h-14 rounded-2xl bg-white border border-amber-200/80 p-2 flex items-center justify-center shadow-soft-xs flex-shrink-0">
+                    <img src="{{ asset('images/dentalcare-icon.png') }}" alt="Dental Care" class="w-10 h-10 object-contain">
                 </div>
                 <div>
-                    <span class="text-xs font-semibold text-amber-700 uppercase tracking-wide">Consultorio Clínico · DENTAL CARE</span>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold text-amber-700 uppercase tracking-wide">Consultorio Clínico</span>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200 font-medium">Dental Care</span>
+                    </div>
                     <h2 class="font-heading font-bold text-xl text-secondary-900"><span id="odo-doctor-name">Dra. Camila Morales</span></h2>
                     <p class="text-xs text-slate-500 mt-0.5">Especialista en Ortodoncia y Ortopedia Maxilar · Cali</p>
                 </div>
             </div>
 
-            <!-- Selector de Fecha de Atención -->
-            <div class="flex items-center gap-2.5">
-                <label for="odo-agenda-date" class="text-xs font-semibold text-slate-600 flex items-center gap-1.5">
-                    <svg class="w-3.5 h-3.5 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
-                    <span>Fecha:</span>
-                </label>
-                <input type="date" id="odo-agenda-date" onchange="renderOdontologoPortal()" class="px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500">
+            <!-- Selector de Fecha de Atención y Marca CRM -->
+            <div class="flex items-center gap-3">
+                <div class="hidden md:flex items-center px-3 py-1.5 bg-slate-50 rounded-xl border border-slate-200/70" title="Plataforma OdontoAgenda CRM">
+                    <img src="{{ asset('images/odontoagenda-clean.png') }}" alt="OdontoAgenda CRM" class="h-5 w-auto object-contain">
+                </div>
+                <div class="flex items-center gap-2.5">
+                    <label for="odo-agenda-date" class="text-xs font-semibold text-slate-600 flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+                        <span>Fecha:</span>
+                    </label>
+                    <input type="date" id="odo-agenda-date" onchange="renderOdontologoPortal()" class="px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                </div>
             </div>
         </div>
 
@@ -700,129 +706,444 @@
     <!-- ===================================================================== -->
     <section id="mod-admin" class="app-module flex-1 py-8 px-4 sm:px-6 max-w-7xl mx-auto w-full hidden space-y-6">
         
-        <!-- Header Administrativo -->
+        <!-- Header Administrativo con Selector de Pestañas (Operaciones vs Usuarios) -->
         <div class="dental-card p-6 flex flex-wrap items-center justify-between gap-4 bg-white">
             <div class="flex items-center gap-4">
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-secondary-50 to-secondary-100 text-secondary-800 flex items-center justify-center shadow-soft-xs flex-shrink-0">
-                    <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+                <div class="w-14 h-14 rounded-2xl bg-white border border-slate-200 p-2 flex items-center justify-center shadow-soft-xs flex-shrink-0">
+                    <img src="{{ asset('images/odontoagenda-icon.png') }}" alt="OdontoAgenda CRM" class="w-10 h-10 object-contain">
                 </div>
                 <div>
-                    <span class="text-xs font-semibold text-secondary-700 uppercase tracking-wide">Administración & Recepción</span>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold text-secondary-700 uppercase tracking-wide">Administración & Recepción</span>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200 font-medium">OdontoAgenda</span>
+                    </div>
                     <h2 class="font-heading font-bold text-xl text-secondary-900">Panel de Control Operativo · DENTAL CARE</h2>
-                    <p class="text-xs text-slate-500 mt-0.5">Supervisión en tiempo real de citas, insumos médicos y tasa de ausentismo</p>
+                    <p class="text-xs text-slate-500 mt-0.5">Supervisión integral de citas, insumos médicos y administración de usuarios</p>
                 </div>
             </div>
-            <div>
-                <button onclick="renderAdminPortal()" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold shadow-soft-xs transition">
+            <div class="flex flex-wrap items-center gap-2.5">
+                <div class="hidden lg:flex items-center px-3 py-2 bg-slate-50 rounded-xl border border-slate-200/80 mr-1" title="Plataforma OdontoAgenda CRM">
+                    <img src="{{ asset('images/odontoagenda-clean.png') }}" alt="OdontoAgenda CRM" class="h-6 w-auto object-contain">
+                </div>
+                <!-- Selector de Pestañas del Panel Admin -->
+                <div class="bg-slate-100 p-1 rounded-2xl flex items-center gap-1 text-xs font-semibold border border-slate-200/80">
+                    <button type="button" id="admin-tab-btn-operaciones" onclick="switchAdminTab('operaciones')" class="px-3.5 py-1.5 rounded-xl bg-white text-secondary-900 shadow-soft-xs transition flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 text-primary-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+                        <span>Operaciones & Citas</span>
+                    </button>
+                    <button type="button" id="admin-tab-btn-usuarios" onclick="switchAdminTab('usuarios')" class="px-3.5 py-1.5 rounded-xl text-slate-600 hover:text-secondary-900 transition flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 text-slate-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        <span>Gestión de Usuarios</span>
+                    </button>
+                </div>
+                <button onclick="actualizarDatosAdminActual()" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold shadow-soft-xs transition">
                     <svg class="w-3.5 h-3.5 text-slate-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
-                    <span>Actualizar Datos</span>
+                    <span>Actualizar</span>
                 </button>
             </div>
         </div>
 
-        <!-- Indicadores Gerenciales con Semáforo de Ausentismo -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5">
-            <div class="dental-card p-5 bg-white">
-                <span class="text-[11px] text-slate-400 font-semibold uppercase block">Total Citas</span>
-                <strong id="adm-kpi-total" class="font-heading text-2xl font-bold text-secondary-900 mt-1 block">0</strong>
-                <span class="text-[11px] text-slate-400">En sistema</span>
-            </div>
-            <div class="dental-card p-5 bg-white">
-                <span class="text-[11px] text-emerald-600 font-semibold uppercase block">Atendidas</span>
-                <strong id="adm-kpi-atendidas" class="font-heading text-2xl font-bold text-emerald-700 mt-1 block">0</strong>
-                <span class="text-[11px] text-emerald-600 font-medium">Insumos descontados</span>
-            </div>
-            <div class="dental-card p-5 bg-white">
-                <span class="text-[11px] text-amber-600 font-semibold uppercase block">Inasistencias</span>
-                <strong id="adm-kpi-noasistio" class="font-heading text-2xl font-bold text-amber-700 mt-1 block">0</strong>
-                <span class="text-[11px] text-amber-700 font-medium">Insumos preservados</span>
-            </div>
-            <div class="dental-card p-5 bg-gradient-to-br from-amber-50/80 to-rose-50/80 border-amber-200">
-                <span class="text-[11px] text-amber-950 font-bold uppercase block">Tasa Ausentismo</span>
-                <strong id="adm-kpi-tasa" class="font-heading text-2xl font-black text-rose-700 mt-1 block">0%</strong>
-                <span class="text-[11px] text-amber-900 font-medium">Faltas / (Atend + Faltas)</span>
-            </div>
-            <div class="dental-card p-5 bg-white">
-                <span class="text-[11px] text-rose-600 font-semibold uppercase block">Alertas Stock</span>
-                <strong id="adm-kpi-stock-alert" class="font-heading text-2xl font-bold text-rose-700 mt-1 block">0</strong>
-                <span class="text-[11px] text-slate-400">Bajo umbral mínimo</span>
-            </div>
-        </div>
-
-        <!-- Tabla General de Consultorios (Recepción) -->
-        <div class="dental-card p-6 space-y-4 bg-white">
-            <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
-                <div class="flex items-center gap-2.5">
-                    <div class="w-8 h-8 rounded-xl bg-secondary-50 text-secondary-800 flex items-center justify-center">
-                        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
-                    </div>
-                    <div>
-                        <h3 class="font-heading font-bold text-secondary-900 text-base">Agenda General de Consultorios</h3>
-                        <p class="text-xs text-slate-500 mt-0.5">Control de cupos, asignación de horas y verificación de asistencia</p>
-                    </div>
+        <!-- ================================================================= -->
+        <!-- SUB-VISTA 1: OPERACIONES, AGENDA, INSUMOS & REPORTES -->
+        <!-- ================================================================= -->
+        <div id="admin-subview-operaciones" class="space-y-6">
+            <!-- Indicadores Gerenciales con Semáforo de Ausentismo -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5">
+                <div class="dental-card p-5 bg-white">
+                    <span class="text-[11px] text-slate-400 font-semibold uppercase block">Total Citas</span>
+                    <strong id="adm-kpi-total" class="font-heading text-2xl font-bold text-secondary-900 mt-1 block">0</strong>
+                    <span class="text-[11px] text-slate-400">En sistema</span>
+                </div>
+                <div class="dental-card p-5 bg-white">
+                    <span class="text-[11px] text-emerald-600 font-semibold uppercase block">Atendidas</span>
+                    <strong id="adm-kpi-atendidas" class="font-heading text-2xl font-bold text-emerald-700 mt-1 block">0</strong>
+                    <span class="text-[11px] text-emerald-600 font-medium">Insumos descontados</span>
+                </div>
+                <div class="dental-card p-5 bg-white">
+                    <span class="text-[11px] text-amber-600 font-semibold uppercase block">Inasistencias</span>
+                    <strong id="adm-kpi-noasistio" class="font-heading text-2xl font-bold text-amber-700 mt-1 block">0</strong>
+                    <span class="text-[11px] text-amber-700 font-medium">Insumos preservados</span>
+                </div>
+                <div class="dental-card p-5 bg-gradient-to-br from-amber-50/80 to-rose-50/80 border-amber-200">
+                    <span class="text-[11px] text-amber-950 font-bold uppercase block">Tasa Ausentismo</span>
+                    <strong id="adm-kpi-tasa" class="font-heading text-2xl font-black text-rose-700 mt-1 block">0%</strong>
+                    <span class="text-[11px] text-amber-900 font-medium">Faltas / (Atend + Faltas)</span>
+                </div>
+                <div class="dental-card p-5 bg-white">
+                    <span class="text-[11px] text-rose-600 font-semibold uppercase block">Alertas Stock</span>
+                    <strong id="adm-kpi-stock-alert" class="font-heading text-2xl font-bold text-rose-700 mt-1 block">0</strong>
+                    <span class="text-[11px] text-slate-400">Bajo umbral mínimo</span>
                 </div>
             </div>
 
-            <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="border-b border-slate-200/80 text-[11px] font-semibold uppercase text-slate-400 tracking-wider">
-                            <th class="py-2.5 px-3.5">ID</th>
-                            <th class="py-2.5 px-3.5">Horario</th>
-                            <th class="py-2.5 px-3.5">Paciente</th>
-                            <th class="py-2.5 px-3.5">Especialista</th>
-                            <th class="py-2.5 px-3.5">Tratamiento</th>
-                            <th class="py-2.5 px-3.5">Estado</th>
-                            <th class="py-2.5 px-3.5">Control Recepción</th>
-                        </tr>
-                    </thead>
-                    <tbody id="adm-agenda-table-body"></tbody>
-                </table>
+            <!-- Tabla General de Consultorios (Recepción) -->
+            <div class="dental-card p-6 space-y-4 bg-white">
+                <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-8 h-8 rounded-xl bg-secondary-50 text-secondary-800 flex items-center justify-center">
+                            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-heading font-bold text-secondary-900 text-base">Agenda General de Consultorios</h3>
+                            <p class="text-xs text-slate-500 mt-0.5">Control de cupos, asignación de horas y verificación de asistencia</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-200/80 text-[11px] font-semibold uppercase text-slate-400 tracking-wider">
+                                <th class="py-2.5 px-3.5">ID</th>
+                                <th class="py-2.5 px-3.5">Horario</th>
+                                <th class="py-2.5 px-3.5">Paciente</th>
+                                <th class="py-2.5 px-3.5">Especialista</th>
+                                <th class="py-2.5 px-3.5">Tratamiento</th>
+                                <th class="py-2.5 px-3.5">Estado</th>
+                                <th class="py-2.5 px-3.5">Control Recepción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adm-agenda-table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Inventario de Insumos Médicos Odontológicos -->
+            <div class="dental-card p-6 space-y-4 bg-white">
+                <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-8 h-8 rounded-xl bg-primary-50 text-primary-700 flex items-center justify-center">
+                            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-heading font-bold text-secondary-900 text-base">Control de Inventario y Suministros Clínicos</h3>
+                            <p class="text-xs text-slate-500 mt-0.5">Regla de Negocio: Los insumos únicamente se descuentan tras finalizar la cita en estado 'Atendido'.</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="adm-inventario-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5"></div>
+            </div>
+
+            <!-- Indicador Comparativo de Ausentismo por Odontólogo -->
+            <div class="dental-card p-6 space-y-4 bg-white">
+                <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-8 h-8 rounded-xl bg-secondary-50 text-secondary-800 flex items-center justify-center">
+                            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                        </div>
+                        <h3 class="font-heading font-bold text-secondary-900 text-base">Tasa de Ausentismo por Especialista</h3>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-200/80 text-[11px] font-semibold uppercase text-slate-400 tracking-wider">
+                                <th class="py-2.5 px-3.5">Especialista</th>
+                                <th class="py-2.5 px-3.5">Área Clínica</th>
+                                <th class="py-2.5 px-3.5 text-center">Atendidas</th>
+                                <th class="py-2.5 px-3.5 text-center">Inasistencias</th>
+                                <th class="py-2.5 px-3.5 text-center">Tasa Ausentismo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adm-reporte-odontologos-tbody"></tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
-        <!-- Inventario de Insumos Médicos Odontológicos -->
-        <div class="dental-card p-6 space-y-4 bg-white">
-            <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
-                <div class="flex items-center gap-2.5">
-                    <div class="w-8 h-8 rounded-xl bg-primary-50 text-primary-700 flex items-center justify-center">
-                        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+        <!-- ================================================================= -->
+        <!-- SUB-VISTA 2: GESTIÓN DE USUARIOS DEL SISTEMA (EXCLUSIVO ADMIN) -->
+        <!-- ================================================================= -->
+        <div id="admin-subview-usuarios" class="space-y-6 hidden">
+            <!-- Barra Superior de Gestión de Usuarios -->
+            <div class="dental-card p-6 bg-white space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-slate-100">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-2xl bg-primary-100 text-primary-700 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-heading font-bold text-secondary-900 text-lg">Directorio y Control de Usuarios</h3>
+                            <p class="text-xs text-slate-500">Administra cuentas, asignación de roles definitivos, seguridad y credenciales</p>
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="font-heading font-bold text-secondary-900 text-base">Control de Inventario y Suministros Clínicos</h3>
-                        <p class="text-xs text-slate-500 mt-0.5">Regla de Negocio: Los insumos únicamente se descuentan tras finalizar la cita en estado 'Atendido'.</p>
-                    </div>
+                    <button type="button" onclick="abrirModalCrearUsuario()" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 text-white font-heading font-semibold text-xs shadow-soft-sm hover:shadow-soft-md transition flex items-center gap-2">
+                        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                        <span>Nuevo Usuario</span>
+                    </button>
                 </div>
-            </div>
-            <div id="adm-inventario-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5"></div>
-        </div>
 
-        <!-- Indicador Comparativo de Ausentismo por Odontólogo -->
-        <div class="dental-card p-6 space-y-4 bg-white">
-            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-                <div class="flex items-center gap-2.5">
-                    <div class="w-8 h-8 rounded-xl bg-secondary-50 text-secondary-800 flex items-center justify-center">
-                        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                <!-- Barra de Búsqueda y Filtros -->
+                <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 text-xs">
+                    <!-- Búsqueda en Vivo -->
+                    <div class="sm:col-span-6 relative">
+                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                        </span>
+                        <input type="text" id="usuarios-filtro-buscar" oninput="debounceBuscarUsuarios()" placeholder="Buscar por nombre, correo o documento..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition">
                     </div>
-                    <h3 class="font-heading font-bold text-secondary-900 text-base">Tasa de Ausentismo por Especialista</h3>
+
+                    <!-- Filtro por Rol Definitivo -->
+                    <div class="sm:col-span-3">
+                        <select id="usuarios-filtro-rol" onchange="renderAdminUsuarios(1)" class="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white">
+                            <option value="">Todos los Roles</option>
+                            <option value="Administrador">Administrador</option>
+                            <option value="Odontólogo">Odontólogo</option>
+                            <option value="Recepcionista">Recepcionista</option>
+                            <option value="Paciente">Paciente</option>
+                        </select>
+                    </div>
+
+                    <!-- Filtro por Estado Activo / Inactivo -->
+                    <div class="sm:col-span-3">
+                        <select id="usuarios-filtro-activo" onchange="renderAdminUsuarios(1)" class="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white">
+                            <option value="">Todos los Estados</option>
+                            <option value="1">Solo Activos</option>
+                            <option value="0">Solo Inactivos</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="border-b border-slate-200/80 text-[11px] font-semibold uppercase text-slate-400 tracking-wider">
-                            <th class="py-2.5 px-3.5">Especialista</th>
-                            <th class="py-2.5 px-3.5">Área Clínica</th>
-                            <th class="py-2.5 px-3.5 text-center">Atendidas</th>
-                            <th class="py-2.5 px-3.5 text-center">Inasistencias</th>
-                            <th class="py-2.5 px-3.5 text-center">Tasa Ausentismo</th>
-                        </tr>
-                    </thead>
-                    <tbody id="adm-reporte-odontologos-tbody"></tbody>
-                </table>
+
+                <!-- Tabla Interactiva de Usuarios -->
+                <div class="overflow-x-auto pt-2">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-200/80 text-[11px] font-semibold uppercase text-slate-400 tracking-wider">
+                                <th class="py-2.5 px-3.5">Usuario / Documento</th>
+                                <th class="py-2.5 px-3.5">Contacto</th>
+                                <th class="py-2.5 px-3.5">Rol Oficial</th>
+                                <th class="py-2.5 px-3.5">Estado</th>
+                                <th class="py-2.5 px-3.5">Auditoría</th>
+                                <th class="py-2.5 px-3.5 text-right">Acciones de Seguridad</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adm-usuarios-tbody">
+                            <!-- Filas cargadas dinámicamente desde /api/admin/usuarios -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Paginación -->
+                <div id="adm-usuarios-pagination" class="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500">
+                    <!-- Dinámico -->
+                </div>
             </div>
         </div>
     </section>
+
+    <!-- ===================================================================== -->
+    <!-- MODAL 1: CREAR USUARIO (CON ASIGNACIÓN DE CONTRASEÑA Y ENLACE SEGURO) -->
+    <!-- ===================================================================== -->
+    <div id="modal-crear-usuario" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-secondary-900/60 backdrop-blur-sm hidden" role="dialog" aria-modal="true">
+        <div class="bg-white w-full max-w-lg rounded-3xl shadow-soft-xl border border-slate-200 overflow-hidden flex flex-col max-h-[92vh]">
+            <div class="p-6 bg-gradient-to-r from-primary-600 to-secondary-800 text-white flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center text-white">
+                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6"/><path d="M22 11h-6"/></svg>
+                    </div>
+                    <div>
+                        <h3 class="font-heading text-base font-bold text-white">Crear Nuevo Usuario</h3>
+                        <p class="text-xs text-primary-100">Asignación de rol oficial, datos y credenciales</p>
+                    </div>
+                </div>
+                <button type="button" onclick="cerrarModalCrearUsuario()" class="text-primary-100 hover:text-white text-2xl font-bold leading-none p-1 rounded-lg hover:bg-white/10 transition">&times;</button>
+            </div>
+
+            <form id="form-crear-usuario" onsubmit="handleCrearUsuarioSubmit(event)" class="p-6 overflow-y-auto space-y-4 text-xs flex-1">
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Nombre Completo *</label>
+                    <input type="text" id="crear-user-nombre" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary-500" placeholder="Ej. Dr. Andrés Restrepo">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Correo Electrónico *</label>
+                        <input type="email" id="crear-user-correo" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary-500" placeholder="usuario@dentalcare.com">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Teléfono / Celular *</label>
+                        <input type="text" id="crear-user-telefono" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary-500" placeholder="310 123 4567">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Documento de Identidad</label>
+                        <input type="text" id="crear-user-doc" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary-500" placeholder="CC 114400...">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Rol en el Sistema *</label>
+                        <select id="crear-user-rol" required onchange="onRolUsuarioChange(this, 'crear-odontologo-fields')" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary-500 font-semibold text-secondary-900 bg-white">
+                            <option value="Paciente">Paciente</option>
+                            <option value="Odontólogo">Odontólogo</option>
+                            <option value="Recepcionista">Recepcionista</option>
+                            <option value="Administrador">Administrador</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Campos adicionales si el rol es Odontólogo -->
+                <div id="crear-odontologo-fields" class="p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200/80 space-y-3 hidden">
+                    <span class="font-bold text-amber-950 flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 text-amber-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>
+                        <span>Datos Profesionales del Especialista</span>
+                    </span>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        <div>
+                            <label class="block font-medium text-amber-900 mb-1">Especialidad</label>
+                            <input type="text" id="crear-user-especialidad" class="w-full px-3 py-2 rounded-xl border border-amber-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-500" placeholder="Ej. Ortodoncia">
+                        </div>
+                        <div>
+                            <label class="block font-medium text-amber-900 mb-1">Registro Médico</label>
+                            <input type="text" id="crear-user-registro" class="w-full px-3 py-2 rounded-xl border border-amber-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-500" placeholder="RM-ORT-...">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Opciones de Contraseña (Requisito 1.c) -->
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-3">
+                    <span class="font-bold text-secondary-900 block">Asignación de Contraseña de Acceso</span>
+                    
+                    <label class="flex items-start gap-2.5 cursor-pointer">
+                        <input type="radio" name="crear_metodo_contrasena" value="enlace" checked onchange="onMetodoContrasenaChange('enlace')" class="mt-0.5 text-primary-600 focus:ring-primary-500">
+                        <div>
+                            <span class="font-semibold text-secondary-900">Enviar enlace seguro por correo (Recomendado)</span>
+                            <p class="text-slate-500 text-[11px] mt-0.5">El usuario recibirá un correo con token temporal seguro para definir su propia contraseña mediante Password Broker.</p>
+                        </div>
+                    </label>
+
+                    <label class="flex items-start gap-2.5 cursor-pointer">
+                        <input type="radio" name="crear_metodo_contrasena" value="manual" onchange="onMetodoContrasenaChange('manual')" class="mt-0.5 text-primary-600 focus:ring-primary-500">
+                        <div>
+                            <span class="font-semibold text-secondary-900">Definir contraseña inicial manualmente</span>
+                            <p class="text-slate-500 text-[11px] mt-0.5">Asignar una contraseña temporal. El usuario será marcado para cambiarla en su primer inicio de sesión.</p>
+                        </div>
+                    </label>
+
+                    <div id="crear-pass-manual-container" class="pt-2 hidden">
+                        <label class="block font-semibold text-slate-700 mb-1">Contraseña Inicial Manual (mínimo 8 caracteres) *</label>
+                        <input type="password" id="crear-user-password" minlength="8" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-500" placeholder="••••••••">
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2 pt-1">
+                    <input type="checkbox" id="crear-user-activo" checked class="w-4 h-4 rounded text-primary-600 focus:ring-primary-500 border-slate-300">
+                    <label for="crear-user-activo" class="font-semibold text-slate-700 cursor-pointer">Usuario activo inmediatamente</label>
+                </div>
+
+                <div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-2.5">
+                    <button type="button" onclick="cerrarModalCrearUsuario()" class="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 font-semibold transition">
+                        Cancelar
+                    </button>
+                    <button type="submit" id="crear-user-submit-btn" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 text-white font-heading font-semibold shadow-soft-sm transition">
+                        Crear y Guardar Usuario
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- MODAL 2: EDITAR USUARIO (DATOS, ROL, ESTADO Y RESPETO DE REGLAS ADMIN)-->
+    <!-- ===================================================================== -->
+    <div id="modal-editar-usuario" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-secondary-900/60 backdrop-blur-sm hidden" role="dialog" aria-modal="true">
+        <div class="bg-white w-full max-w-lg rounded-3xl shadow-soft-xl border border-slate-200 overflow-hidden flex flex-col max-h-[92vh]">
+            <div class="p-6 bg-secondary-900 text-white flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center text-white">
+                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    </div>
+                    <div>
+                        <h3 class="font-heading text-base font-bold text-white">Editar Usuario</h3>
+                        <p class="text-xs text-slate-300">Modificación de información, rol y estado</p>
+                    </div>
+                </div>
+                <button type="button" onclick="cerrarModalEditarUsuario()" class="text-slate-300 hover:text-white text-2xl font-bold leading-none p-1 rounded-lg hover:bg-white/10 transition">&times;</button>
+            </div>
+
+            <form id="form-editar-usuario" onsubmit="handleEditarUsuarioSubmit(event)" class="p-6 overflow-y-auto space-y-4 text-xs flex-1">
+                <input type="hidden" id="editar-user-id">
+
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Nombre Completo *</label>
+                    <input type="text" id="editar-user-nombre" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Correo Electrónico *</label>
+                        <input type="email" id="editar-user-correo" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Teléfono / Celular *</label>
+                        <input type="text" id="editar-user-telefono" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Documento de Identidad</label>
+                        <input type="text" id="editar-user-doc" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Rol en el Sistema *</label>
+                        <select id="editar-user-rol" required onchange="onRolUsuarioChange(this, 'editar-odontologo-fields')" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary-500 font-semibold text-secondary-900 bg-white">
+                            <option value="Paciente">Paciente</option>
+                            <option value="Odontólogo">Odontólogo</option>
+                            <option value="Recepcionista">Recepcionista</option>
+                            <option value="Administrador">Administrador</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="editar-rol-warning" class="p-2.5 rounded-xl bg-amber-50 text-amber-900 border border-amber-200 text-[11px] hidden">
+                    <strong>Aviso de seguridad:</strong> Como Administrador actual, no puedes removerte tu propio rol para garantizar la gobernanza del sistema.
+                </div>
+
+                <!-- Campos adicionales si el rol es Odontólogo -->
+                <div id="editar-odontologo-fields" class="p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200/80 space-y-3 hidden">
+                    <span class="font-bold text-amber-950 flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 text-amber-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>
+                        <span>Datos Profesionales del Especialista</span>
+                    </span>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        <div>
+                            <label class="block font-medium text-amber-900 mb-1">Especialidad</label>
+                            <input type="text" id="editar-user-especialidad" class="w-full px-3 py-2 rounded-xl border border-amber-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-500">
+                        </div>
+                        <div>
+                            <label class="block font-medium text-amber-900 mb-1">Registro Médico</label>
+                            <input type="text" id="editar-user-registro" class="w-full px-3 py-2 rounded-xl border border-amber-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-500">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cambio de Contraseña Opcional -->
+                <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
+                    <label class="block font-semibold text-slate-700">Cambiar Contraseña (Opcional)</label>
+                    <input type="password" id="editar-user-password" minlength="8" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-500" placeholder="Dejar en blanco para mantener la contraseña actual">
+                    <span class="text-[11px] text-slate-400 block">Si se ingresa un nuevo valor, se hasheará con Bcrypt y se obligará al cambio en el próximo ingreso.</span>
+                </div>
+
+                <div class="flex items-center gap-2 pt-1">
+                    <input type="checkbox" id="editar-user-activo" class="w-4 h-4 rounded text-primary-600 focus:ring-primary-500 border-slate-300">
+                    <label for="editar-user-activo" class="font-semibold text-slate-700 cursor-pointer">Cuenta de usuario activa</label>
+                </div>
+                <div id="editar-activo-warning" class="p-2.5 rounded-xl bg-rose-50 text-rose-900 border border-rose-200 text-[11px] hidden">
+                    <strong>Aviso de seguridad:</strong> No puedes desactivar tu propia cuenta mientras estés autenticado como Administrador.
+                </div>
+
+                <div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-2.5">
+                    <button type="button" onclick="cerrarModalEditarUsuario()" class="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 font-semibold transition">
+                        Cancelar
+                    </button>
+                    <button type="submit" id="editar-user-submit-btn" class="px-5 py-2.5 rounded-xl bg-secondary-900 hover:bg-secondary-800 text-white font-heading font-semibold shadow-soft-sm transition">
+                        Guardar Cambios
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- ===================================================================== -->
     <!-- PANTALLA 6: MODAL WIZARD PARA AGENDAR CITA (ODONTO AGENDA EN 4 PASOS) -->
@@ -831,10 +1152,18 @@
         <div class="bg-white w-full max-w-2xl rounded-3xl shadow-soft-xl border border-slate-200 overflow-hidden flex flex-col max-h-[92vh]">
             
             <!-- Encabezado del Wizard con Marca DENTAL CARE -->
-            <div class="p-6 bg-gradient-to-r from-primary-600 via-teal-600 to-secondary-800 text-white flex items-center justify-between">
-                <div>
-                    <span id="wizard-step-number" class="text-xs uppercase font-extrabold tracking-wider text-primary-200 block">Paso 1 de 4</span>
-                    <h3 id="wizard-step-title" class="font-heading text-lg font-bold mt-0.5 text-white">Agendar Cita Odontológica</h3>
+            <div class="p-5 sm:p-6 bg-gradient-to-r from-primary-600 via-teal-600 to-secondary-800 text-white flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-2xl bg-white p-1.5 flex items-center justify-center shadow-soft-xs flex-shrink-0">
+                        <img src="{{ asset('images/dentalcare-icon.png') }}" class="w-8 h-8 object-contain" alt="Dental Care">
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span id="wizard-step-number" class="text-xs uppercase font-extrabold tracking-wider text-primary-200 block">Paso 1 de 4</span>
+                            <span class="text-[10px] px-1.5 py-0.5 rounded bg-white/20 text-white font-medium">Dental Care</span>
+                        </div>
+                        <h3 id="wizard-step-title" class="font-heading text-lg font-bold mt-0.5 text-white">Agendar Cita Odontológica</h3>
+                    </div>
                 </div>
                 <button onclick="closeBookingWizard()" class="text-primary-100 hover:text-white text-2xl font-bold leading-none p-1 rounded-lg hover:bg-white/10 transition" aria-label="Cerrar asistente de agendamiento">&times;</button>
             </div>
@@ -883,6 +1212,23 @@
 
             <div id="doctor-finalizar-alert" class="empty:hidden"></div>
 
+            <!-- Panel de Consulta de Historial Clínico DURANTE la Consulta -->
+            <div class="border border-teal-200/90 rounded-2xl overflow-hidden bg-primary-50/40">
+                <button type="button" onclick="toggleDoctorFinalizarHistorial()" class="w-full px-4 py-2.5 flex items-center justify-between text-left hover:bg-primary-100/50 transition">
+                    <span class="inline-flex items-center gap-2 text-xs font-bold text-secondary-900">
+                        <svg class="w-4 h-4 text-primary-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>
+                        <span>Historial Clínico Previo del Paciente</span>
+                    </span>
+                    <span id="doctor-finalizar-historial-toggle-btn" class="text-xs font-bold text-primary-700 flex items-center gap-1">
+                        <span>Ver antecedentes</span>
+                        <svg id="doctor-finalizar-historial-chevron" class="w-3.5 h-3.5 transform transition-transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+                    </span>
+                </button>
+                <div id="doctor-finalizar-historial-box" class="hidden p-3.5 border-t border-teal-100 bg-white max-h-48 overflow-y-auto space-y-2 text-xs">
+                    <!-- Se carga dinámicamente con los eventos clínicos y observaciones previas del paciente -->
+                </div>
+            </div>
+
             <div>
                 <label for="doctor-notas-input" class="block text-xs font-semibold text-slate-700 mb-1.5">Observaciones Clínicas del Procedimiento</label>
                 <textarea id="doctor-notas-input" rows="4" placeholder="Ej: Se completó limpieza ultrasónica y profilaxis coronal sin complicaciones. Se programa control en 6 meses." class="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary-500"></textarea>
@@ -901,6 +1247,59 @@
     </div>
 
     <!-- ===================================================================== -->
+    <!-- MODAL DE HISTORIAL CLÍNICO DEL PACIENTE (PARA ODONTÓLOGOS) -->
+    <!-- Permite ver antecedentes antes y durante la atención clínica -->
+    <!-- ===================================================================== -->
+    <div id="paciente-historial-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-secondary-900/60 backdrop-blur-sm hidden" role="dialog" aria-modal="true" aria-labelledby="paciente-historial-titulo">
+        <div class="bg-white w-full max-w-2xl max-h-[90vh] rounded-3xl shadow-soft-xl border border-slate-200 flex flex-col overflow-hidden">
+            <!-- Header del Modal -->
+            <div class="p-6 pb-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/70">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-2xl bg-primary-100 text-primary-700 flex items-center justify-center shadow-soft-xs flex-shrink-0">
+                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>
+                    </div>
+                    <div>
+                        <span class="text-xs font-semibold text-primary-700 uppercase tracking-wide">Ficha Clínica · DENTAL CARE</span>
+                        <h3 id="paciente-historial-titulo" class="font-heading font-bold text-secondary-900 text-lg">Historial Clínico del Paciente</h3>
+                        <p id="paciente-historial-subtitulo" class="text-xs text-slate-500">Consultas previas, tratamientos realizados y evolución médica</p>
+                    </div>
+                </div>
+                <button onclick="cerrarHistorialPacienteModal()" class="text-slate-400 hover:text-slate-600 text-2xl font-bold p-1 leading-none rounded-xl hover:bg-slate-100 transition" aria-label="Cerrar modal">&times;</button>
+            </div>
+
+            <!-- Contenido Desplazable -->
+            <div class="p-6 overflow-y-auto space-y-5 flex-1 text-xs">
+                <!-- Ficha Resumen del Paciente -->
+                <div id="paciente-historial-info" class="p-4 rounded-2xl bg-gradient-to-br from-primary-50/60 to-slate-50 border border-primary-100/80 flex flex-wrap items-center justify-between gap-3">
+                    <!-- Dinámico: Nombre, Documento, Teléfono, Faltas, Estado -->
+                </div>
+
+                <!-- Cabecera de Sección Cronológica -->
+                <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                    <span class="font-heading font-bold text-secondary-900 text-sm">Registro Cronológico de Atenciones Clínicas</span>
+                    <span id="paciente-historial-contador" class="text-slate-500 font-medium">0 eventos</span>
+                </div>
+
+                <!-- Timeline de Atenciones Clínicas y Observaciones -->
+                <div id="paciente-historial-timeline" class="space-y-3">
+                    <!-- Dinámico: Eventos clínicos pasados con notas del odontólogo -->
+                </div>
+            </div>
+
+            <!-- Footer del Modal -->
+            <div class="p-4 px-6 border-t border-slate-100 bg-slate-50/70 flex items-center justify-between">
+                <span class="text-[11px] text-slate-400 flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5 text-primary-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+                    <span>Información confidencial para uso exclusivo del profesional de salud en consulta</span>
+                </span>
+                <button type="button" onclick="cerrarHistorialPacienteModal()" class="px-4 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-semibold transition">
+                    Cerrar Ficha
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
     <!-- CONTENEDOR FLOTANTE TOAST (CAPA SUPERIOR Z-[99999]) -->
     <!-- ===================================================================== -->
     <div id="toast-container" class="fixed top-5 right-5 z-[99999] flex flex-col gap-2.5 max-w-md w-full pointer-events-none px-4 sm:px-0"></div>
@@ -908,19 +1307,29 @@
     <!-- ===================================================================== -->
     <!-- PIE DE PÁGINA CORPORATIVO INSTITUCIONAL -->
     <!-- ===================================================================== -->
-    <footer class="bg-white border-t border-slate-200/80 py-8 text-center text-xs text-slate-500 mt-auto">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 space-y-2">
-            <div class="flex items-center justify-center gap-2">
-                <span class="font-heading font-extrabold text-sm tracking-tight text-secondary-900">DENTAL</span>
-                <span class="font-heading font-extrabold text-sm tracking-tight text-primary-600">CARE</span>
-                <span class="text-slate-300">·</span>
-                <span class="text-slate-600 font-medium">Clínica Odontológica Especializada</span>
-                <span class="text-slate-300">·</span>
-                <span>Cali, Colombia</span>
+    <footer class="bg-white border-t border-slate-200/80 py-10 text-xs text-slate-500 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 space-y-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-slate-100">
+                <!-- Marca Dental Care -->
+                <div class="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+                    <img src="{{ asset('images/dentalcare-clean.png') }}" alt="Dental Care - Sonrisas saludables" class="h-11 w-auto object-contain">
+                    <div class="border-t sm:border-t-0 sm:border-l border-slate-200 pt-2 sm:pt-0 sm:pl-3 text-slate-500 text-xs">
+                        <span class="font-semibold block text-slate-700">Clínica Odontológica Especializada</span>
+                        <span>Cali, Colombia · Atención ética, moderna y de calidad</span>
+                    </div>
+                </div>
+
+                <!-- Marca OdontoAgenda CRM -->
+                <div class="flex items-center gap-3 bg-slate-50 px-4 py-2.5 rounded-2xl border border-slate-200/80">
+                    <span class="text-slate-400 text-[11px] font-medium hidden sm:inline">Tecnología de gestión:</span>
+                    <img src="{{ asset('images/odontoagenda-clean.png') }}" alt="OdontoAgenda - CRM para Clínicas Dentales" class="h-7 w-auto object-contain">
+                </div>
             </div>
-            <p class="text-slate-400">
-                Agenda en línea impulsada por <strong>Odonto Agenda</strong> · Todos los derechos reservados · 2026
-            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-2 text-slate-400 text-[11px] text-center sm:text-left">
+                <p>Dental Care © {{ date('Y') }} · Sonrisas saludables · Todos los derechos reservados.</p>
+                <p>Plataforma impulsada por <strong>OdontoAgenda CRM</strong></p>
+            </div>
         </div>
     </footer>
 
@@ -931,6 +1340,6 @@
     </script>
 
     <!-- Lógica Vanilla JS con Soporte y Renderizado de Iconos Vectoriales -->
-    <script src="js/prototype.js"></script>
+    <script src="{{ asset('js/prototype.js') }}"></script>
 </body>
 </html>

@@ -168,6 +168,11 @@ function syncStateFromDb(dbState) {
     updateUserBadge();
 }
 
+function escapeJs(str) {
+    if (!str) return '';
+    return String(str).replace(/'/g, "\\'").replace(/"/g, '&quot;');
+}
+
 // Estado inicial del sistema (hidratado dinámicamente desde MySQL)
 const OdontoState = {
     currentUser: {
@@ -456,7 +461,13 @@ function navigateToModule(moduleId) {
     // Disparar renders específicos
     if (moduleId === 'mod-paciente') renderPacientePortal();
     if (moduleId === 'mod-odontologo') renderOdontologoPortal();
-    if (moduleId === 'mod-admin') renderAdminPortal();
+    if (moduleId === 'mod-admin') {
+        if (typeof currentAdminTab !== 'undefined' && currentAdminTab === 'usuarios') {
+            renderAdminUsuarios(currentUsuariosPage);
+        } else {
+            renderAdminPortal();
+        }
+    }
 }
 
 // Switch de roles para demostración conectado a la BD MySQL
@@ -1156,7 +1167,6 @@ async function submitWizardBooking() {
         showWizardStepAlert(err.message, 'error');
     }
 }
-}
 
 function checkDoctorCollision(doctorId, fecha, horaInicioStr, duracionMin) {
     if (!doctorId || !fecha || !horaInicioStr) return false;
@@ -1441,12 +1451,16 @@ function renderOdontologoPortal() {
         if (c.estado === 'Solicitado' || c.estado === 'Asignado') {
             statusBadge = `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold ${c.estado === 'Asignado' ? 'bg-emerald-100 text-emerald-800' : 'bg-sky-100 text-sky-800'}">${c.estado === 'Asignado' ? AppIcons.check("w-3 h-3") + 'Confirmada' : AppIcons.clock("w-3 h-3") + 'Solicitada'}</span>`;
             actionButtons = `
-                <div class="flex flex-wrap gap-2 mt-3 pt-3 border-t border-slate-100">
-                    <button onclick="doctorIniciarAtencion(${c.id})" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold shadow-sm transition">
+                <div class="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-slate-100">
+                    <button type="button" onclick="verHistorialPacienteDesdeOdontologo(${c.pacienteId}, '${escapeJs(c.pacienteNombre)}', ${c.id})" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-primary-300 bg-primary-50/80 hover:bg-primary-100 text-primary-900 text-xs font-bold shadow-soft-xs transition" title="Consultar antecedentes clínicos y evolución antes de llamar al paciente">
+                        ${AppIcons.clipboardList("w-3.5 h-3.5 text-primary-700")}
+                        <span>Ver Historial Clínico</span>
+                    </button>
+                    <button type="button" onclick="doctorIniciarAtencion(${c.id})" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold shadow-sm transition">
                         ${AppIcons.play("w-3 h-3")}
                         Iniciar Atención
                     </button>
-                    <button onclick="doctorMarcarNoAsistio(${c.id})" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-amber-400 bg-amber-50 hover:bg-amber-100 text-amber-900 text-xs font-bold transition">
+                    <button type="button" onclick="doctorMarcarNoAsistio(${c.id})" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-amber-400 bg-amber-50 hover:bg-amber-100 text-amber-900 text-xs font-bold transition">
                         ${AppIcons.clock("w-3.5 h-3.5 text-amber-800")}
                         Registrar No Asistió (15 min)
                     </button>
@@ -1455,8 +1469,12 @@ function renderOdontologoPortal() {
         } else if (c.estado === 'En Proceso') {
             statusBadge = '<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-purple-100 text-purple-800 animate-pulse"><span class="w-2 h-2 rounded-full bg-purple-600"></span>En Sillón (Atención Activa)</span>';
             actionButtons = `
-                <div class="flex flex-wrap gap-2 mt-3 pt-3 border-t border-slate-100">
-                    <button onclick="doctorAbrirFinalizar(${c.id})" class="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition flex items-center gap-1.5">
+                <div class="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-slate-100">
+                    <button type="button" onclick="verHistorialPacienteDesdeOdontologo(${c.pacienteId}, '${escapeJs(c.pacienteNombre)}', ${c.id})" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-purple-300 bg-purple-50 hover:bg-purple-100 text-purple-900 text-xs font-bold shadow-soft-xs transition" title="Consultar antecedentes clínicos mientras el paciente está en el sillón">
+                        ${AppIcons.clipboardList("w-3.5 h-3.5 text-purple-700")}
+                        <span>Consultar Historial Clínico</span>
+                    </button>
+                    <button type="button" onclick="doctorAbrirFinalizar(${c.id})" class="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition flex items-center gap-1.5">
                         ${AppIcons.fileEdit("w-4 h-4")}
                         <span>Finalizar y Registrar Observaciones</span>
                     </button>
@@ -1465,19 +1483,36 @@ function renderOdontologoPortal() {
         } else if (c.estado === 'Atendido') {
             statusBadge = '<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-800">' + AppIcons.check("w-3 h-3") + 'Atendido</span>';
             actionButtons = `
-                <div class="mt-2 text-xs text-slate-500 italic bg-slate-50 p-2.5 rounded-lg border border-slate-100">
-                    <strong>Notas clínicas:</strong> ${c.observaciones || 'Procedimiento completado sin contratiempos.'}
+                <div class="mt-2 text-xs text-slate-500 bg-slate-50 p-2.5 rounded-lg border border-slate-100 flex flex-wrap items-center justify-between gap-2">
+                    <span class="italic"><strong>Notas clínicas:</strong> ${c.observaciones || 'Procedimiento completado sin contratiempos.'}</span>
+                    <button type="button" onclick="verHistorialPacienteDesdeOdontologo(${c.pacienteId}, '${escapeJs(c.pacienteNombre)}', ${c.id})" class="inline-flex items-center gap-1 text-primary-700 hover:text-primary-900 font-bold hover:underline">
+                        ${AppIcons.clipboardList("w-3.5 h-3.5 text-primary-600")}
+                        <span>Ver Ficha del Paciente</span>
+                    </button>
                 </div>
             `;
         } else if (c.estado === 'No Asistio') {
             statusBadge = '<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300">' + AppIcons.alertTriangle("w-3.5 h-3.5 text-amber-800") + 'No Asistió (Falta Registrada)</span>';
             actionButtons = `
-                <div class="mt-2 text-xs text-amber-800 bg-amber-50 p-2.5 rounded-lg border border-amber-200">
-                    <strong>Motivo de falta:</strong> ${c.motivoInasistencia || 'Paciente ausente tras superar los 15 minutos de tolerancia.'}
+                <div class="mt-2 text-xs text-amber-800 bg-amber-50 p-2.5 rounded-lg border border-amber-200 flex flex-wrap items-center justify-between gap-2">
+                    <span><strong>Motivo de falta:</strong> ${c.motivoInasistencia || 'Paciente ausente tras superar los 15 minutos de tolerancia.'}</span>
+                    <button type="button" onclick="verHistorialPacienteDesdeOdontologo(${c.pacienteId}, '${escapeJs(c.pacienteNombre)}', ${c.id})" class="inline-flex items-center gap-1 text-amber-900 hover:text-amber-950 font-bold hover:underline">
+                        ${AppIcons.clipboardList("w-3.5 h-3.5 text-amber-800")}
+                        <span>Ver Historial del Paciente</span>
+                    </button>
                 </div>
             `;
         } else if (c.estado === 'Cancelado') {
             statusBadge = '<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-slate-200 text-slate-600">Cancelada</span>';
+            actionButtons = `
+                <div class="mt-2 text-xs text-slate-500 bg-slate-50 p-2 rounded-lg border border-slate-100 flex flex-wrap items-center justify-between gap-2">
+                    <span>Cita cancelada</span>
+                    <button type="button" onclick="verHistorialPacienteDesdeOdontologo(${c.pacienteId}, '${escapeJs(c.pacienteNombre)}', ${c.id})" class="inline-flex items-center gap-1 text-slate-600 hover:text-slate-900 font-bold hover:underline">
+                        ${AppIcons.clipboardList("w-3 h-3 text-slate-500")}
+                        <span>Ver Historial</span>
+                    </button>
+                </div>
+            `;
         }
 
         return `
@@ -1525,14 +1560,268 @@ function doctorAbrirFinalizar(citaId) {
     clearDoctorFinalizarAlert();
     const notasInput = document.getElementById('doctor-notas-input');
     if (notasInput) notasInput.value = '';
+
+    // Cargar antecedentes clínicos en el contenedor interno del modal
+    const box = document.getElementById('doctor-finalizar-historial-box');
+    const chevron = document.getElementById('doctor-finalizar-historial-chevron');
+    if (box) {
+        box.classList.add('hidden');
+        if (chevron) chevron.classList.remove('rotate-180');
+        box.innerHTML = `<div class="p-3 text-center text-slate-400">Cargando antecedentes clínicos del paciente...</div>`;
+    }
+
+    const cita = OdontoState.citas.find(c => c.id === citaId);
+    if (cita && box) {
+        apiFetch(`/api/pacientes/${cita.pacienteId}/historial`)
+            .then(res => {
+                if (!res || !res.success || !box) return;
+                const previas = (res.citas || []).filter(c => c.id !== citaId && (c.estado === 'Atendido' || c.observaciones || c.estado === 'No Asistio'));
+                if (previas.length === 0 && (!res.historial || res.historial.length === 0)) {
+                    box.innerHTML = `
+                        <div class="p-3 text-center text-slate-500 bg-slate-50 rounded-xl">
+                            No se registran antecedentes previos para este paciente. Esta es su primera atención clínica registrada.
+                        </div>
+                    `;
+                } else {
+                    const items = previas.slice(0, 4).map(p => {
+                        const isAtendido = p.estado === 'Atendido';
+                        const isFalta = p.estado === 'No Asistio';
+                        const badgeClass = isAtendido ? 'bg-emerald-100 text-emerald-800' : (isFalta ? 'bg-rose-100 text-rose-800' : 'bg-slate-200 text-slate-700');
+                        return `
+                            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1">
+                                <div class="flex items-center justify-between text-slate-800 font-semibold text-[11px]">
+                                    <span>${p.fecha} · ${(p.servicios || []).join(', ') || 'Procedimiento'}</span>
+                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${badgeClass}">${p.estado}</span>
+                                </div>
+                                ${p.observaciones ? `<div class="text-slate-600 text-[11px] italic bg-white p-2 rounded-lg border border-slate-100 font-normal">Dr(a). ${p.doctor}: "${p.observaciones}"</div>` : ''}
+                                ${p.motivoInasistencia ? `<div class="text-rose-700 text-[11px] font-medium">Inasistencia: ${p.motivoInasistencia}</div>` : ''}
+                            </div>
+                        `;
+                    }).join('');
+
+                    box.innerHTML = `
+                        <div class="space-y-2">
+                            ${items}
+                            <div class="pt-1.5 flex justify-end">
+                                <button type="button" onclick="verHistorialPacienteDesdeOdontologo(${cita.pacienteId}, '${escapeJs(cita.pacienteNombre)}', ${cita.id})" class="text-primary-700 hover:text-primary-900 font-bold underline text-xs inline-flex items-center gap-1">
+                                    <span>Ver Ficha y Cronología Completa</span> &rarr;
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }
+            })
+            .catch(() => {
+                if (box) box.innerHTML = `<div class="p-2.5 text-center text-rose-600">No se pudieron cargar los antecedentes.</div>`;
+            });
+    }
+
     const modal = document.getElementById('doctor-finalizar-modal');
     if (modal) modal.classList.remove('hidden');
+}
+
+function toggleDoctorFinalizarHistorial() {
+    const box = document.getElementById('doctor-finalizar-historial-box');
+    const chevron = document.getElementById('doctor-finalizar-historial-chevron');
+    if (!box) return;
+    const isHidden = box.classList.contains('hidden');
+    if (isHidden) {
+        box.classList.remove('hidden');
+        if (chevron) chevron.classList.add('rotate-180');
+    } else {
+        box.classList.add('hidden');
+        if (chevron) chevron.classList.remove('rotate-180');
+    }
 }
 
 function doctorCerrarFinalizarModal() {
     activeFinalizarCitaId = null;
     clearDoctorFinalizarAlert();
     const modal = document.getElementById('doctor-finalizar-modal');
+    if (modal) modal.classList.add('hidden');
+}
+
+async function verHistorialPacienteDesdeOdontologo(pacienteId, pacienteNombre, citaId = null) {
+    const modal = document.getElementById('paciente-historial-modal');
+    const infoContainer = document.getElementById('paciente-historial-info');
+    const timelineContainer = document.getElementById('paciente-historial-timeline');
+    const contadorEl = document.getElementById('paciente-historial-contador');
+    const tituloEl = document.getElementById('paciente-historial-titulo');
+
+    if (!modal) return;
+
+    if (tituloEl) tituloEl.textContent = `Historial Clínico: ${pacienteNombre}`;
+    if (contadorEl) contadorEl.textContent = 'Cargando registros...';
+
+    if (infoContainer) {
+        infoContainer.innerHTML = `
+            <div class="w-full flex items-center justify-center py-4 text-slate-400">
+                <span class="inline-flex items-center gap-2">
+                    <svg class="animate-spin w-4 h-4 text-primary-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
+                    <span>Cargando datos del paciente desde MySQL...</span>
+                </span>
+            </div>
+        `;
+    }
+
+    if (timelineContainer) {
+        timelineContainer.innerHTML = `
+            <div class="p-8 text-center text-slate-400 text-xs">
+                Consultando base de datos de atenciones previas...
+            </div>
+        `;
+    }
+
+    modal.classList.remove('hidden');
+
+    try {
+        const res = await apiFetch(`/api/pacientes/${pacienteId}/historial`);
+        if (!res.success) {
+            showToast(res.message || 'No se pudo cargar el historial del paciente.', 'error');
+            if (timelineContainer) timelineContainer.innerHTML = `<div class="p-4 text-rose-600 bg-rose-50 rounded-xl">Error: ${res.message || 'No se pudo obtener el historial.'}</div>`;
+            return;
+        }
+
+        const pac = res.paciente || {};
+        const citas = res.citas || [];
+        const historial = res.historial || [];
+
+        // Render Ficha Resumen
+        if (infoContainer) {
+            const faltas = pac.faltas_acumuladas || 0;
+            const faltasBadge = faltas === 0
+                ? '<span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800">0 Inasistencias (Excelente)</span>'
+                : (faltas >= 3
+                    ? '<span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-rose-100 text-rose-800">3 Faltas (Agendamiento Web Bloqueado)</span>'
+                    : `<span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-100 text-amber-800">${faltas} Inasistencia(s)</span>`);
+
+            infoContainer.innerHTML = `
+                <div class="space-y-1">
+                    <div class="flex items-center gap-2">
+                        <span class="font-bold text-secondary-900 text-sm">${pac.nombre}</span>
+                        ${faltasBadge}
+                    </div>
+                    <div class="flex flex-wrap items-center gap-3 text-slate-600 text-xs">
+                        <span><strong>Doc:</strong> ${pac.documento_identidad || 'Sin documento'}</span>
+                        <span>·</span>
+                        <span><strong>Tel:</strong> ${pac.telefono || 'Sin teléfono'}</span>
+                        <span>·</span>
+                        <span><strong>Email:</strong> ${pac.correo || 'Sin correo'}</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-[11px] text-slate-500">Historial registrado</div>
+                    <div class="font-bold text-secondary-900 text-sm">${citas.length} citas / ${historial.length} atenciones</div>
+                </div>
+            `;
+        }
+
+        if (contadorEl) {
+            contadorEl.textContent = `${citas.length} registros clínicos`;
+        }
+
+        // Render Timeline
+        if (timelineContainer) {
+            if (citas.length === 0 && historial.length === 0) {
+                timelineContainer.innerHTML = `
+                    <div class="p-8 text-center bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
+                        <div class="w-12 h-12 mx-auto rounded-full bg-slate-100 text-slate-400 flex items-center justify-center">
+                            ${AppIcons.clipboardList("w-6 h-6")}
+                        </div>
+                        <h5 class="font-bold text-secondary-900">Paciente sin antecedentes previos</h5>
+                        <p class="text-slate-500 text-xs max-w-sm mx-auto">No existen registros de citas anteriores o procedimientos finalizados para este paciente. Las observaciones que registre al finalizar su consulta iniciarán su historia clínica.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const itemsHtml = citas.map((c) => {
+                const isCurrent = citaId && c.id === citaId;
+                const isAtendido = c.estado === 'Atendido';
+                const isEnProceso = c.estado === 'En Proceso';
+                const isNoAsistio = c.estado === 'No Asistio';
+                const isCancelado = c.estado === 'Cancelado';
+
+                let badge = `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800">${c.estado}</span>`;
+                let borderHighlight = 'border-slate-200';
+                let dotBg = 'bg-slate-300';
+
+                if (isAtendido) {
+                    badge = `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">Atendido con Éxito</span>`;
+                    dotBg = 'bg-emerald-500';
+                } else if (isEnProceso) {
+                    badge = `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-primary-100 text-primary-800 animate-pulse">En Sillón Ahora</span>`;
+                    borderHighlight = 'border-primary-400 ring-2 ring-primary-100';
+                    dotBg = 'bg-primary-600';
+                } else if (isNoAsistio) {
+                    badge = `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-rose-800">Inasistencia Injustificada</span>`;
+                    dotBg = 'bg-rose-500';
+                } else if (isCancelado) {
+                    badge = `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-200 text-slate-700">Cancelada</span>`;
+                    dotBg = 'bg-slate-400';
+                }
+
+                return `
+                    <div class="relative pl-6 pb-4 last:pb-0">
+                        <div class="absolute left-2.5 top-3 bottom-0 w-0.5 bg-slate-200 -z-0"></div>
+                        <div class="absolute left-1 top-2 w-3.5 h-3.5 rounded-full ${dotBg} ring-4 ring-white z-10"></div>
+
+                        <div class="bg-white p-4 rounded-2xl border ${borderHighlight} shadow-soft-xs space-y-2.5">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-bold text-secondary-900 text-xs">${c.fecha}</span>
+                                    <span class="text-slate-400">·</span>
+                                    <span class="text-slate-600 font-medium">${c.horaInicio} - ${c.horaFin}</span>
+                                    ${isCurrent ? '<span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-primary-600 text-white">Consulta Actual</span>' : ''}
+                                </div>
+                                ${badge}
+                            </div>
+
+                            <div class="text-xs text-slate-700 space-y-1">
+                                <div><strong>Tratamiento / Procedimiento:</strong> ${(c.servicios || []).join(', ') || 'Consulta general'}</div>
+                                <div class="text-slate-500"><strong>Profesional a cargo:</strong> Dr(a). ${c.doctor || 'Especialista'}</div>
+                            </div>
+
+                            ${c.observaciones ? `
+                                <div class="p-3 rounded-xl bg-slate-50/90 border border-slate-200/70 text-secondary-900 text-xs">
+                                    <div class="font-semibold text-[11px] text-primary-800 flex items-center gap-1.5 mb-1">
+                                        ${AppIcons.clipboardList("w-3.5 h-3.5 text-primary-600")}
+                                        <span>Evolución / Observaciones Clínicas:</span>
+                                    </div>
+                                    <div class="italic text-slate-700 whitespace-pre-wrap">${c.observaciones}</div>
+                                </div>
+                            ` : ''}
+
+                            ${c.motivoInasistencia ? `
+                                <div class="p-2.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-900 text-xs space-y-0.5">
+                                    <div class="font-bold text-[11px] flex items-center gap-1 text-rose-800">
+                                        ${AppIcons.alertTriangle("w-3.5 h-3.5 text-rose-600")}
+                                        <span>Motivo de Falta Registrado:</span>
+                                    </div>
+                                    <div class="text-rose-700 italic">${c.motivoInasistencia}</div>
+                                </div>
+                            ` : ''}
+
+                            <div class="flex items-center justify-between text-[11px] text-slate-400 pt-1 border-t border-slate-100">
+                                <span>Duración: ${c.duracionMin || 30} min</span>
+                                <span>Costo: $${(c.costo || 0).toLocaleString('es-CO')} COP</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            timelineContainer.innerHTML = itemsHtml;
+        }
+
+    } catch (err) {
+        showToast(err.message || 'Error al conectar con el servidor.', 'error');
+        if (timelineContainer) timelineContainer.innerHTML = `<div class="p-4 text-rose-600 bg-rose-50 rounded-xl">Error de comunicación: ${err.message}</div>`;
+    }
+}
+
+function cerrarHistorialPacienteModal() {
+    const modal = document.getElementById('paciente-historial-modal');
     if (modal) modal.classList.add('hidden');
 }
 
@@ -1800,6 +2089,517 @@ function renderAdminReportes() {
     }).join('');
 }
 
+// -------------------------------------------------------------
+// GESTIÓN DE USUARIOS DEL SISTEMA (EXCLUSIVO ADMINISTRADOR)
+// -------------------------------------------------------------
+let currentAdminTab = 'operaciones';
+let currentUsuariosPage = 1;
+let debounceBuscarUsuariosTimer = null;
+let cachedUsuariosList = [];
+
+function switchAdminTab(tabName) {
+    currentAdminTab = tabName;
+    const subOperaciones = document.getElementById('admin-subview-operaciones');
+    const subUsuarios = document.getElementById('admin-subview-usuarios');
+    const btnOperaciones = document.getElementById('admin-tab-btn-operaciones');
+    const btnUsuarios = document.getElementById('admin-tab-btn-usuarios');
+
+    if (tabName === 'usuarios') {
+        if (subOperaciones) subOperaciones.classList.add('hidden');
+        if (subUsuarios) subUsuarios.classList.remove('hidden');
+
+        if (btnOperaciones) {
+            btnOperaciones.className = 'px-3.5 py-1.5 rounded-xl text-slate-600 hover:text-secondary-900 transition flex items-center gap-1.5';
+        }
+        if (btnUsuarios) {
+            btnUsuarios.className = 'px-3.5 py-1.5 rounded-xl bg-white text-secondary-900 shadow-soft-xs transition flex items-center gap-1.5 font-bold';
+        }
+
+        renderAdminUsuarios(1);
+    } else {
+        if (subUsuarios) subUsuarios.classList.add('hidden');
+        if (subOperaciones) subOperaciones.classList.remove('hidden');
+
+        if (btnOperaciones) {
+            btnOperaciones.className = 'px-3.5 py-1.5 rounded-xl bg-white text-secondary-900 shadow-soft-xs transition flex items-center gap-1.5 font-bold';
+        }
+        if (btnUsuarios) {
+            btnUsuarios.className = 'px-3.5 py-1.5 rounded-xl text-slate-600 hover:text-secondary-900 transition flex items-center gap-1.5';
+        }
+
+        renderAdminPortal();
+    }
+}
+
+function actualizarDatosAdminActual() {
+    if (currentAdminTab === 'usuarios') {
+        renderAdminUsuarios(currentUsuariosPage);
+    } else {
+        renderAdminPortal();
+    }
+}
+
+function debounceBuscarUsuarios() {
+    clearTimeout(debounceBuscarUsuariosTimer);
+    debounceBuscarUsuariosTimer = setTimeout(() => {
+        renderAdminUsuarios(1);
+    }, 350);
+}
+
+async function renderAdminUsuarios(page = 1) {
+    currentUsuariosPage = page;
+    const tbody = document.getElementById('adm-usuarios-tbody');
+    const paginationContainer = document.getElementById('adm-usuarios-pagination');
+    if (!tbody) return;
+
+    const buscarInput = document.getElementById('usuarios-filtro-buscar');
+    const rolSelect = document.getElementById('usuarios-filtro-rol');
+    const activoSelect = document.getElementById('usuarios-filtro-activo');
+
+    const buscar = buscarInput ? buscarInput.value.trim() : '';
+    const rol = rolSelect ? rolSelect.value : '';
+    const activo = activoSelect ? activoSelect.value : '';
+
+    tbody.innerHTML = `
+        <tr>
+            <td colspan="6" class="py-8 text-center text-slate-400">
+                <span class="inline-flex items-center gap-2">
+                    <svg class="animate-spin w-4 h-4 text-primary-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
+                    <span>Cargando usuarios desde MySQL...</span>
+                </span>
+            </td>
+        </tr>
+    `;
+
+    try {
+        const queryParams = new URLSearchParams({
+            page: page,
+            per_page: 8,
+            buscar: buscar,
+            rol: rol,
+            activo: activo
+        });
+
+        const res = await apiFetch(`/api/admin/usuarios?${queryParams.toString()}`);
+        if (!res.success) {
+            tbody.innerHTML = `<tr><td colspan="6" class="py-6 text-center text-rose-600">${res.message || 'Error al cargar usuarios.'}</td></tr>`;
+            return;
+        }
+
+        cachedUsuariosList = res.data || [];
+        const pagination = res.pagination || {};
+
+        if (cachedUsuariosList.length === 0) {
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="6" class="py-10 text-center">
+                        <div class="max-w-sm mx-auto text-slate-400 space-y-2">
+                            <svg class="w-8 h-8 mx-auto text-slate-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                            <div class="font-bold text-slate-600 text-sm">No se encontraron usuarios</div>
+                            <p class="text-xs">No hay coincidencias con los filtros aplicados. Intente ajustar el término de búsqueda o rol.</p>
+                        </div>
+                    </td>
+                </tr>
+            `;
+            if (paginationContainer) paginationContainer.innerHTML = '';
+            return;
+        }
+
+        tbody.innerHTML = cachedUsuariosList.map(u => {
+            // Badges para los 4 roles definitivos
+            let rolBadge = '<span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-slate-100 text-slate-800">' + u.rol + '</span>';
+            if (u.rol === 'Administrador') {
+                rolBadge = '<span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-purple-100 text-purple-900 border border-purple-200">Administrador</span>';
+            } else if (u.rol === 'Odontólogo') {
+                rolBadge = '<span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-100 text-amber-900 border border-amber-200">Odontólogo</span>';
+            } else if (u.rol === 'Recepcionista') {
+                rolBadge = '<span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-sky-100 text-sky-900 border border-sky-200">Recepcionista</span>';
+            } else if (u.rol === 'Paciente') {
+                rolBadge = '<span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-900 border border-emerald-200">Paciente</span>';
+            }
+
+            // Estado activo / inactivo
+            const estadoBadge = u.activo
+                ? '<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>Activo</span>'
+                : '<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-50 text-rose-700 border border-rose-200"><span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>Inactivo</span>';
+
+            // Detalles odontólogo
+            const detalleExtra = (u.rol === 'Odontólogo' && u.odontologo)
+                ? `<div class="text-[10px] text-amber-800 mt-0.5">${u.odontologo.especialidad || 'Especialista'}${u.odontologo.registro_medico ? ' · ' + u.odontologo.registro_medico : ''}</div>`
+                : '';
+
+            // Toggle botón Activar / Desactivar
+            const toggleBtnText = u.activo ? 'Desactivar' : 'Activar';
+            const toggleBtnClass = u.activo
+                ? 'text-rose-600 hover:text-rose-800 hover:bg-rose-50'
+                : 'text-emerald-700 hover:text-emerald-900 hover:bg-emerald-50';
+
+            return `
+                <tr class="border-b border-slate-100 hover:bg-slate-50/60 transition">
+                    <td class="py-3 px-3.5">
+                        <div class="font-bold text-slate-900 text-xs">${u.nombre}</div>
+                        <div class="text-[11px] text-slate-400">${u.documento_identidad || 'Sin documento'}</div>
+                        ${u.debe_cambiar_contrasena ? '<span class="inline-block mt-0.5 text-[10px] px-1.5 py-0.5 bg-amber-50 text-amber-800 rounded font-semibold border border-amber-200">Debe cambiar clave</span>' : ''}
+                    </td>
+                    <td class="py-3 px-3.5">
+                        <div class="text-xs text-slate-700 font-medium">${u.correo}</div>
+                        <div class="text-[11px] text-slate-400">Tel: ${u.telefono || 'No registrado'}</div>
+                    </td>
+                    <td class="py-3 px-3.5">
+                        ${rolBadge}
+                        ${detalleExtra}
+                    </td>
+                    <td class="py-3 px-3.5">
+                        ${estadoBadge}
+                    </td>
+                    <td class="py-3 px-3.5 text-[11px] text-slate-500">
+                        <div>Por: <span class="font-semibold text-slate-700">${u.creado_por}</span></div>
+                        <div class="text-[10px] text-slate-400">${u.created_at || 'Registro previo'}</div>
+                    </td>
+                    <td class="py-3 px-3.5 text-right">
+                        <div class="inline-flex items-center gap-1">
+                            <button type="button" onclick="abrirModalEditarUsuario(${u.id})" class="p-1.5 rounded-lg text-slate-600 hover:text-secondary-900 hover:bg-slate-100 transition" title="Editar datos y rol">
+                                <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                            </button>
+                            <button type="button" onclick="reenviarAccesoUsuario(${u.id}, '${escapeJs(u.correo)}')" class="p-1.5 rounded-lg text-primary-700 hover:text-primary-900 hover:bg-primary-50 transition" title="Reenviar enlace de acceso">
+                                <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                            </button>
+                            <button type="button" onclick="toggleUsuarioActivo(${u.id}, '${escapeJs(u.nombre)}', ${u.activo})" class="px-2 py-1 rounded-lg text-[11px] font-bold border transition ${toggleBtnClass}">
+                                ${toggleBtnText}
+                            </button>
+                            <button type="button" onclick="eliminarUsuario(${u.id}, '${escapeJs(u.nombre)}')" class="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition" title="Eliminar usuario">
+                                <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+
+        // Render Paginación
+        if (paginationContainer) {
+            const total = pagination.total || 0;
+            const currentPage = pagination.current_page || 1;
+            const lastPage = pagination.last_page || 1;
+
+            paginationContainer.innerHTML = `
+                <div>Mostrando <span class="font-bold text-slate-800">${cachedUsuariosList.length}</span> de <span class="font-bold text-slate-800">${total}</span> usuarios</div>
+                <div class="flex items-center gap-1.5">
+                    <button type="button" onclick="renderAdminUsuarios(${currentPage - 1})" ${currentPage <= 1 ? 'disabled class="px-2.5 py-1 rounded-lg border border-slate-200 text-slate-300 cursor-not-allowed"' : 'class="px-2.5 py-1 rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-50 transition"'}>
+                        &larr; Anterior
+                    </button>
+                    <span class="px-2 py-1 font-bold text-secondary-900">${currentPage} / ${lastPage}</span>
+                    <button type="button" onclick="renderAdminUsuarios(${currentPage + 1})" ${currentPage >= lastPage ? 'disabled class="px-2.5 py-1 rounded-lg border border-slate-200 text-slate-300 cursor-not-allowed"' : 'class="px-2.5 py-1 rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-50 transition"'}>
+                        Siguiente &rarr;
+                    </button>
+                </div>
+            `;
+        }
+
+    } catch (err) {
+        tbody.innerHTML = `<tr><td colspan="6" class="py-6 text-center text-rose-600">Error de comunicación: ${err.message}</td></tr>`;
+    }
+}
+
+function onRolUsuarioChange(selectEl, contenedorId) {
+    const contenedor = document.getElementById(contenedorId);
+    if (!contenedor) return;
+    if (selectEl.value === 'Odontólogo') {
+        contenedor.classList.remove('hidden');
+    } else {
+        contenedor.classList.add('hidden');
+    }
+}
+
+function onMetodoContrasenaChange(metodo) {
+    const passContainer = document.getElementById('crear-pass-manual-container');
+    const passInput = document.getElementById('crear-user-password');
+    if (!passContainer) return;
+
+    if (metodo === 'manual') {
+        passContainer.classList.remove('hidden');
+        if (passInput) passInput.required = true;
+    } else {
+        passContainer.classList.add('hidden');
+        if (passInput) {
+            passInput.required = false;
+            passInput.value = '';
+        }
+    }
+}
+
+function abrirModalCrearUsuario() {
+    const modal = document.getElementById('modal-crear-usuario');
+    const form = document.getElementById('form-crear-usuario');
+    if (form) form.reset();
+
+    const odoFields = document.getElementById('crear-odontologo-fields');
+    if (odoFields) odoFields.classList.add('hidden');
+
+    onMetodoContrasenaChange('enlace');
+
+    if (modal) modal.classList.remove('hidden');
+}
+
+function cerrarModalCrearUsuario() {
+    const modal = document.getElementById('modal-crear-usuario');
+    if (modal) modal.classList.add('hidden');
+}
+
+async function handleCrearUsuarioSubmit(event) {
+    if (event) event.preventDefault();
+
+    const nombre = document.getElementById('crear-user-nombre')?.value.trim();
+    const correo = document.getElementById('crear-user-correo')?.value.trim();
+    const telefono = document.getElementById('crear-user-telefono')?.value.trim();
+    const documento = document.getElementById('crear-user-doc')?.value.trim();
+    const rol = document.getElementById('crear-user-rol')?.value;
+    const activo = document.getElementById('crear-user-activo')?.checked;
+
+    const radiosMetodo = document.getElementsByName('crear_metodo_contrasena');
+    let metodo = 'enlace';
+    for (const r of radiosMetodo) {
+        if (r.checked) {
+            metodo = r.value;
+            break;
+        }
+    }
+
+    const contrasena = document.getElementById('crear-user-password')?.value;
+    const especialidad = document.getElementById('crear-user-especialidad')?.value.trim();
+    const registro = document.getElementById('crear-user-registro')?.value.trim();
+
+    if (metodo === 'manual' && (!contrasena || contrasena.length < 8)) {
+        showToast('La contraseña manual debe contener como mínimo 8 caracteres.', 'warning');
+        return;
+    }
+
+    const payload = {
+        nombre,
+        correo,
+        telefono,
+        documento_identidad: documento || null,
+        rol,
+        activo: activo ? 1 : 0,
+        metodo_contrasena: metodo,
+        contrasena: metodo === 'manual' ? contrasena : null,
+        especialidad: rol === 'Odontólogo' ? especialidad : null,
+        registro_medico: rol === 'Odontólogo' ? registro : null,
+    };
+
+    const submitBtn = document.getElementById('crear-user-submit-btn');
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Guardando...';
+    }
+
+    try {
+        const res = await apiFetch('/api/admin/usuarios', {
+            method: 'POST',
+            body: JSON.stringify(payload)
+        });
+
+        if (!res.success) {
+            showToast(res.message || 'Error al crear el usuario.', 'error');
+            return;
+        }
+
+        cerrarModalCrearUsuario();
+        showToast(res.message || 'Usuario creado exitosamente.', 'success');
+        renderAdminUsuarios(1);
+    } catch (err) {
+        showToast(err.message, 'error');
+    } finally {
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Crear y Guardar Usuario';
+        }
+    }
+}
+
+function abrirModalEditarUsuario(usuarioId) {
+    const u = cachedUsuariosList.find(item => item.id === usuarioId);
+    if (!u) return;
+
+    const modal = document.getElementById('modal-editar-usuario');
+    document.getElementById('editar-user-id').value = u.id;
+    document.getElementById('editar-user-nombre').value = u.nombre;
+    document.getElementById('editar-user-correo').value = u.correo;
+    document.getElementById('editar-user-telefono').value = u.telefono || '';
+    document.getElementById('editar-user-doc').value = u.documento_identidad || '';
+    document.getElementById('editar-user-rol').value = u.rol;
+    document.getElementById('editar-user-activo').checked = u.activo;
+    document.getElementById('editar-user-password').value = '';
+
+    const odoFields = document.getElementById('editar-odontologo-fields');
+    if (u.rol === 'Odontólogo' && odoFields) {
+        odoFields.classList.remove('hidden');
+        document.getElementById('editar-user-especialidad').value = u.odontologo?.especialidad || '';
+        document.getElementById('editar-user-registro').value = u.odontologo?.registro_medico || '';
+    } else if (odoFields) {
+        odoFields.classList.add('hidden');
+    }
+
+    // Regla de seguridad: Si el usuario actual es el Admin editándose a sí mismo
+    const isSelfAdmin = OdontoState.currentUser && OdontoState.currentUser.id === u.id && u.rol === 'Administrador';
+    const rolSelect = document.getElementById('editar-user-rol');
+    const rolWarning = document.getElementById('editar-rol-warning');
+    const activoCheckbox = document.getElementById('editar-user-activo');
+    const activoWarning = document.getElementById('editar-activo-warning');
+
+    if (rolSelect && rolWarning) {
+        if (isSelfAdmin) {
+            rolSelect.disabled = true;
+            rolWarning.classList.remove('hidden');
+        } else {
+            rolSelect.disabled = false;
+            rolWarning.classList.add('hidden');
+        }
+    }
+
+    if (activoCheckbox && activoWarning) {
+        if (isSelfAdmin) {
+            activoCheckbox.disabled = true;
+            activoWarning.classList.remove('hidden');
+        } else {
+            activoCheckbox.disabled = false;
+            activoWarning.classList.add('hidden');
+        }
+    }
+
+    if (modal) modal.classList.remove('hidden');
+}
+
+function cerrarModalEditarUsuario() {
+    const modal = document.getElementById('modal-editar-usuario');
+    if (modal) modal.classList.add('hidden');
+}
+
+async function handleEditarUsuarioSubmit(event) {
+    if (event) event.preventDefault();
+
+    const id = document.getElementById('editar-user-id')?.value;
+    const nombre = document.getElementById('editar-user-nombre')?.value.trim();
+    const correo = document.getElementById('editar-user-correo')?.value.trim();
+    const telefono = document.getElementById('editar-user-telefono')?.value.trim();
+    const documento = document.getElementById('editar-user-doc')?.value.trim();
+    const rol = document.getElementById('editar-user-rol')?.value;
+    const activo = document.getElementById('editar-user-activo')?.checked;
+    const contrasena = document.getElementById('editar-user-password')?.value;
+    const especialidad = document.getElementById('editar-user-especialidad')?.value.trim();
+    const registro = document.getElementById('editar-user-registro')?.value.trim();
+
+    if (contrasena && contrasena.length < 8) {
+        showToast('Si cambia la contraseña, debe tener al menos 8 caracteres.', 'warning');
+        return;
+    }
+
+    const payload = {
+        nombre,
+        correo,
+        telefono,
+        documento_identidad: documento || null,
+        rol,
+        activo: activo ? 1 : 0,
+        contrasena: contrasena || null,
+        especialidad: rol === 'Odontólogo' ? especialidad : null,
+        registro_medico: rol === 'Odontólogo' ? registro : null,
+    };
+
+    const submitBtn = document.getElementById('editar-user-submit-btn');
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Actualizando...';
+    }
+
+    try {
+        const res = await apiFetch(`/api/admin/usuarios/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify(payload)
+        });
+
+        if (!res.success) {
+            showToast(res.message || 'Error al actualizar usuario.', 'error');
+            return;
+        }
+
+        cerrarModalEditarUsuario();
+        showToast(res.message || 'Usuario actualizado exitosamente.', 'success');
+        renderAdminUsuarios(currentUsuariosPage);
+    } catch (err) {
+        showToast(err.message, 'error');
+    } finally {
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Guardar Cambios';
+        }
+    }
+}
+
+async function toggleUsuarioActivo(id, nombre, estadoActual) {
+    const accion = estadoActual ? 'desactivar' : 'activar';
+    const confirmMsg = `¿Confirma que desea ${accion} al usuario ${nombre}?\n\n${estadoActual ? '• El usuario no podrá iniciar sesión.\n• Si tiene una sesión activa, será invalidada inmediatamente.' : '• El usuario recuperará el acceso inmediato a la plataforma.'}`;
+
+    if (!confirm(confirmMsg)) return;
+
+    try {
+        const res = await apiFetch(`/api/admin/usuarios/${id}/toggle-activo`, {
+            method: 'PATCH'
+        });
+
+        if (!res.success) {
+            showToast(res.message || 'Error al modificar estado del usuario.', 'error');
+            return;
+        }
+
+        showToast(res.message || 'Estado del usuario actualizado.', 'success');
+        renderAdminUsuarios(currentUsuariosPage);
+    } catch (err) {
+        showToast(err.message, 'error');
+    }
+}
+
+async function reenviarAccesoUsuario(id, correo) {
+    const confirmMsg = `¿Desea reenviar el correo con enlace seguro de acceso a ${correo}?`;
+    if (!confirm(confirmMsg)) return;
+
+    try {
+        const res = await apiFetch(`/api/admin/usuarios/${id}/reenviar-acceso`, {
+            method: 'POST'
+        });
+
+        if (!res.success) {
+            showToast(res.message || 'Error al reenviar acceso.', 'error');
+            return;
+        }
+
+        showToast(res.message || 'Enlace seguro enviado con éxito.', 'success');
+    } catch (err) {
+        showToast(err.message, 'error');
+    }
+}
+
+async function eliminarUsuario(id, nombre) {
+    const confirmMsg = `¿Confirma la eliminación del usuario ${nombre}?\n\nEl usuario será desactivado y archivado de forma segura mediante SoftDeletes.`;
+    if (!confirm(confirmMsg)) return;
+
+    try {
+        const res = await apiFetch(`/api/admin/usuarios/${id}`, {
+            method: 'DELETE'
+        });
+
+        if (!res.success) {
+            showToast(res.message || 'Error al eliminar usuario.', 'error');
+            return;
+        }
+
+        showToast(res.message || 'Usuario eliminado con éxito.', 'success');
+        renderAdminUsuarios(currentUsuariosPage);
+    } catch (err) {
+        showToast(err.message, 'error');
+    }
+}
+
 // Inicialización general al cargar el DOM con hidratación desde MySQL
 document.addEventListener('DOMContentLoaded', () => {
     if (window.INITIAL_DB_STATE) {
@@ -1811,5 +2611,10 @@ document.addEventListener('DOMContentLoaded', () => {
         ? 'mod-' + window.INITIAL_ACTIVE_MODULE 
         : 'mod-landing';
 
-    navigateToModule(activeMod);
+    if (activeMod === 'mod-admin-usuarios') {
+        navigateToModule('mod-admin');
+        switchAdminTab('usuarios');
+    } else {
+        navigateToModule(activeMod);
+    }
 });

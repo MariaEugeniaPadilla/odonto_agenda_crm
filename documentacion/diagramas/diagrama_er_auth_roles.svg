@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 650" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .table-box { fill: #ffffff; stroke: #334155; stroke-width: 1.5; rx: 6; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.06)); }
+      .table-header { fill: #0284c7; }
+      .table-header-roles { fill: #7c3aed; }
+      .table-header-pwd { fill: #e11d48; }
+      .table-header-odon { fill: #059669; }
+      .header-text { font-family: system-ui, sans-serif; font-size: 13px; font-weight: bold; fill: #ffffff; text-anchor: middle; }
+      .field-text { font-family: 'Consolas', 'Courier New', monospace; font-size: 11px; fill: #1e293b; }
+      .pk-text { font-weight: bold; fill: #b45309; }
+      .fk-text { font-style: italic; fill: #2563eb; }
+      .title { font-family: system-ui, sans-serif; font-size: 18px; font-weight: bold; fill: #0f172a; }
+      .subtitle { font-family: system-ui, sans-serif; font-size: 12px; fill: #64748b; }
+      .rel-line { stroke: #64748b; stroke-width: 1.5; fill: none; }
+      .rel-marker { fill: #64748b; }
+    </style>
+  </defs>
+
+  <rect width="100%" height="100%" class="bg" />
+
+  <text x="40" y="40" class="title">OdontoAgenda CRM — Modelo Entidad - Relación (Autenticación y Roles)</text>
+  <text x="40" y="60" class="subtitle">Estructura de Base de Datos MySQL (odontoagenda_crm)</text>
+
+  <!-- TABLA: roles -->
+  <g transform="translate(40, 100)">
+    <rect width="240" height="170" class="table-box" />
+    <rect width="240" height="30" class="table-header-roles" rx="6" />
+    <rect width="240" height="10" y="20" class="table-header-roles" />
+    <text x="120" y="20" class="header-text">roles</text>
+    <text x="15" y="55" class="field-text"><tspan class="pk-text">PK</tspan> id : INT (AUTO_INC)</text>
+    <text x="15" y="75" class="field-text">   nombre : VARCHAR(50)</text>
+    <text x="15" y="95" class="field-text">   slug : VARCHAR(50)</text>
+    <text x="15" y="115" class="field-text">   descripcion : VARCHAR(255)</text>
+    <text x="15" y="135" class="field-text">   created_at : TIMESTAMP</text>
+    <text x="15" y="155" class="field-text">   updated_at : TIMESTAMP</text>
+  </g>
+
+  <!-- TABLA: usuarios -->
+  <g transform="translate(360, 100)">
+    <rect width="280" height="420" class="table-box" />
+    <rect width="280" height="30" class="table-header" rx="6" />
+    <rect width="280" height="10" y="20" class="table-header" />
+    <text x="140" y="20" class="header-text">usuarios</text>
+    <text x="15" y="55" class="field-text"><tspan class="pk-text">PK</tspan> id : INT (AUTO_INCREMENT)</text>
+    <text x="15" y="75" class="field-text">   nombre : VARCHAR(150)</text>
+    <text x="15" y="95" class="field-text">   correo : VARCHAR(150) UNIQUE</text>
+    <text x="15" y="115" class="field-text">   contrasena : VARCHAR(255)</text>
+    <text x="15" y="135" class="field-text">   telefono : VARCHAR(20)</text>
+    <text x="15" y="155" class="field-text">   documento_identidad : VARCHAR(20)</text>
+    <text x="15" y="175" class="field-text"><tspan class="fk-text">FK</tspan> role_id : INT</text>
+    <text x="15" y="195" class="field-text">   rol : VARCHAR(30) [compat]</text>
+    <text x="15" y="215" class="field-text">   activo : TINYINT(1) DEFAULT 1</text>
+    <text x="15" y="235" class="field-text">   debe_cambiar_contrasena : TINYINT(1)</text>
+    <text x="15" y="255" class="field-text">   faltas_acumuladas : INT DEFAULT 0</text>
+    <text x="15" y="275" class="field-text"><tspan class="fk-text">FK</tspan> created_by : INT NULL</text>
+    <text x="15" y="295" class="field-text"><tspan class="fk-text">FK</tspan> updated_by : INT NULL</text>
+    <text x="15" y="315" class="field-text">   remember_token : VARCHAR(100)</text>
+    <text x="15" y="335" class="field-text">   created_at : TIMESTAMP</text>
+    <text x="15" y="355" class="field-text">   updated_at : TIMESTAMP</text>
+    <text x="15" y="375" class="field-text">   deleted_at : TIMESTAMP (SoftDeletes)</text>
+  </g>
+
+  <!-- TABLA: password_reset_tokens -->
+  <g transform="translate(40, 360)">
+    <rect width="240" height="120" class="table-box" />
+    <rect width="240" height="30" class="table-header-pwd" rx="6" />
+    <rect width="240" height="10" y="20" class="table-header-pwd" />
+    <text x="120" y="20" class="header-text">password_reset_tokens</text>
+    <text x="15" y="55" class="field-text"><tspan class="pk-text">PK</tspan> email : VARCHAR(255)</text>
+    <text x="15" y="75" class="field-text">   token : VARCHAR(255)</text>
+    <text x="15" y="95" class="field-text">   created_at : TIMESTAMP</text>
+  </g>
+
+  <!-- TABLA: odontologos -->
+  <g transform="translate(710, 100)">
+    <rect width="250" height="160" class="table-box" />
+    <rect width="250" height="30" class="table-header-odon" rx="6" />
+    <rect width="250" height="10" y="20" class="table-header-odon" />
+    <text x="125" y="20" class="header-text">odontologos</text>
+    <text x="15" y="55" class="field-text"><tspan class="pk-text">PK</tspan> id : INT (AUTO_INCREMENT)</text>
+    <text x="15" y="75" class="field-text"><tspan class="fk-text">FK</tspan> usuario_id : INT</text>
+    <text x="15" y="95" class="field-text">   especialidad : VARCHAR(100)</text>
+    <text x="15" y="115" class="field-text">   registro_medico : VARCHAR(50)</text>
+    <text x="15" y="135" class="field-text">   estado : ENUM('activo','inactivo')</text>
+  </g>
+
+  <!-- RELACIONES -->
+  <!-- roles -> usuarios (1 a N) -->
+  <path d="M 280 180 L 360 270" class="rel-line" />
+  <circle cx="285" cy="183" r="4" class="rel-marker" />
+  <text x="300" y="215" font-family="system-ui, sans-serif" font-size="11px" fill="#475569">1:N</text>
+
+  <!-- usuarios -> odontologos (1 a 0..1) -->
+  <path d="M 640 180 L 710 180" class="rel-line" />
+  <circle cx="645" cy="180" r="4" class="rel-marker" />
+  <text x="660" y="170" font-family="system-ui, sans-serif" font-size="11px" fill="#475569">1:0..1</text>
+
+  <!-- usuarios -> password_reset_tokens (correo <-> email) -->
+  <path d="M 360 410 L 280 410" class="rel-line" />
+  <circle cx="285" cy="410" r="4" class="rel-marker" />
+  <text x="295" y="400" font-family="system-ui, sans-serif" font-size="11px" fill="#475569">1:N</text>
+
+  <!-- usuarios -> usuarios (created_by autoreferencia) -->
+  <path d="M 640 375 C 670 375, 670 345, 640 345" class="rel-line" />
+  <text x="675" y="365" font-family="system-ui, sans-serif" font-size="11px" fill="#475569">1:N audit</text>
+</svg>

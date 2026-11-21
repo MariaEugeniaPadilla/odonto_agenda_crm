@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 560" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { font-family: system-ui, sans-serif; font-size: 18px; font-weight: bold; fill: #0f172a; }
+      .subtitle { font-family: system-ui, sans-serif; font-size: 12px; fill: #64748b; }
+      .participant-box { fill: #0284c7; rx: 6; }
+      .participant-admin { fill: #15803d; rx: 6; }
+      .participant-text { font-family: system-ui, sans-serif; font-size: 12px; font-weight: bold; fill: #ffffff; text-anchor: middle; }
+      .lifeline { stroke: #cbd5e1; stroke-width: 1.5; stroke-dasharray: 4,4; }
+      .msg-line { stroke: #0284c7; stroke-width: 1.5; marker-end: url(#arrow); }
+      .return-line { stroke: #10b981; stroke-width: 1.5; stroke-dasharray: 3,3; marker-end: url(#arrow-ret); }
+      .msg-text { font-family: system-ui, sans-serif; font-size: 11px; fill: #1e293b; }
+      .note-box { fill: #fef3c7; stroke: #f59e0b; stroke-width: 1; rx: 4; }
+      .note-text { font-family: system-ui, sans-serif; font-size: 10px; fill: #92400e; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0284c7" />
+    </marker>
+    <marker id="arrow-ret" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#10b981" />
+    </marker>
+  </defs>
+
+  <rect width="100%" height="100%" class="bg" />
+
+  <text x="30" y="35" class="title">Diagrama de Secuencia: Creación de Usuario por Administrador</text>
+  <text x="30" y="55" class="subtitle">Flujo con Enlace de Activación Seguro (Password Broker) y Notificación Mailpit</text>
+
+  <!-- Participantes -->
+  <!-- 1. Admin -->
+  <g transform="translate(40, 80)">
+    <rect width="110" height="36" class="participant-admin" />
+    <text x="55" y="23" class="participant-text">Administrador</text>
+  </g>
+  <line x1="95" y1="116" x2="95" y2="520" class="lifeline" />
+
+  <!-- 2. UI / Blade -->
+  <g transform="translate(190, 80)">
+    <rect width="110" height="36" class="participant-box" />
+    <text x="55" y="23" class="participant-text">UI (prototype.js)</text>
+  </g>
+  <line x1="245" y1="116" x2="245" y2="520" class="lifeline" />
+
+  <!-- 3. CheckRole / Policy -->
+  <g transform="translate(340, 80)">
+    <rect width="130" height="36" class="participant-box" />
+    <text x="65" y="23" class="participant-text">Middleware &amp; Policy</text>
+  </g>
+  <line x1="405" y1="116" x2="405" y2="520" class="lifeline" />
+
+  <!-- 4. Controller -->
+  <g transform="translate(510, 80)">
+    <rect width="120" height="36" class="participant-box" />
+    <text x="60" y="23" class="participant-text">UsuarioController</text>
+  </g>
+  <line x1="570" y1="116" x2="570" y2="520" class="lifeline" />
+
+  <!-- 5. DB MySQL -->
+  <g transform="translate(670, 80)">
+    <rect width="100" height="36" class="participant-box" />
+    <text x="50" y="23" class="participant-text">MySQL DB</text>
+  </g>
+  <line x1="720" y1="116" x2="720" y2="520" class="lifeline" />
+
+  <!-- 6. Mailer -->
+  <g transform="translate(810, 80)">
+    <rect width="100" height="36" class="participant-box" />
+    <text x="50" y="23" class="participant-text">Mail / Mailpit</text>
+  </g>
+  <line x1="860" y1="116" x2="860" y2="520" class="lifeline" />
+
+  <!-- Pasos -->
+  <!-- 1. Form submit -->
+  <line x1="95" y1="145" x2="245" y2="145" class="msg-line" />
+  <text x="105" y="140" class="msg-text">1. Envía formulario (+ enlace)</text>
+
+  <!-- 2. POST API -->
+  <line x1="245" y1="175" x2="405" y2="175" class="msg-line" />
+  <text x="255" y="170" class="msg-text">2. POST /api/admin/usuarios</text>
+
+  <!-- 3. Policy verify -->
+  <line x1="405" y1="205" x2="570" y2="205" class="msg-line" />
+  <text x="415" y="200" class="msg-text">3. CheckRole + UserPolicy (admin activo)</text>
+
+  <!-- 4. Form validation & DB Insert -->
+  <line x1="570" y1="245" x2="720" y2="245" class="msg-line" />
+  <text x="580" y="240" class="msg-text">4. INSERT INTO usuarios (role_id, created_by)</text>
+
+  <!-- Note Odontologo -->
+  <rect x="580" y="265" width="220" height="30" class="note-box" />
+  <text x="590" y="284" class="note-text">Si rol = Odontólogo, inserta en odontologos</text>
+
+  <!-- 5. Generate token -->
+  <line x1="570" y1="320" x2="720" y2="320" class="msg-line" />
+  <text x="580" y="315" class="msg-text">5. Password::createToken() -> password_reset_tokens</text>
+
+  <!-- 6. Notify -->
+  <line x1="570" y1="365" x2="860" y2="365" class="msg-line" />
+  <text x="580" y="360" class="msg-text">6. notify(CuentaCreadaAdminNotification)</text>
+
+  <!-- 7. Mail delivered -->
+  <line x1="860" y1="395" x2="570" y2="395" class="return-line" />
+  <text x="640" y="390" class="msg-text">7. Correo con enlace enviado (127.0.0.1:1025)</text>
+
+  <!-- 8. JSON 201 -->
+  <line x1="570" y1="435" x2="245" y2="435" class="return-line" />
+  <text x="320" y="430" class="msg-text">8. 201 Created (JSON usuario + rol)</text>
+
+  <!-- 9. Feedback to Admin -->
+  <line x1="245" y1="475" x2="95" y2="475" class="return-line" />
+  <text x="110" y="470" class="msg-text">9. Toast de éxito + recarga tabla con nuevo usuario</text>
+</svg>
