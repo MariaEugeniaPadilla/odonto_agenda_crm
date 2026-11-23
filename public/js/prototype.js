@@ -144,7 +144,13 @@ async function apiFetch(url, options = {}) {
         const data = await response.json().catch(() => ({}));
 
         if (!response.ok) {
-            throw new Error(data.message || `Error en la solicitud (${response.status})`);
+            let errorMsg = data.message;
+            if (response.status === 403 && (!errorMsg || errorMsg.toLowerCase().includes('unauthorized') || errorMsg.toLowerCase().includes('this action is unauthorized'))) {
+                errorMsg = 'No tiene permisos para realizar esta acción.';
+            } else if (response.status === 401 && (!errorMsg || errorMsg.toLowerCase().includes('unauthenticated'))) {
+                errorMsg = 'Debe iniciar sesión para acceder a este módulo.';
+            }
+            throw new Error(errorMsg || `Error en la solicitud (${response.status})`);
         }
 
         return data;
