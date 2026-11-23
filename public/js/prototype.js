@@ -166,6 +166,7 @@ function syncStateFromDb(dbState) {
     if (dbState.usuarios) OdontoState.usuarios = dbState.usuarios;
 
     updateUserBadge();
+    syncRoleUi();
 }
 
 function escapeJs(str) {
@@ -479,6 +480,39 @@ function puedeAccederAModulo(user, moduleId) {
     return true;
 }
 
+function syncRoleUi() {
+    const user = window.AUTH_USER || (OdontoState && OdontoState.currentUser ? OdontoState.currentUser : null);
+    const hasAuth = !!window.AUTH_USER;
+    const slug = getRoleSlug(user);
+
+    const btnLanding = document.querySelector('button[data-target="mod-landing"]');
+    const btnLogin = document.querySelector('button[data-target="mod-login"]');
+    const btnPaciente = document.querySelector('button[data-target="mod-paciente"]');
+    const btnOdontologo = document.querySelector('button[data-target="mod-odontologo"]');
+    const btnAdmin = document.querySelector('button[data-target="mod-admin"]');
+    const btnUsuarios = document.getElementById('nav-btn-usuarios');
+    const subBtnUsuarios = document.getElementById('admin-tab-btn-usuarios');
+
+    if (!hasAuth) {
+        if (btnLanding) btnLanding.classList.remove('hidden');
+        if (btnLogin) btnLogin.classList.remove('hidden');
+        if (btnPaciente) btnPaciente.classList.remove('hidden');
+        if (btnOdontologo) btnOdontologo.classList.remove('hidden');
+        if (btnAdmin) btnAdmin.classList.remove('hidden');
+        if (btnUsuarios) btnUsuarios.classList.toggle('hidden', slug !== 'admin');
+        if (subBtnUsuarios) subBtnUsuarios.classList.toggle('hidden', slug !== 'admin');
+        return;
+    }
+
+    if (btnLogin) btnLogin.classList.add('hidden');
+    if (btnLanding) btnLanding.classList.toggle('hidden', slug !== 'paciente');
+    if (btnPaciente) btnPaciente.classList.toggle('hidden', slug !== 'paciente');
+    if (btnOdontologo) btnOdontologo.classList.toggle('hidden', slug !== 'odontologo');
+    if (btnAdmin) btnAdmin.classList.toggle('hidden', slug !== 'admin' && slug !== 'recepcionista');
+    if (btnUsuarios) btnUsuarios.classList.toggle('hidden', slug !== 'admin');
+    if (subBtnUsuarios) subBtnUsuarios.classList.toggle('hidden', slug !== 'admin');
+}
+
 // Navegación entre Módulos del Prototipo
 function navigateToModule(moduleId) {
     const user = window.AUTH_USER || null;
@@ -551,6 +585,7 @@ async function switchRoleDemo(roleType) {
     }
 
     updateUserBadge();
+    syncRoleUi();
     navigateToModule(moduleTarget);
 }
 
@@ -589,6 +624,7 @@ async function handleLoginFormSubmit(event) {
             window.AUTH_USER = res.user;
             OdontoState.currentUser = res.user;
             updateUserBadge();
+    syncRoleUi();
         }
 
         const rolNorm = getRoleSlug(res.user);
@@ -2156,6 +2192,14 @@ let debounceBuscarUsuariosTimer = null;
 let cachedUsuariosList = [];
 
 function switchAdminTab(tabName) {
+    const user = window.AUTH_USER || (OdontoState && OdontoState.currentUser ? OdontoState.currentUser : null);
+    const slug = getRoleSlug(user);
+
+    if (tabName === 'usuarios' && slug !== 'admin') {
+        showToast('No tiene permisos para realizar esta acción', 'warning');
+        return switchAdminTab('operaciones');
+    }
+
     currentAdminTab = tabName;
     const subOperaciones = document.getElementById('admin-subview-operaciones');
     const subUsuarios = document.getElementById('admin-subview-usuarios');
@@ -2667,6 +2711,7 @@ document.addEventListener('DOMContentLoaded', () => {
         OdontoState.currentUser = window.AUTH_USER;
     }
     updateUserBadge();
+    syncRoleUi();
 
     const activeMod = (window.INITIAL_ACTIVE_MODULE && window.INITIAL_ACTIVE_MODULE !== 'landing') 
         ? 'mod-' + window.INITIAL_ACTIVE_MODULE 
