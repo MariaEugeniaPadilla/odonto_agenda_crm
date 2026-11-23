@@ -511,6 +511,11 @@ function syncRoleUi() {
     if (btnAdmin) btnAdmin.classList.toggle('hidden', slug !== 'admin' && slug !== 'recepcionista');
     if (btnUsuarios) btnUsuarios.classList.toggle('hidden', slug !== 'admin');
     if (subBtnUsuarios) subBtnUsuarios.classList.toggle('hidden', slug !== 'admin');
+
+    const nameEl = document.getElementById('auth-user-nombre');
+    const rolEl = document.getElementById('auth-user-rol');
+    if (nameEl && user) nameEl.textContent = user.nombre;
+    if (rolEl && user) rolEl.textContent = user.rol || user.nombre_rol;
 }
 
 // Navegación entre Módulos del Prototipo

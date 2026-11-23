@@ -75,6 +75,7 @@
     <!-- ===================================================================== -->
     <!-- BARRA SUPERIOR DE PRUEBAS / SIMULADOR DE USUARIOS (DISCRETA Y ELEGANTE) -->
     <!-- ===================================================================== -->
+    @if(app()->environment('local') && !Auth::check())
     <aside class="bg-secondary-900 text-slate-200 text-xs py-1.5 px-4 sticky top-0 z-50 border-b border-secondary-800 shadow-sm" aria-label="Panel de demostración de roles">
         <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2.5">
             <div class="flex items-center gap-2">
@@ -112,11 +113,12 @@
             </div>
         </div>
     </aside>
+    @endif
 
     <!-- ===================================================================== -->
     <!-- CABECERA INSTITUCIONAL Y MENÚ PRINCIPAL (DENTAL CARE) -->
     <!-- ===================================================================== -->
-    <header class="glass-nav border-b border-slate-200/80 sticky top-8 z-40">
+    <header class="glass-nav border-b border-slate-200/80 sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-4">
             
             <!-- LOGO INSTITUCIONAL OFICIAL DE DENTAL CARE -->
@@ -176,6 +178,22 @@
                 </button>
                 @endif
             </nav>
+
+            @auth
+            <div id="auth-user-bar" class="flex items-center gap-2.5 sm:gap-3 pl-2 sm:border-l sm:border-slate-200">
+                <div class="flex flex-col text-right">
+                    <span id="auth-user-nombre" class="text-xs font-semibold text-secondary-900 leading-tight">{{ Auth::user()->nombre }}</span>
+                    <span id="auth-user-rol" class="text-[10px] text-primary-700 font-medium">{{ Auth::user()->nombre_rol }}</span>
+                </div>
+                <form id="logout-form" method="POST" action="{{ route('logout') }}" class="inline m-0">
+                    @csrf
+                    <button type="submit" id="btn-logout" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-semibold shadow-soft-xs transition" title="Cerrar sesión segura">
+                        <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+                        <span>Cerrar sesión</span>
+                    </button>
+                </form>
+            </div>
+            @endauth
         </div>
     </header>
 
