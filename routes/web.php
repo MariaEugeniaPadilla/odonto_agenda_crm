@@ -16,6 +16,19 @@ if (!function_exists('renderOdontoView')) {
     function renderOdontoView($activeModule = 'landing', $userId = null) {
         $actualUserId = $userId ?? (Auth::check() ? Auth::id() : null);
         $initialState = ApiController::getInitialState($actualUserId);
+
+        // Si el usuario está autenticado y la ruta solicitada es landing/home, activar su módulo según rol
+        if ($activeModule === 'landing' && Auth::check()) {
+            $user = Auth::user();
+            if ($user->esAdmin() || $user->esRecepcionista()) {
+                $activeModule = 'admin';
+            } elseif ($user->esOdontologo()) {
+                $activeModule = 'odontologo';
+            } else {
+                $activeModule = 'paciente';
+            }
+        }
+
         return view('prototype', compact('initialState', 'activeModule'));
     }
 }

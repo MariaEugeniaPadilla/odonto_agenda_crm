@@ -438,8 +438,59 @@ function clearDoctorFinalizarAlert() {
     if (alertBox) alertBox.innerHTML = '';
 }
 
+// Control de roles y módulos
+function getRoleSlug(user) {
+    if (!user) return '';
+    const r = (user.rol_slug || user.rol || user.nombre_rol || '').toLowerCase();
+    if (r.includes('admin')) return 'admin';
+    if (r.includes('recep')) return 'recepcionista';
+    if (r.includes('odonto')) return 'odontologo';
+    if (r.includes('pac')) return 'paciente';
+    return r;
+}
+
+function getModulePorRol(user) {
+    const slug = getRoleSlug(user);
+    if (slug === 'admin' || slug === 'recepcionista') return 'mod-admin';
+    if (slug === 'odontologo') return 'mod-odontologo';
+    if (slug === 'paciente') return 'mod-paciente';
+    return 'mod-landing';
+}
+
+function puedeAccederAModulo(user, moduleId) {
+    if (!user) return true;
+    const slug = getRoleSlug(user);
+
+    if (moduleId === 'mod-admin') {
+        return slug === 'admin' || slug === 'recepcionista';
+    }
+    if (moduleId === 'mod-odontologo') {
+        return slug === 'odontologo';
+    }
+    if (moduleId === 'mod-paciente') {
+        return slug === 'paciente';
+    }
+    if (moduleId === 'mod-landing') {
+        return slug === 'paciente';
+    }
+    if (moduleId === 'mod-login') {
+        return false;
+    }
+    return true;
+}
+
 // Navegación entre Módulos del Prototipo
 function navigateToModule(moduleId) {
+    const user = window.AUTH_USER || null;
+    if (user && !puedeAccederAModulo(user, moduleId)) {
+        showToast('No tiene permisos para realizar esta acción', 'warning');
+        const allowedModule = getModulePorRol(user);
+        if (moduleId !== allowedModule) {
+            return navigateToModule(allowedModule);
+        }
+        return;
+    }
+
     const modules = document.querySelectorAll('.app-module');
     modules.forEach(m => m.classList.add('hidden'));
 
@@ -534,9 +585,16 @@ async function handleLoginFormSubmit(event) {
 
         showToast(res.message || '¡Sesión iniciada con éxito en la base de datos!', 'success');
 
-        if (res.user.rol === 'admin' || res.user.rol === 'recepcionista') {
+        if (res.user) {
+            window.AUTH_USER = res.user;
+            OdontoState.currentUser = res.user;
+            updateUserBadge();
+        }
+
+        const rolNorm = getRoleSlug(res.user);
+        if (rolNorm === 'admin' || rolNorm === 'recepcionista') {
             navigateToModule('mod-admin');
-        } else if (res.user.rol === 'odontologo') {
+        } else if (rolNorm === 'odontologo') {
             navigateToModule('mod-odontologo');
         } else {
             navigateToModule('mod-paciente');
@@ -2605,11 +2663,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.INITIAL_DB_STATE) {
         syncStateFromDb(window.INITIAL_DB_STATE);
     }
+    if (window.AUTH_USER) {
+        OdontoState.currentUser = window.AUTH_USER;
+    }
     updateUserBadge();
 
     const activeMod = (window.INITIAL_ACTIVE_MODULE && window.INITIAL_ACTIVE_MODULE !== 'landing') 
         ? 'mod-' + window.INITIAL_ACTIVE_MODULE 
-        : 'mod-landing';
+        : (window.AUTH_USER ? getModulePorRol(window.AUTH_USER) : 'mod-landing');
 
     if (activeMod === 'mod-admin-usuarios') {
         navigateToModule('mod-admin');

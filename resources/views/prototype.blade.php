@@ -1335,6 +1335,24 @@
 
     <!-- Datos Iniciales Conectados a MySQL (odontoagenda_crm) -->
     <script>
+        @auth
+        window.AUTH_USER = {
+            id: {{ Auth::id() }},
+            nombre: {!! json_encode(Auth::user()->nombre) !!},
+            correo: {!! json_encode(Auth::user()->correo) !!},
+            telefono: {!! json_encode(Auth::user()->telefono) !!},
+            rol: {!! json_encode(Auth::user()->nombre_rol) !!},
+            rol_slug: {!! json_encode(Auth::user()->rol) !!},
+            es_admin: {{ Auth::user()->esAdmin() ? 'true' : 'false' }},
+            es_recepcionista: {{ Auth::user()->esRecepcionista() ? 'true' : 'false' }},
+            es_odontologo: {{ Auth::user()->esOdontologo() ? 'true' : 'false' }},
+            es_paciente: {{ Auth::user()->esPaciente() ? 'true' : 'false' }},
+            faltas_acumuladas: {{ (int) Auth::user()->faltas_acumuladas }},
+            puedeAgendarWeb: {{ Auth::user()->puedeAgendarWeb() ? 'true' : 'false' }}
+        };
+        @else
+        window.AUTH_USER = null;
+        @endauth
         window.INITIAL_DB_STATE = {!! json_encode($initialState ?? null) !!};
         window.INITIAL_ACTIVE_MODULE = "{{ $activeModule ?? 'landing' }}";
     </script>
