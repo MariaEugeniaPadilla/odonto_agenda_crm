@@ -1372,11 +1372,11 @@
         @auth
         window.AUTH_USER = {
             id: {{ Auth::id() }},
-            nombre: {!! json_encode(Auth::user()->nombre) !!},
-            correo: {!! json_encode(Auth::user()->correo) !!},
-            telefono: {!! json_encode(Auth::user()->telefono) !!},
-            rol: {!! json_encode(Auth::user()->nombre_rol) !!},
-            rol_slug: {!! json_encode(Auth::user()->rol) !!},
+            nombre: {!! json_encode(Auth::user()->nombre, JSON_UNESCAPED_UNICODE) !!},
+            correo: {!! json_encode(Auth::user()->correo, JSON_UNESCAPED_UNICODE) !!},
+            telefono: {!! json_encode(Auth::user()->telefono, JSON_UNESCAPED_UNICODE) !!},
+            rol: {!! json_encode(Auth::user()->nombre_rol, JSON_UNESCAPED_UNICODE) !!},
+            rol_slug: {!! json_encode(Auth::user()->rol, JSON_UNESCAPED_UNICODE) !!},
             es_admin: {{ Auth::user()->esAdmin() ? 'true' : 'false' }},
             es_recepcionista: {{ Auth::user()->esRecepcionista() ? 'true' : 'false' }},
             es_odontologo: {{ Auth::user()->esOdontologo() ? 'true' : 'false' }},
