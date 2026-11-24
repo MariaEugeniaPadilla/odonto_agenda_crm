@@ -13,7 +13,7 @@ class OdontoAgendaSeeder extends Seeder
         $defaultPassword = Hash::make('Password123!');
         $adminNombre = env('ADMIN_NOMBRE', 'Administradora General');
         $adminEmail = env('ADMIN_EMAIL', 'admin@dentalcare.com');
-        $adminPassword = Hash::make(env('ADMIN_PASSWORD', 'AdminPassword123!'));
+        $adminPassword = Hash::make(env('ADMIN_PASSWORD', 'cambiar-esta-contraseña'));
 
         // 1. Usuarios del sistema
         $usuarios = [

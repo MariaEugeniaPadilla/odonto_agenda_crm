@@ -75,6 +75,7 @@
     <!-- ===================================================================== -->
     <!-- BARRA SUPERIOR DE PRUEBAS / SIMULADOR DE USUARIOS (DISCRETA Y ELEGANTE) -->
     <!-- ===================================================================== -->
+    @if(app()->environment('local') && !Auth::check())
     <aside class="bg-secondary-900 text-slate-200 text-xs py-1.5 px-4 sticky top-0 z-50 border-b border-secondary-800 shadow-sm" aria-label="Panel de demostración de roles">
         <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2.5">
             <div class="flex items-center gap-2">
@@ -112,11 +113,12 @@
             </div>
         </div>
     </aside>
+    @endif
 
     <!-- ===================================================================== -->
     <!-- CABECERA INSTITUCIONAL Y MENÚ PRINCIPAL (DENTAL CARE) -->
     <!-- ===================================================================== -->
-    <header class="glass-nav border-b border-slate-200/80 sticky top-8 z-40">
+    <header class="glass-nav border-b border-slate-200/80 sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-4">
             
             <!-- LOGO INSTITUCIONAL OFICIAL DE DENTAL CARE -->
@@ -126,42 +128,72 @@
 
             <!-- Botones de Navegación del Prototipo -->
             <nav class="flex flex-wrap items-center gap-1.5 md:gap-2" aria-label="Navegación principal">
+                @if(!Auth::check() || Auth::user()->esPaciente())
                 <button data-target="mod-landing" onclick="navigateToModule('mod-landing')" class="nav-tab-btn px-3.5 py-2 rounded-xl text-xs md:text-sm font-semibold bg-primary-600 text-white shadow-soft-sm flex items-center gap-1.5 transition">
                     <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
                     <span>Inicio / Servicios</span>
                 </button>
+                @endif
 
+                @guest
                 <button data-target="mod-login" onclick="navigateToModule('mod-login')" class="nav-tab-btn px-3.5 py-2 rounded-xl text-xs md:text-sm font-medium bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/80 flex items-center gap-1.5 transition">
                     <svg class="w-4 h-4 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                     <span>Login / Registro</span>
                 </button>
+                @endguest
 
+                @if(!Auth::check() || Auth::user()->esPaciente())
                 <button data-target="mod-paciente" onclick="navigateToModule('mod-paciente')" class="nav-tab-btn px-3.5 py-2 rounded-xl text-xs md:text-sm font-medium bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/80 flex items-center gap-1.5 transition">
                     <svg class="w-4 h-4 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                     <span>Portal Paciente</span>
                 </button>
+                @endif
 
+                @if(!Auth::check() || Auth::user()->esOdontologo())
                 <button data-target="mod-odontologo" onclick="navigateToModule('mod-odontologo')" class="nav-tab-btn px-3.5 py-2 rounded-xl text-xs md:text-sm font-medium bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/80 flex items-center gap-1.5 transition">
                     <svg class="w-4 h-4 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>
                     <span>Agenda Especialista</span>
                 </button>
+                @endif
 
+                @if(!Auth::check() || Auth::user()->esAdmin() || Auth::user()->esRecepcionista())
                 <button data-target="mod-admin" onclick="navigateToModule('mod-admin'); switchAdminTab('operaciones');" class="nav-tab-btn px-3.5 py-2 rounded-xl text-xs md:text-sm font-medium bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/80 flex items-center gap-1.5 transition">
                     <svg class="w-4 h-4 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
                     <span>Administración y Recepción</span>
                 </button>
+                @endif
 
+                @if(!Auth::check() || Auth::user()->esAdmin())
                 <button id="nav-btn-usuarios" data-target="mod-admin" onclick="navigateToModule('mod-admin'); switchAdminTab('usuarios');" class="nav-tab-btn px-3.5 py-2 rounded-xl text-xs md:text-sm font-medium bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/80 flex items-center gap-1.5 transition">
                     <svg class="w-4 h-4 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                     <span>Usuarios</span>
                 </button>
+                @endif
 
+                @if(!Auth::check() || Auth::user()->esPaciente())
                 <!-- CTA PRINCIPAL: AGENDAR CITA CON ODONTO AGENDA -->
                 <button onclick="openBookingWizard()" class="ml-1 sm:ml-2 px-4 py-2 rounded-xl bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 text-white text-xs md:text-sm font-semibold shadow-soft-sm hover:shadow-soft-md transition transform hover:-translate-y-0.5 flex items-center gap-1.5" aria-label="Abrir asistente para agendar cita">
                     <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
                     <span>Agendar Cita</span>
                 </button>
+                @endif
             </nav>
+
+            @auth
+            <div id="auth-user-bar" class="flex items-center gap-2.5 sm:gap-3 pl-2 sm:border-l sm:border-slate-200">
+                <div class="flex flex-col text-right">
+                    <span id="auth-user-nombre" class="text-xs font-semibold text-secondary-900 leading-tight">{{ Auth::user()->nombre }}</span>
+                    <span id="auth-user-rol" class="text-[10px] text-primary-700 font-medium">{{ Auth::user()->nombre_rol }}</span>
+                </div>
+                <form id="logout-form" method="POST" action="{{ route('logout') }}" class="inline m-0">
+                    @csrf
+                    <button type="submit" id="btn-logout" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-semibold shadow-soft-xs transition" title="Cerrar sesión segura">
+                        <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+                        <span>Cerrar sesión</span>
+                    </button>
+                </form>
+            </div>
+            @endauth
         </div>
     </header>
 
@@ -731,10 +763,12 @@
                         <svg class="w-3.5 h-3.5 text-primary-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
                         <span>Operaciones & Citas</span>
                     </button>
+                    @if(!Auth::check() || Auth::user()->esAdmin())
                     <button type="button" id="admin-tab-btn-usuarios" onclick="switchAdminTab('usuarios')" class="px-3.5 py-1.5 rounded-xl text-slate-600 hover:text-secondary-900 transition flex items-center gap-1.5">
                         <svg class="w-3.5 h-3.5 text-slate-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                         <span>Gestión de Usuarios</span>
                     </button>
+                    @endif
                 </div>
                 <button onclick="actualizarDatosAdminActual()" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold shadow-soft-xs transition">
                     <svg class="w-3.5 h-3.5 text-slate-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
@@ -1335,6 +1369,24 @@
 
     <!-- Datos Iniciales Conectados a MySQL (odontoagenda_crm) -->
     <script>
+        @auth
+        window.AUTH_USER = {
+            id: {{ Auth::id() }},
+            nombre: {!! json_encode(Auth::user()->nombre, JSON_UNESCAPED_UNICODE) !!},
+            correo: {!! json_encode(Auth::user()->correo, JSON_UNESCAPED_UNICODE) !!},
+            telefono: {!! json_encode(Auth::user()->telefono, JSON_UNESCAPED_UNICODE) !!},
+            rol: {!! json_encode(Auth::user()->nombre_rol, JSON_UNESCAPED_UNICODE) !!},
+            rol_slug: {!! json_encode(Auth::user()->rol, JSON_UNESCAPED_UNICODE) !!},
+            es_admin: {{ Auth::user()->esAdmin() ? 'true' : 'false' }},
+            es_recepcionista: {{ Auth::user()->esRecepcionista() ? 'true' : 'false' }},
+            es_odontologo: {{ Auth::user()->esOdontologo() ? 'true' : 'false' }},
+            es_paciente: {{ Auth::user()->esPaciente() ? 'true' : 'false' }},
+            faltas_acumuladas: {{ (int) Auth::user()->faltas_acumuladas }},
+            puedeAgendarWeb: {{ Auth::user()->puedeAgendarWeb() ? 'true' : 'false' }}
+        };
+        @else
+        window.AUTH_USER = null;
+        @endauth
         window.INITIAL_DB_STATE = {!! json_encode($initialState ?? null) !!};
         window.INITIAL_ACTIVE_MODULE = "{{ $activeModule ?? 'landing' }}";
     </script>

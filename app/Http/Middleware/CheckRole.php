@@ -53,9 +53,9 @@ class CheckRole
 
             if (!$permitido) {
                 if ($request->expectsJson()) {
-                    return response()->json(['message' => 'Acceso denegado. No posee permisos de ' . implode(' o ', $roles) . '.'], 403);
+                    return response()->json(['message' => 'No tiene permisos para realizar esta acción.'], 403);
                 }
-                abort(403, 'Acceso denegado. No cuenta con permisos suficientes para acceder a esta área de la clínica.');
+                abort(403, 'No tiene permisos para realizar esta acción.');
             }
         }
 

@@ -216,7 +216,7 @@ class UsuarioController extends Controller
             if ($otrosAdmins === 0) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'No se puede cambiar el rol: el sistema debe conservar al menos un Administrador activo.',
+                    'message' => 'Debe existir al menos un administrador activo.',
                 ], 422);
             }
         }
@@ -305,12 +305,32 @@ class UsuarioController extends Controller
     {
         $usuario = Usuario::findOrFail($id);
 
-        if (!$this->authorize('toggleActivo', $usuario)) {
+        if (Auth::id() === $usuario->id) {
             return response()->json([
                 'success' => false,
-                'message' => 'Operación no permitida: no puede desactivarse a sí mismo ni desactivar al único Administrador activo del sistema.',
+                'message' => 'No puede desactivar su propia cuenta.',
             ], 403);
         }
+
+        if ($usuario->esAdmin() && $usuario->activo) {
+            $adminRoleId = Role::where('nombre', Role::ADMINISTRADOR)->value('id');
+            $adminsActivos = Usuario::where('activo', true)
+                ->where(function ($q) use ($adminRoleId) {
+                    $q->where('role_id', $adminRoleId)
+                      ->orWhere('rol', 'admin');
+                })
+                ->where('id', '!=', $usuario->id)
+                ->count();
+
+            if ($adminsActivos === 0) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Debe existir al menos un administrador activo.',
+                ], 403);
+            }
+        }
+
+        $this->authorize('toggleActivo', $usuario);
 
         $nuevoEstado = !$usuario->activo;
         $usuario->activo = $nuevoEstado;
@@ -368,6 +388,32 @@ class UsuarioController extends Controller
     public function destroy(Request $request, $id)
     {
         $usuario = Usuario::findOrFail($id);
+
+        if (Auth::id() === $usuario->id) {
+            return response()->json([
+                'success' => false,
+                'message' => 'No puede desactivar su propia cuenta.',
+            ], 403);
+        }
+
+        if ($usuario->esAdmin() && $usuario->activo) {
+            $adminRoleId = Role::where('nombre', Role::ADMINISTRADOR)->value('id');
+            $adminsActivos = Usuario::where('activo', true)
+                ->where(function ($q) use ($adminRoleId) {
+                    $q->where('role_id', $adminRoleId)
+                      ->orWhere('rol', 'admin');
+                })
+                ->where('id', '!=', $usuario->id)
+                ->count();
+
+            if ($adminsActivos === 0) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Debe existir al menos un administrador activo.',
+                ], 403);
+            }
+        }
+
         $this->authorize('delete', $usuario);
 
         $usuario->activo = false;
